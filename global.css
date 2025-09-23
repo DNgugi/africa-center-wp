@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Sidebar Styles */
+  .widget-area {
+    @apply space-y-6;
+  }
+
+  .widget {
+    @apply bg-white rounded-lg shadow p-6;
+  }
+
+  .widget-title {
+    @apply text-lg font-semibold mb-4 text-gray-900;
+  }
+
+  .widget ul {
+    @apply space-y-2;
+  }
+
+  .widget ul li {
+    @apply text-gray-700;
+  }
+
+  .widget ul li a {
+    @apply hover:text-primary-blue transition-colors;
+  }
+
+  /* Search widget */
+  .widget_search .search-form {
+    @apply flex;
+  }
+
+  .widget_search .search-field {
+    @apply flex-1 rounded-l-lg border-gray-300;
+  }
+
+  .widget_search .search-submit {
+    @apply px-4 py-2 bg-primary-blue text-white rounded-r-lg hover:bg-primary-blue/90 transition-colors;
+  /* Header Styles */
+  .header-style-transparent {
+    @apply bg-transparent absolute w-full z-10;
+  }
+
+  .header-style-transparent .site-title a,
+  .header-style-transparent .main-navigation a {
+    @apply text-white;
+  }
+
+  .header-style-overlay {
+    @apply bg-black/50 absolute w-full z-10;
+  }
+
+  .header-style-overlay .site-title a,
+  .header-style-overlay .main-navigation a {
+    @apply text-white;
+  }
+
+  .header-style-minimal {
+    @apply py-4 bg-white shadow-sm;
+  }
+
+  /* Content Width Classes */
+  .content-width-default {
+    @apply max-w-6xl mx-auto px-4;
+  }
+
+  .content-width-narrow {
+    @apply max-w-4xl mx-auto px-4;
+  }
+
+  .content-width-wide {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .content-width-full {
+    @apply w-full;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-base transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-ochre text-white hover:bg-primary-ochre/90 shadow-lg;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-white text-white hover:bg-white/10;
+  }
+
+  .btn-blue {
+    @apply btn bg-primary-blue text-white hover:bg-primary-blue/90 shadow-lg;
+  }
+
+  .btn-small {
+    @apply px-4 py-2 text-sm;
+  }
+
+  .btn-large {
+    @apply px-8 py-4 text-lg;
+  }
+}
+
+.site-header {
+  @apply p-4 flex justify-between bg-white md:relative fixed top-0 left-0 right-0 z-[100];
+}
+
+.site-branding {
+  @apply flex items-center md:static fixed top-4 left-4 z-[101];
+}
+
+#page {
+  @apply pt-16 md:pt-0; /* Add padding to account for fixed header on mobile only */
+}
+
+.menu-toggle {
+  @apply md:hidden fixed top-4 right-4 z-[101] bg-transparent;
+}
+
+.menu {
+  @apply list-none md:p-2 md:flex md:space-x-2;
+}
+
+/* Mobile menu styles */
+@media (max-width: 767px) {
+  .main-navigation {
+    @apply static;
+  }
+
+  /* Dark overlay behind the menu */
+  .toggled::before {
+    content: "";
+    @apply fixed top-0 left-0 right-0 bottom-0 bg-black/5 backdrop-blur-sm z-[90];
+  }
+
+  .menu {
+    @apply fixed top-0 left-0 right-0 bottom-0 bg-white pt-16 px-4 overflow-y-auto opacity-0 pointer-events-none transition-all duration-200 z-[95];
+  }
+
+  .toggled .menu {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  .menu-item-has-children {
+    @apply relative;
+  }
+
+  .menu-item-has-children > a::after {
+    @apply ml-1 inline-block transition-transform duration-200;
+    content: "\25BC";
+  }
+
+  .menu-item-has-children.active > a::after {
+    @apply transform rotate-180;
+  }
+
+  .sub-menu {
+    @apply hidden pl-4 mt-1 space-y-2;
+  }
+
+  .sub-menu.show {
+    @apply block;
+  }
+
+  /* Nested submenus */
+  .sub-menu .sub-menu {
+    @apply pl-4; /* Additional indentation for nested levels */
+  }
+}
+
+/* Desktop menu styles */
+@media (min-width: 768px) {
+  .menu-item-has-children {
+    @apply relative;
+  }
+
+  /* Add padding to create a larger hover area */
+  .menu-item-has-children > a {
+    @apply pb-2;
+  }
+
+  .menu-item-has-children > a::after {
+    @apply ml-1 inline-block transition-transform duration-300;
+    content: "\25BC";
+  }
+
+  .menu-item-has-children.hover > a::after {
+    @apply transform rotate-180;
+  }
+
+  /* Create a hover bridge between menu item and submenu */
+  .menu-item-has-children::after {
+    content: "";
+    @apply absolute w-full h-2 left-0 top-full pointer-events-none;
+  }
+
+  .sub-menu {
+    @apply absolute left-0 top-full hidden min-w-[200px] bg-white shadow-lg rounded-md p-2 pt-3;
+  }
+
+  /* First level submenu */
+  .menu > .menu-item-has-children > .sub-menu {
+    @apply z-50;
+  }
+
+  /* Handle last two items differently to prevent overflow */
+  .menu > .menu-item-has-children:nth-last-child(-n + 2) > .sub-menu {
+    @apply right-0 left-auto;
+  }
+
+  /* Second level submenu */
+  .menu
+    > .menu-item-has-children
+    > .sub-menu
+    > .menu-item-has-children
+    > .sub-menu {
+    @apply z-[51];
+  }
+
+  /* Third level and deeper submenus */
+  .menu
+    > .menu-item-has-children
+    > .sub-menu
+    > .menu-item-has-children
+    > .sub-menu
+    .sub-menu {
+    @apply z-[52];
+  }
+
+  /* Nested submenus */
+  .sub-menu .menu-item-has-children > a::after {
+    content: "\25B6"; /* Right-pointing triangle for nested items */
+    @apply ml-2;
+  }
+
+  /* Create hover bridge for nested submenus */
+  .sub-menu .menu-item-has-children::after {
+    content: "";
+    @apply absolute w-3 h-full right-0 top-0 pointer-events-none;
+  }
+
+  /* Position nested submenus */
+  .sub-menu .menu-item-has-children > .sub-menu {
+    @apply left-full top-0 pl-3; /* Default position */
+  }
+
+  /* Handle nested submenus for items that might overflow */
+  .menu
+    > .menu-item-has-children:nth-last-child(-n + 2)
+    .sub-menu
+    .menu-item-has-children
+    > .sub-menu {
+    @apply right-full left-auto pl-0 pr-3; /* Position to the left instead */
+  }
+
+  /* Adjust the arrow for right-aligned submenus */
+  .menu
+    > .menu-item-has-children:nth-last-child(-n + 2)
+    .sub-menu
+    .menu-item-has-children
+    > a::after {
+    content: "\\25C0"; /* Left-pointing triangle */
+    @apply mr-2 ml-0;
+  }
+
+  .sub-menu .menu-item-has-children.hover > a::after {
+    @apply transform rotate-90; /* Rotate the arrow for nested items */
+  }
+
+  .sub-menu.show {
+    @apply block;
+  }
+}

@@ -1,0 +1,156 @@
+/* Block Editor Styles */
+
+.wp-block-headless-hero,
+.wp-block-headless-team-members,
+.wp-block-headless-events,
+.wp-block-headless-cultural-items,
+.wp-block-headless-news-grid,
+.wp-block-headless-cta,
+.wp-block-headless-stats,
+.wp-block-headless-faq {
+  padding: 2em;
+  border: 2px dashed #ccc;
+  text-align: center;
+  background: #f8f9fa;
+  min-height: 200px;
+}
+
+/* Hero Component */
+.wp-block-headless-hero {
+  min-height: 300px;
+  background-color: #e6f3ff;
+}
+
+.wp-block-headless-hero.height-small {
+  min-height: 200px;
+}
+
+.wp-block-headless-hero.height-medium {
+  min-height: 300px;
+}
+
+.wp-block-headless-hero.height-large {
+  min-height: 400px;
+}
+
+.wp-block-headless-hero.height-full {
+  min-height: 500px;
+}
+
+/* CTA Component */
+.wp-block-headless-cta {
+  background-color: #fff5f5;
+}
+
+.wp-block-headless-cta.style-split {
+  min-height: 300px;
+}
+
+.wp-block-headless-cta.style-banner {
+  min-height: 150px;
+}
+
+/* Stats Component */
+.wp-block-headless-stats {
+  background-color: #f0fff4;
+}
+
+.wp-block-headless-stats.layout-grid {
+  min-height: 250px;
+}
+
+.wp-block-headless-stats.layout-columns {
+  min-height: 200px;
+}
+
+/* FAQ Component */
+.wp-block-headless-faq {
+  background-color: #f7f7ff;
+}
+
+/* Header Styles */
+.header-style-transparent {
+  background: transparent !important;
+  position: absolute !important;
+  width: 100%;
+  z-index: 10;
+}
+
+.header-style-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+  position: absolute !important;
+  width: 100%;
+  z-index: 10;
+}
+
+.header-style-minimal {
+  padding: 1rem 0;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.wp-block-headless-team-members .placeholder,
+.wp-block-headless-events .placeholder,
+.wp-block-headless-cultural-items .placeholder,
+.wp-block-headless-news-grid .placeholder {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Layout specific styles */
+.wp-block-headless-team-members.layout-grid,
+.wp-block-headless-events.layout-grid,
+.wp-block-headless-cultural-items.layout-grid,
+.wp-block-headless-news-grid.layout-grid {
+  min-height: 200px;
+}
+
+.wp-block-headless-team-members.layout-list,
+.wp-block-headless-events.layout-list,
+.wp-block-headless-cultural-items.layout-list,
+.wp-block-headless-news-grid.layout-list {
+  min-height: 150px;
+}
+
+/* Component specific styles */
+.wp-block-headless-team-members {
+  background-color: #e8f4f8;
+}
+
+.wp-block-headless-events {
+  background-color: #f8e8e8;
+}
+
+.wp-block-headless-cultural-items {
+  background-color: #e8f8e8;
+}
+
+.wp-block-headless-news-grid {
+  background-color: #f8f8e8;
+}
+
+/* Inspector Controls Styling */
+.components-panel__body .components-base-control {
+  margin-bottom: 16px;
+}
+
+.components-panel__body .components-range-control {
+  width: 100%;
+}
+
+.components-panel__body .components-text-control__input {
+  width: 100%;
+}
+
+/* Toggle Control Styling */
+.components-toggle-control .components-base-control__field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Select Control Styling */
+.components-select-control__input {
+  width: 100%;
+  margin-top: 4px;
+}
