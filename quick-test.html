@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, initial-scale=1.0" />
+    <title>Quick Dropdown Test</title>
+    <link rel="stylesheet" href="global.css" />
+    <style>
+      body {
+        min-width: 1200px;
+        font-family: Arial, sans-serif;
+      }
+      .test-active .sub-menu {
+        display: block !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-container">
+        <div class="site-branding">
+          <h1>Test</h1>
+        </div>
+        <nav class="main-navigation" style="display: flex !important">
+          <div class="nav-menu-container">
+            <ul class="menu">
+              <li class="menu-item menu-item-has-children test-active">
+                <a href="#">Test Menu</a>
+                <ul class="sub-menu">
+                  <li><a href="#">Item 1</a></li>
+                  <li><a href="#">Item 2</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div style="margin-top: 200px; padding: 20px">
+      <h2>Quick Test Results</h2>
+      <p>Check if the dropdown (should be visible above) has:</p>
+      <ul>
+        <li>Position: absolute</li>
+        <li>Extends below the header</li>
+        <li>White background with shadow</li>
+      </ul>
+    </div>
+
+    <script>
+      setTimeout(() => {
+        const dropdown = document.querySelector(".sub-menu");
+        if (dropdown) {
+          const styles = window.getComputedStyle(dropdown);
+          console.log("Dropdown position:", styles.position);
+          console.log("Dropdown z-index:", styles.zIndex);
+          console.log("Dropdown display:", styles.display);
+
+          const rect = dropdown.getBoundingClientRect();
+          console.log("Dropdown position on page:", rect);
+
+          if (styles.position === "absolute") {
+            console.log("✅ Dropdown has correct positioning!");
+          } else {
+            console.log("❌ Dropdown positioning issue:", styles.position);
+          }
+        }
+      }, 100);
+    </script>
+  </body>
+</html>
