@@ -3859,6 +3859,10 @@ button:hover,
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-body {
+  font-family: Open Sans, sans-serif;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -4071,6 +4075,10 @@ button:hover,
 
 .underline {
   text-decoration-line: underline;
+}
+
+.no-underline {
+  text-decoration-line: none;
 }
 
 .placeholder-gray-400::-moz-placeholder {
@@ -5537,6 +5545,11 @@ div[class="header-container"] {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-primary-light-blue:hover {
+  --tw-text-opacity: 1;
+  color: rgb(58 124 201 / var(--tw-text-opacity, 1));
 }
 
 .hover\:shadow-lg:hover {
