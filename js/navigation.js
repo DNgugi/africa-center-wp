@@ -260,4 +260,64 @@
       menuItem.classList.toggle("focus");
     }
   }
+
+  // Smooth scroll and focus functionality for newsletter signup
+  document.addEventListener("DOMContentLoaded", function () {
+    // Add smooth scrolling to all anchor links that start with #
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href").substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          e.preventDefault();
+
+          // Smooth scroll to the target element
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+
+          // If targeting the newsletter section, focus on the email input after scrolling
+          if (targetId === "newsletter") {
+            setTimeout(() => {
+              const emailInput = document.getElementById("newsletter-email");
+              if (emailInput) {
+                emailInput.focus();
+                // Add a subtle highlight effect
+                emailInput.style.transition = "box-shadow 0.3s ease";
+                emailInput.style.boxShadow =
+                  "0 0 0 3px rgba(251, 191, 36, 0.3)";
+
+                // Remove highlight after a moment
+                setTimeout(() => {
+                  emailInput.style.boxShadow = "";
+                }, 2000);
+              }
+            }, 500); // Wait for scroll to complete
+          }
+        }
+      });
+    });
+
+    // Back to top functionality
+    const backToTopButton = document.getElementById("back-to-top");
+    if (backToTopButton) {
+      backToTopButton.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        // Smooth scroll to top
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+
+        // Add a subtle scale effect on click
+        this.style.transform = "scale(0.95)";
+        setTimeout(() => {
+          this.style.transform = "";
+        }, 150);
+      });
+    }
+  });
 })();

@@ -228,3 +228,69 @@ require get_template_directory() . '/inc/customizer.php';
 if (defined('JETPACK__VERSION')) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+/**
+ * Enhanced Search Functionality
+ */
+
+// Modify search query to handle filters
+function headless_modify_search_query($query)
+{
+	if (!is_admin() && $query->is_main_query() && is_search()) {
+		// Category filter
+		if (isset($_GET['category']) && !empty($_GET['category'])) {
+			$query->set('category_name', sanitize_text_field($_GET['category']));
+		}
+
+		// Post type filter
+		if (isset($_GET['post_type']) && !empty($_GET['post_type'])) {
+			$post_type = sanitize_text_field($_GET['post_type']);
+			$query->set('post_type', $post_type);
+		}
+
+		// Date filter
+		if (isset($_GET['date']) && !empty($_GET['date'])) {
+			$date_filter = sanitize_text_field($_GET['date']);
+			$date_query = array();
+
+			switch ($date_filter) {
+				case 'week':
+					$date_query['after'] = '1 week ago';
+					break;
+				case 'month':
+					$date_query['after'] = '1 month ago';
+					break;
+				case 'year':
+					$date_query['after'] = '1 year ago';
+					break;
+			}
+
+			if (!empty($date_query)) {
+				$query->set('date_query', array($date_query));
+			}
+		}
+
+		// Increase posts per page for search
+		$query->set('posts_per_page', 10);
+	}
+}
+add_action('pre_get_posts', 'headless_modify_search_query');
+
+
+
+// Highlight search terms in content
+function headless_highlight_search_terms($content)
+{
+	if (is_search() && !is_admin() && get_search_query()) {
+		$search_term = get_search_query();
+		$highlighted_content = preg_replace(
+			'/(' . preg_quote($search_term, '/') . ')/i',
+			'<mark class="bg-yellow-200">$1</mark>',
+			$content
+		);
+		return $highlighted_content;
+	}
+	return $content;
+}
+add_filter('the_content', 'headless_highlight_search_terms');
+add_filter('the_excerpt', 'headless_highlight_search_terms');

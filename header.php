@@ -52,7 +52,7 @@
 		<header id="masthead" class="<?php echo esc_attr(implode(' ', $header_classes)); ?> bg-white shadow-md">
 			<div class="container mx-auto px-4">
 				<div class="flex justify-between lg:justify-start items-center py-6">
-					<div class="site-branding flex items-center lg:mr-2">
+					<div class="site-branding flex items-center lg:mr-4">
 						<?php
 						the_custom_logo();
 						if (is_front_page() && is_home()) :
@@ -88,9 +88,18 @@
 								'theme_location' => 'menu-1',
 								'menu_id'        => 'primary-menu',
 								'container_class' => 'hidden lg:block flex-1',
-								'menu_class'     => 'flex justify-start',
+								'menu_class'     => 'flex justify-between',
 							)
 						);
 						?>
+
+						<!-- Search Icon -->
+						<div class="search-toggle ml-4">
+							<a href="<?php echo esc_url(home_url('/?s=')); ?>"
+								class="inline-flex items-center justify-center w-12 h-12 bg-primary-blue text-white rounded-full shadow-lg hover:shadow-xl hover:bg-primary-blue/90 transition-all duration-300"
+								aria-label="<?php esc_attr_e('Search', 'headless'); ?>">
+								<i class="fas fa-search text-lg" aria-hidden="true"></i>
+							</a>
+						</div>
 					</nav><!-- #site-navigation -->
 		</header><!-- #masthead -->

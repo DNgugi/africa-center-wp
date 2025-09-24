@@ -2,6 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Enable smooth scrolling for all anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Back to top button styles */
+#back-to-top {
+  @apply transition-all duration-300;
+  animation: bounceOnce 2s ease-out;
+  animation-delay: 1s;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1;
+}
+
+#back-to-top:hover {
+  @apply transform -translate-y-1 scale-110;
+}
+
+/* Search functionality styles */
+.search-toggle a {
+  @apply no-underline;
+}
+
+.search-toggle a:hover {
+  @apply transform scale-110 no-underline;
+  text-decoration: none !important;
+}
+
+.search-form {
+  @apply transition-all duration-300;
+}
+
+.search-field:focus {
+  @apply ring-2 ring-primary-ochre ring-opacity-50;
+}
+
+.search-submit:hover {
+  @apply transform scale-105;
+}
+
+/* Search results highlighting */
+mark {
+  @apply bg-yellow-200 px-1 rounded;
+}
+
+/* Search filters styling */
+.search-form select:focus,
+.search-form input:focus {
+  @apply ring-2 ring-primary-ochre ring-opacity-50 border-primary-ochre;
+}
+
+/* Pagination styles */
+.pagination {
+  @apply flex justify-center items-center space-x-2 mt-8;
+}
+
+.pagination a,
+.pagination span {
+  @apply px-4 py-2 rounded-lg transition-colors duration-200;
+}
+
+.pagination a {
+  @apply bg-white text-primary-blue border border-gray-300 hover:bg-primary-blue hover:text-white;
+}
+
+.pagination .current {
+  @apply bg-primary-blue text-white border border-primary-blue;
+}
+
+/* Bounce animation that plays once */
+@keyframes bounceOnce {
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
 @layer base {
   /* Base typography styles */
   html {
@@ -361,23 +454,46 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-base transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-base transition-all duration-300;
+    text-decoration: none !important; /* Override global link underline */
+  }
+
+  .btn:hover {
+    text-decoration: none !important; /* Ensure no underline on hover */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   }
 
   .btn-primary {
-    @apply btn bg-primary-ochre text-white hover:bg-primary-ochre/90 shadow-lg;
+    @apply btn bg-primary-ochre text-white hover:bg-primary-ochre/90 hover:text-white shadow-lg;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
   }
 
   .btn-outline {
-    @apply btn border-2 border-white text-white hover:bg-white/10;
+    @apply btn border-2 border-white text-white hover:bg-white/10 hover:text-white;
+  }
+
+  .btn-outline:hover {
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
   }
 
   .btn-blue {
     @apply btn bg-primary-blue text-white hover:bg-primary-light-blue hover:text-white shadow-lg;
   }
 
+  .btn-blue:hover {
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+  }
+
   .btn-ochre {
     @apply btn bg-primary-ochre text-white hover:bg-primary-ochre/90 hover:text-white shadow-lg;
+  }
+
+  .btn-ochre:hover {
+    box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
   }
 
   .btn-small {
@@ -472,7 +588,7 @@
 
 .menu {
   @apply list-none lg:p-2 lg:flex;
-  gap: 1rem; /* Reduced gap for more compact navigation */
+  gap: 2.5rem; /* Increased gap to spread items across available width */
 }
 
 /* Navigation link styles */
@@ -591,7 +707,7 @@
 
   .menu {
     @apply flex-wrap; /* Allow wrapping if absolutely necessary */
-    gap: 1rem; /* Consistent gap for compact navigation */
+    gap: 0.5rem; /* Use gap instead of space-x for better wrapping */
   }
 
   .menu-item-has-children {

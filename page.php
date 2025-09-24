@@ -122,7 +122,7 @@ get_header();
 
 				</div>
 
-				<?php if ($sidebar_layout !== 'no-sidebar') : ?>
+				<?php if (!$disable_sidebar && $sidebar_layout !== 'no-sidebar' && is_active_sidebar('sidebar-1')) : ?>
 					<div class="lg:w-1/3 mt-8 lg:mt-0 <?php echo $sidebar_layout === 'left-sidebar' ? 'lg:pr-8' : 'lg:pl-8'; ?>">
 						<aside id="secondary" class="widget-area">
 							<?php dynamic_sidebar('sidebar-1'); ?>
