@@ -2560,24 +2560,16 @@ button:hover,
   z-index: 100;
 }
 
-.z-\[101\] {
-  z-index: 101;
+.z-\[150\] {
+  z-index: 150;
 }
 
-.z-\[51\] {
-  z-index: 51;
+.z-\[151\] {
+  z-index: 151;
 }
 
-.z-\[52\] {
-  z-index: 52;
-}
-
-.z-\[90\] {
-  z-index: 90;
-}
-
-.z-\[95\] {
-  z-index: 95;
+.z-\[152\] {
+  z-index: 152;
 }
 
 .col-span-2 {
@@ -2859,10 +2851,6 @@ button:hover,
   max-height: 65px;
 }
 
-.max-h-\[80px\] {
-  max-height: 80px;
-}
-
 .w-1 {
   width: 0.25rem;
 }
@@ -2977,10 +2965,6 @@ button:hover,
 
 .max-w-\[220px\] {
   max-width: 220px;
-}
-
-.max-w-\[280px\] {
-  max-width: 280px;
 }
 
 .max-w-full {
@@ -3443,10 +3427,6 @@ button:hover,
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
 }
 
-.bg-black\/5 {
-  background-color: rgb(0 0 0 / 0.05);
-}
-
 .bg-black\/50 {
   background-color: rgb(0 0 0 / 0.5);
 }
@@ -3857,10 +3837,6 @@ button:hover,
 
 .pt-8 {
   padding-top: 2rem;
-}
-
-.pt-\[80px\] {
-  padding-top: 80px;
 }
 
 .text-left {
@@ -4301,6 +4277,12 @@ html {
 
 /* Search functionality styles */
 
+.search-toggle {
+  display: flex;
+  align-items: center;
+  /* Center align with nav items */
+}
+
 .search-toggle a {
   text-decoration-line: none;
 }
@@ -4311,6 +4293,20 @@ html {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   text-decoration-line: none;
   text-decoration: none !important;
+}
+
+/* Mobile search icon - keep inline with toggle button (no special positioning) */
+
+@media (max-width: 1023px) {
+  .mobile-controls .search-toggle {
+    position: static;
+    transform: none;
+  }
+
+  .mobile-controls .search-toggle a {
+    transform: none;
+    position: relative;
+  }
 }
 
 .search-form {
@@ -4446,70 +4442,33 @@ mark {
   z-index: 100;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
   height: 80px;
-  /* Increased height for better logo accommodation on mobile */
+  /* Increased from 70px to give more space for logo */
+  padding: 0 16px;
+  /* Minimal edge padding */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  overflow-y: visible;
+  /* Allow dropdowns to extend below header */
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .site-header {
-    height: 90px;
-    /* Even larger height on tablet for logo breathing room */
-    padding: 1rem 1.5rem;
-    /* md:py-4 md:px-6 equivalent */
-  }
+/* Scrolled state - more transparency and stronger shadow */
+
+.site-header.header-scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-@media (min-width: 1024px) {
-  .site-header {
-    height: auto;
-    /* Natural height on desktop */
-    position: relative;
-    /* Use natural flow on desktop */
-    padding: 1rem 1.5rem;
-    /* lg:py-4 lg:px-6 equivalent */
-  }
-}
-
-/* Header inner container - better handling for long nav */
-
-.site-header > div {
-  display: flex;
-  width: 100%;
-  min-width: 0px;
-  align-items: center;
-  /* min-w-0 allows flex items to shrink */
-}
-
-.site-branding {
-  position: fixed;
-  left: 1rem;
-  z-index: 101;
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  /* Fixed positioning on mobile */
-  top: 20px;
-  /* Center in 80px mobile header */
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .site-branding {
-    top: 25px;
-    /* Center in 90px tablet header */
-  }
-}
-
-@media (min-width: 1024px) {
-  .site-branding {
-    position: static;
-    /* Use natural flow on desktop */
-    left: auto;
-    top: auto;
-  }
+#page {
+  padding-top: 80px;
+  /* Match header height exactly */
+  margin-top: 0;
+  /* Remove any margin that could cause gaps */
 }
 
 /* Logo sizing constraints */
@@ -4520,38 +4479,42 @@ mark {
 
 .custom-logo,
 .site-branding img {
-  height: auto;
-  max-height: 80px;
   width: auto;
-  max-width: 280px;
   -o-object-fit: contain;
      object-fit: contain;
-}
-
-#page {
-  padding-top: 80px;
-  /* Account for 80px fixed header on mobile */
+  /* Mobile: 50px max height */
+  max-height: 50px;
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  #page {
-    padding-top: 90px;
-    /* Account for 90px fixed header on tablet */
+  .custom-logo,
+  .site-branding img {
+    /* Tablet: 60px max height */
+    max-height: 60px;
   }
 }
 
 @media (min-width: 1024px) {
-  #page {
-    padding-top: 0;
-    /* No padding needed on desktop since header is relative */
+  .custom-logo,
+  .site-branding img {
+    /* Desktop: 70px max height - increased to fit in 80px header */
+    max-height: 70px;
   }
 }
 
 .menu-toggle {
-  position: fixed;
-  right: 1rem;
-  z-index: 101;
+  border-radius: 0.375rem;
   background-color: transparent;
+  padding: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+}
+
+.menu-toggle:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
 
 @media (min-width: 1024px) {
@@ -4560,15 +4523,169 @@ mark {
   }
 }
 
-.menu-toggle {
-  top: 20px;
-  /* Center in 80px mobile header */
+/* Header layout styles */
+
+.header-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Prevent horizontal overflow only */
+  overflow-y: visible;
+  /* Allow dropdowns to extend vertically */
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .menu-toggle {
-    top: 25px;
-    /* Center in 90px tablet header (matches logo) */
+/* Two-line layout fallback for desktop */
+
+@media (min-width: 1024px) {
+  .header-container.two-line-layout {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    /* Increased gap for better visual separation */
+    padding: 0.75rem 0;
+    /* Add vertical padding */
+  }
+
+  .header-container.two-line-layout .site-branding {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    /* Move logo down one final bit */
+  }
+
+  .header-container.two-line-layout .header-controls {
+    width: 100%;
+    justify-content: center;
+    margin-top: -1rem;
+    /* Move navigation + search up one final bit */
+  }
+
+  .header-container.two-line-layout .main-navigation .menu {
+    justify-content: center;
+    gap: 1rem;
+    /* Smaller gap for two-line layout */
+  }
+
+  /* Increase logo size for two-line layout since we have more space */
+
+  .header-container.two-line-layout .custom-logo,
+  .header-container.two-line-layout .site-branding img {
+    max-height: 85px;
+    /* Increased from 70px for two-line layout */
+  }
+}
+
+.site-branding {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-controls {
+  gap: 0.5rem;
+}
+
+/* Desktop navigation layout */
+
+.main-navigation {
+  align-items: center;
+  /* Remove max-width constraint to allow dropdowns to extend */
+}
+
+.main-navigation .nav-menu-container {
+  display: flex;
+  align-items: center;
+  /* Remove max-width constraint to allow dropdowns to extend */
+}
+
+.main-navigation .menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  /* Space between nav items */
+  flex-wrap: nowrap;
+  /* Prevent wrapping, let JS handle overflow */
+  /* Remove max-width constraint to allow dropdowns to extend */
+  min-width: 0;
+  /* Allow shrinking */
+}
+
+.main-navigation .menu a {
+  white-space: nowrap;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.main-navigation .menu a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+
+.main-navigation .menu a {
+  flex-shrink: 0;
+  /* Don't shrink nav items */
+}
+
+/* Navigation container styles */
+
+.nav-menu-container {
+  /* Desktop: flex-1 and visible */
+  display: block;
+  flex: 1 1 0%;
+}
+
+@media (max-width: 1023px) {
+  .nav-menu-container {
+    /* Mobile/Tablet: hidden by default, positioned for overlay */
+    display: none;
+  }
+
+  .main-navigation .nav-menu-container.lg\\:block {
+    overflow-x: auto;
+    /* Add horizontal scroll if needed */
+    overflow-y: visible;
+    /* Allow dropdowns to extend vertically */
+    scrollbar-width: none;
+    /* Hide scrollbar in Firefox */
+    -ms-overflow-style: none;
+    /* Hide scrollbar in IE */
+  }
+
+  .main-navigation .nav-menu-container.lg\\:block::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar in Webkit browsers */
+  }
+
+  @media (min-width: 768px) {
+    .main-navigation .nav-menu-container.lg\\:block {
+      max-width: none;
+      /* Allow navigation to use available space */
+    }
+  }
+
+  .toggled .nav-menu-container {
+    /* Mobile/Tablet: show when toggled */
+    display: block;
   }
 }
 
@@ -4578,14 +4695,19 @@ mark {
 
 @media (min-width: 1024px) {
   .menu {
-    display: flex;
     padding: 0.5rem;
   }
 }
 
-.menu {
-  gap: 2.5rem;
-  /* Increased gap to spread items across available width */
+/* Desktop menu styles */
+
+@media (min-width: 1024px) {
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.5rem;
+    /* Increased gap to spread items across available width */
+  }
 }
 
 /* Navigation link styles */
@@ -4638,6 +4760,8 @@ mark {
 .main-navigation .hidden.lg\\:block {
   overflow-x: auto;
   /* Add horizontal scroll if needed */
+  overflow-y: visible;
+  /* Allow dropdowns to extend vertically */
   scrollbar-width: none;
   /* Hide scrollbar in Firefox */
   -ms-overflow-style: none;
@@ -4678,45 +4802,175 @@ mark {
     position: static;
   }
 
-  /* Dark overlay behind the menu */
+  /* Override the hidden class when mobile menu is open */
 
-  .toggled::before {
+  body.mobile-menu-open .main-navigation {
+    display: block;
+  }
+
+  /* Hide desktop search icon when mobile menu is open to prevent duplication with mobile search icon */
+
+  @media (max-width: 1023px) {
+    body.mobile-menu-open .main-navigation .search-toggle {
+      display: none !important;
+    }
+  }
+
+  /* Dark overlay behind the menu - Applied to body */
+
+  body.mobile-menu-open::before {
     content: "";
     position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 90;
-    background-color: rgb(0 0 0 / 0.05);
-    --tw-backdrop-blur: blur(4px);
-    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+  }
+
+  /* Prevent body scroll when mobile menu is open */
+
+  body.mobile-menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 210;
+  }
+
+  /* Ensure the header (with close button) stays above the mobile menu */
+
+  body.mobile-menu-open .site-header {
+    position: fixed !important;
+    z-index: 220 !important;
+  }
+
+  /* Ensure menu toggle button is clickable when menu is open */
+
+  body.mobile-menu-open .menu-toggle {
+    position: relative;
+    z-index: 225 !important;
+  }
+
+  body.mobile-menu-open .nav-menu-container {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .menu {
-    pointer-events: none;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 95;
+    background: white;
+    width: 100vw;
+    height: 100vh;
     overflow-y: auto;
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-    padding-left: 1rem;
-    padding-right: 1rem;
-    opacity: 0;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+    padding: 100px 1rem 2rem 1rem;
+    /* Top padding for header space */
+    margin: 0;
+    position: relative;
+    /* Override desktop flex layout for mobile */
+    display: block !important;
+    flex-direction: column !important;
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+  }
+
+  /* Mobile menu items display as full-width blocks */
+
+  body.mobile-menu-open .menu li {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Mobile menu list styling */
+
+  .menu li {
+    border-bottom-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(243 244 246 / var(--tw-border-opacity, 1));
+  }
+
+  .menu li:last-child {
+    border-bottom-width: 0px;
+  }
+
+  .menu li {
+    display: block !important;
+    /* Override any flex item styling */
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    /* Break long words */
+    word-wrap: break-word;
+    /* Fallback for older browsers */
+  }
+
+  .menu a {
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity, 1));
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
-    padding-top: 3rem;
-    /* Match the even more reduced page padding */
   }
 
-  .toggled .menu {
-    pointer-events: auto;
-    opacity: 1;
+  .menu a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(30 80 145 / var(--tw-text-opacity, 1));
+  }
+
+  .menu a {
+    text-decoration: none;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    white-space: normal !important;
+    /* Allow text wrapping */
+    overflow-wrap: break-word;
+    /* Break long words */
+    word-wrap: break-word;
+    /* Fallback for older browsers */
+    word-break: break-word;
+    /* Aggressive word breaking */
+    hyphens: auto;
+    /* Add hyphens for long words */
+    max-width: 100%;
+    /* Ensure proper spacing for nested items */
+    padding-right: 1rem !important;
+  }
+
+  .menu .current-menu-item > a,
+  .menu .current_page_item > a {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(30 80 145 / var(--tw-text-opacity, 1));
   }
 
   .menu-item-has-children {
@@ -4755,6 +5009,8 @@ mark {
   .main-navigation .sub-menu.lg\\:block {
     overflow-x: auto;
     /* Add horizontal scroll if needed */
+    overflow-y: visible;
+    /* Allow dropdowns to extend vertically */
     scrollbar-width: none;
     /* Hide scrollbar in Firefox */
     -ms-overflow-style: none;
@@ -4782,6 +5038,54 @@ mark {
   .sub-menu .sub-menu {
     padding-left: 1rem;
     /* Additional indentation for nested levels */
+  }
+
+  /* Ensure deeply nested menu items don't cause horizontal overflow */
+
+  .sub-menu a,
+  .sub-menu .sub-menu a,
+  .sub-menu .sub-menu .sub-menu a {
+    max-width: calc(100vw - 2rem) !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    /* Add more left padding for nested levels */
+    padding-left: 2rem !important;
+  }
+
+  /* Third level nesting */
+
+  .sub-menu .sub-menu a {
+    padding-left: 3rem !important;
+  }
+
+  /* Fourth level nesting (for extremely deep menus) */
+
+  .sub-menu .sub-menu .sub-menu a {
+    padding-left: 4rem !important;
+  }
+
+  /* Ensure submenus don't cause horizontal overflow */
+
+  body.mobile-menu-open .sub-menu {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding-left: 2rem;
+    /* Indentation for nested items */
+    margin: 0 !important;
+  }
+
+  body.mobile-menu-open .sub-menu li {
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+
+  body.mobile-menu-open .sub-menu a {
+    width: 100% !important;
+    padding-left: 1rem !important;
+    /* Extra indentation for submenu items */
+    white-space: normal !important;
+    overflow-wrap: break-word;
   }
 }
 
@@ -4875,6 +5179,8 @@ mark {
   .main-navigation .sub-menu.lg\\:block {
     overflow-x: auto;
     /* Add horizontal scroll if needed */
+    overflow-y: visible;
+    /* Allow dropdowns to extend vertically */
     scrollbar-width: none;
     /* Hide scrollbar in Firefox */
     -ms-overflow-style: none;
@@ -4896,8 +5202,11 @@ mark {
   .sub-menu {
     padding-top: 1rem;
     /* Add padding to create overlap with hover bridge */
-    margin-top: -0.5rem;
-    /* Pull submenu up to overlap with parent area */
+    margin-top: 0.25rem;
+    /* Position below header shadow */
+    max-width: 300px;
+    /* Prevent overly wide submenus */
+    /* Removed max-height and overflow-y to allow natural expansion */
   }
 
   /* Add invisible hover area around submenus for diagonal mouse movement */
@@ -4912,10 +5221,10 @@ mark {
     z-index: -1;
   }
 
-  /* First level submenu */
+  /* First level submenu - Above header z-[100] */
 
   .menu > .menu-item-has-children > .sub-menu {
-    z-index: 50;
+    z-index: 150;
   }
 
   /* Handle last two items differently to prevent overflow */
@@ -4925,17 +5234,17 @@ mark {
     left: auto;
   }
 
-  /* Second level submenu */
+  /* Second level submenu - Above first level */
 
   .menu
     > .menu-item-has-children
     > .sub-menu
     > .menu-item-has-children
     > .sub-menu {
-    z-index: 51;
+    z-index: 151;
   }
 
-  /* Third level and deeper submenus */
+  /* Third level and deeper submenus - Above second level */
 
   .menu
     > .menu-item-has-children
@@ -4943,7 +5252,7 @@ mark {
     > .menu-item-has-children
     > .sub-menu
     .sub-menu {
-    z-index: 52;
+    z-index: 152;
   }
 
   /* Nested submenus */
@@ -5026,6 +5335,11 @@ mark {
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-gray-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-primary-blue:hover {
@@ -5213,16 +5527,6 @@ mark {
     margin-bottom: calc(0px * var(--tw-space-y-reverse));
   }
 
-  .md\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  .md\:py-4 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
   .md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -5265,10 +5569,6 @@ mark {
     margin-right: 0px;
   }
 
-  .lg\:mr-4 {
-    margin-right: 1rem;
-  }
-
   .lg\:mt-0 {
     margin-top: 0px;
   }
@@ -5305,27 +5605,9 @@ mark {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .lg\:justify-start {
-    justify-content: flex-start;
-  }
-
-  .lg\:p-2 {
-    padding: 0.5rem;
-  }
-
-  .lg\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
   .lg\:py-28 {
     padding-top: 7rem;
     padding-bottom: 7rem;
-  }
-
-  .lg\:py-4 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
   }
 
   .lg\:pl-8 {

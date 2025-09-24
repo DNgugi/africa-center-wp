@@ -6,24 +6,44 @@
  */
 (function () {
   const siteNavigation = document.getElementById("site-navigation");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const header = document.querySelector(".site-header");
   const isMobile = () => window.innerWidth < 1024; // Match with Tailwind's lg breakpoint
 
-  // Return early if the navigation doesn't exist.
-  if (!siteNavigation) {
+  // Return early if we have no navigation elements at all
+  if (!siteNavigation && !menuToggle) {
+    console.log("Navigation script: No navigation elements found");
     return;
   }
 
-  const button = siteNavigation.getElementsByTagName("button")[0];
+  const button =
+    menuToggle || siteNavigation?.getElementsByTagName("button")[0];
 
   // Return early if the button doesn't exist.
-  if ("undefined" === typeof button) {
+  if (!button) {
+    console.log("Navigation script: No button found");
+    console.log("menuToggle:", menuToggle);
+    console.log("siteNavigation:", siteNavigation);
     return;
   }
 
-  const menu = siteNavigation.getElementsByTagName("ul")[0];
+  console.log("Navigation script: Button found:", button);
+
+  const menu =
+    document.querySelector(".menu") ||
+    siteNavigation?.getElementsByTagName("ul")[0];
+
+  console.log("Navigation script: Menu element found:", menu);
 
   // Hide menu toggle button if menu is empty and return early.
-  if ("undefined" === typeof menu) {
+  if (!menu) {
+    console.log("Navigation script: No menu found, hiding toggle button");
+    button.style.display = "none";
+    return;
+  }
+
+  console.log("Navigation script: Setup complete, all elements found");
+  if (!menu) {
     button.style.display = "none";
     return;
   }
@@ -31,6 +51,64 @@
   if (!menu.classList.contains("nav-menu")) {
     menu.classList.add("nav-menu");
   }
+
+  // Scroll-based header animations
+  let lastScrollY = window.scrollY;
+
+  function handleScroll() {
+    const currentScrollY = window.scrollY;
+
+    if (header) {
+      if (currentScrollY > 50) {
+        header.classList.add("header-scrolled");
+      } else {
+        header.classList.remove("header-scrolled");
+      }
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
+  // Add scroll listener
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
+
+  // Intelligent layout switching for desktop
+  function checkNavigationLayout() {
+    if (isMobile()) return;
+
+    const headerContainer = document.querySelector(".header-container");
+    const siteBranding = document.querySelector(".site-branding");
+    const mainNavigation = document.querySelector(".main-navigation");
+    const siteHeader = document.querySelector(".site-header");
+    const pageElement = document.getElementById("page");
+
+    if (!headerContainer || !siteBranding || !mainNavigation || !siteHeader)
+      return;
+
+    const headerWidth = headerContainer.offsetWidth;
+    const brandingWidth = siteBranding.offsetWidth;
+    const navigationWidth = mainNavigation.offsetWidth;
+    const totalNeeded = brandingWidth + navigationWidth + 64;
+
+    if (totalNeeded > headerWidth) {
+      if (!headerContainer.classList.contains("two-line-layout")) {
+        headerContainer.classList.add("two-line-layout");
+        siteHeader.style.height =
+          "130px"; /* Increased from 110px to give more space for logo */
+        if (pageElement) pageElement.style.paddingTop = "130px";
+      }
+    } else {
+      if (headerContainer.classList.contains("two-line-layout")) {
+        headerContainer.classList.remove("two-line-layout");
+        siteHeader.style.height = "80px"; /* Updated base height */
+        if (pageElement) pageElement.style.paddingTop = "80px";
+      }
+    }
+  }
+
+  window.addEventListener("resize", checkNavigationLayout);
+  setTimeout(checkNavigationLayout, 100);
 
   // Setup dropdown functionality for all levels
   function setupDropdownMenu(menuItem) {
@@ -52,19 +130,43 @@
         menuItem.classList.add("hover");
         submenu.classList.add("show");
 
-        // Dynamically adjust submenu position for wrapped menus
+        // Smart positioning to prevent submenu from going off-screen
         setTimeout(() => {
           const menuItemRect = menuItem.getBoundingClientRect();
-          const menuRect = menuItem.closest(".menu").getBoundingClientRect();
+          const submenuRect = submenu.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
 
-          // If menu item is on a lower row (wrapped), adjust submenu position
-          if (menuItemRect.top > menuRect.top + 10) {
-            // 10px tolerance
-            submenu.style.marginTop = "0.5rem"; // Push submenu down a bit more
-          } else {
-            submenu.style.marginTop = "-0.5rem"; // Default overlap
+          // Reset any previous positioning
+          submenu.style.left = "";
+          submenu.style.right = "";
+          submenu.style.top = "";
+          submenu.style.marginTop = "";
+
+          // Check horizontal positioning
+          if (submenuRect.right > viewportWidth - 20) {
+            // Submenu goes off right edge, position to the left
+            submenu.style.left = "auto";
+            submenu.style.right = "0";
           }
-        }, 10); // Small delay to ensure layout is settled
+
+          // Check vertical positioning
+          if (submenuRect.bottom > viewportHeight - 20) {
+            // Submenu goes off bottom, position it upward
+            submenu.style.top = "auto";
+            submenu.style.bottom = "100%";
+            submenu.style.marginTop = "0";
+          } else {
+            // Default downward positioning
+            submenu.style.marginTop = "-0.5rem";
+          }
+
+          // Handle wrapped menu items
+          const menuRect = menuItem.closest(".menu").getBoundingClientRect();
+          if (menuItemRect.top > menuRect.top + 10) {
+            submenu.style.marginTop = "0.5rem";
+          }
+        }, 10);
 
         // Keep parent menus open when hovering nested items
         let parent = menuItem.parentElement.closest(".menu-item-has-children");
@@ -173,44 +275,63 @@
   allDropdownMenus.forEach(setupDropdownMenu);
 
   // Toggle the .toggled class and the aria-expanded value each time the button is clicked.
-  button.addEventListener("click", function () {
-    siteNavigation.classList.toggle("toggled");
+  button.addEventListener("click", function (e) {
+    e.preventDefault();
+    console.log("Mobile menu button clicked!");
+
+    // For mobile, we need to toggle on the body or a parent container
+    const body = document.body;
+
+    body.classList.toggle("mobile-menu-open");
+    console.log("Body classes after toggle:", body.className);
 
     // Toggle icons
     const hamburgerIcon = button.querySelector(".hamburger-icon");
     const closeIcon = button.querySelector(".close-icon");
+    console.log("Hamburger icon:", hamburgerIcon);
+    console.log("Close icon:", closeIcon);
 
-    if (siteNavigation.classList.contains("toggled")) {
-      hamburgerIcon.classList.add("hidden");
-      closeIcon.classList.remove("hidden");
-    } else {
-      hamburgerIcon.classList.remove("hidden");
-      closeIcon.classList.add("hidden");
-    }
-
-    if (button.getAttribute("aria-expanded") === "true") {
-      button.setAttribute("aria-expanded", "false");
-    } else {
+    if (body.classList.contains("mobile-menu-open")) {
+      hamburgerIcon?.classList.add("hidden");
+      closeIcon?.classList.remove("hidden");
       button.setAttribute("aria-expanded", "true");
+      console.log("Menu opened - switched to close icon");
+    } else {
+      hamburgerIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+      button.setAttribute("aria-expanded", "false");
+      console.log("Menu closed - switched to hamburger icon");
     }
   });
 
   // Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
   document.addEventListener("click", function (event) {
-    const isClickInside = siteNavigation.contains(event.target);
+    const body = document.body;
+    const mobileControls = document.querySelector(".mobile-controls");
+    const navContainer = document.querySelector(".nav-menu-container");
 
-    if (!isClickInside) {
-      siteNavigation.classList.remove("toggled");
-      button.setAttribute("aria-expanded", "false");
+    const isClickInsideNav =
+      navContainer && navContainer.contains(event.target);
+    const isClickInsideMobileControls =
+      mobileControls && mobileControls.contains(event.target);
+    const isClickInside = isClickInsideNav || isClickInsideMobileControls;
 
-      // Reset icons to hamburger when menu is closed
+    if (
+      !isClickInside &&
+      !button.contains(event.target) &&
+      body.classList.contains("mobile-menu-open")
+    ) {
+      body.classList.remove("mobile-menu-open");
+
+      // Reset button icons
       const hamburgerIcon = button.querySelector(".hamburger-icon");
       const closeIcon = button.querySelector(".close-icon");
-
       if (hamburgerIcon && closeIcon) {
         hamburgerIcon.classList.remove("hidden");
         closeIcon.classList.add("hidden");
       }
+
+      button.setAttribute("aria-expanded", "false");
     }
   });
 

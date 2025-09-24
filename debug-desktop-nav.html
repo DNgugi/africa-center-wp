@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Navigation Debug Test</title>
+    <link rel="stylesheet" href="final.css">
+    <style>
+        /* Debug styles to highlight navigation */
+        .debug-navigation {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid red;
+        }
+        .debug-dropdown {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid green;
+        }
+        
+        /* Override any potential hiding rules */
+        .main-navigation {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .menu-item-has-children .sub-menu {
+            background: white !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+            border: 1px solid #ccc !important;
+        }
+        
+        /* Force show dropdown on hover for testing */
+        .menu-item-has-children:hover .sub-menu {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-gray-100 pt-24">
+        <h1 class="text-center text-2xl font-bold mb-8">Desktop Navigation Debug Test</h1>
+        
+        <!-- Replicate header structure -->
+        <header class="site-header">
+            <div class="header-container">
+                <div class="site-branding">
+                    <h1>Logo</h1>
+                </div>
+                
+                <nav class="main-navigation debug-navigation">
+                    <div class="nav-menu-container">
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="menu-item menu-item-has-children">
+                                <a href="#">About</a>
+                                <ul class="sub-menu debug-dropdown">
+                                    <li class="menu-item">
+                                        <a href="#">Our Story</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Team</a>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a href="#">Locations</a>
+                                        <ul class="sub-menu debug-dropdown">
+                                            <li class="menu-item">
+                                                <a href="#">Hong Kong</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#">Singapore</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-has-children">
+                                <a href="#">Programs</a>
+                                <ul class="sub-menu debug-dropdown">
+                                    <li class="menu-item">
+                                        <a href="#">Cultural Events</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Education</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <div class="desktop-search-container">
+                    <button class="search-toggle">🔍</button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="container mx-auto px-4 pt-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-bold mb-4">Debug Information</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Screen width:</strong> <span id="screen-width"></span></p>
+                    <p><strong>Navigation visible:</strong> <span id="nav-visible"></span></p>
+                    <p><strong>Navigation display:</strong> <span id="nav-display"></span></p>
+                    <p><strong>Navigation z-index:</strong> <span id="nav-zindex"></span></p>
+                    <p><strong>Dropdown z-index:</strong> <span id="dropdown-zindex"></span></p>
+                </div>
+                
+                <div class="mt-4">
+                    <h3 class="font-bold mb-2">Instructions:</h3>
+                    <ol class="text-sm space-y-1">
+                        <li>1. Make sure you're viewing on desktop (1024px+ width)</li>
+                        <li>2. The navigation should be visible with red debug border</li>
+                        <li>3. Hover over "About" or "Programs" to test dropdowns</li>
+                        <li>4. Dropdowns should appear with green debug border</li>
+                        <li>5. Test nested dropdowns under "About" → "Locations"</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/navigation.js"></script>
+    <script>
+        function updateDebugInfo() {
+            const nav = document.querySelector('.main-navigation');
+            const dropdown = document.querySelector('.sub-menu');
+            
+            document.getElementById('screen-width').textContent = window.innerWidth + 'px';
+            document.getElementById('nav-visible').textContent = nav ? 'Found' : 'Not found';
+            
+            if (nav) {
+                const style = window.getComputedStyle(nav);
+                document.getElementById('nav-display').textContent = style.display;
+                document.getElementById('nav-zindex').textContent = style.zIndex;
+            }
+            
+            if (dropdown) {
+                const style = window.getComputedStyle(dropdown);
+                document.getElementById('dropdown-zindex').textContent = style.zIndex;
+            }
+        }
+        
+        // Update debug info on load and resize
+        updateDebugInfo();
+        window.addEventListener('resize', updateDebugInfo);
+        
+        // Add click handlers to menu items for debugging
+        document.querySelectorAll('.menu-item a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Clicked:', link.textContent);
+                alert('Clicked: ' + link.textContent);
+            });
+        });
+        
+        // Debug dropdown hover states
+        document.querySelectorAll('.menu-item-has-children').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                console.log('Entered dropdown:', item.querySelector('a').textContent);
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                console.log('Left dropdown:', item.querySelector('a').textContent);
+            });
+        });
+    </script>
+</body>
+</html>
