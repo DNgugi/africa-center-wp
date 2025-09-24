@@ -38,7 +38,7 @@
 		$header_classes = array('site-header');
 
 		// Add header style class
-		if ($page_options['header_style'] !== 'default') {
+		if (isset($page_options['header_style']) && $page_options['header_style'] !== 'default') {
 			$header_classes[] = 'header-style-' . $page_options['header_style'];
 		}
 
@@ -50,9 +50,9 @@
 		$header_classes = array_map('sanitize_html_class', $header_classes);
 		?>
 		<header id="masthead" class="<?php echo esc_attr(implode(' ', $header_classes)); ?> bg-white shadow-md">
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="flex justify-between items-center py-6">
-					<div class="site-branding flex items-center">
+			<div class="container mx-auto px-4">
+				<div class="flex justify-between lg:justify-start items-center py-6">
+					<div class="site-branding flex items-center lg:mr-2">
 						<?php
 						the_custom_logo();
 						if (is_front_page() && is_home()) :
@@ -74,15 +74,21 @@
 
 					<nav id="site-navigation" class="main-navigation">
 						<button class="lg:hidden menu-toggle p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100" aria-controls="primary-menu" aria-expanded="false">
-							<?php esc_html_e('Menu', 'headless'); ?>
+							<span class="hamburger-icon">
+								<i class="fas fa-bars" aria-hidden="true"></i>
+							</span>
+							<span class="close-icon hidden">
+								<i class="fas fa-times" aria-hidden="true"></i>
+							</span>
+							<span class="sr-only"><?php esc_html_e('Menu', 'headless'); ?></span>
 						</button>
 						<?php
 						wp_nav_menu(
 							array(
 								'theme_location' => 'menu-1',
 								'menu_id'        => 'primary-menu',
-								'container_class' => 'hidden lg:block',
-								'menu_class'     => 'flex space-x-8',
+								'container_class' => 'hidden lg:block flex-1',
+								'menu_class'     => 'flex justify-start',
 							)
 						);
 						?>

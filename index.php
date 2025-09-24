@@ -22,7 +22,7 @@ get_header();
 		<div class="container mx-auto px-4 relative z-10">
 			<div class="max-w-3xl mx-auto">
 				<?php if (is_home() && ! is_front_page()) : ?>
-					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading"><?php single_post_title(); ?></h1>
+					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary-ochre"><?php single_post_title(); ?></h1>
 				<?php endif; ?>
 			</div>
 		</div>

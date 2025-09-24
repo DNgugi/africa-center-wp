@@ -14,7 +14,6 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
-require_once get_template_directory() . '/inc/components/component-system.php';
 require_once get_template_directory() . '/inc/template-functions.php';
 require_once get_template_directory() . '/inc/template-tags.php';
 
@@ -29,8 +28,8 @@ get_header();
 				<div class="inline-block bg-primary-terracotta px-4 py-1 rounded-full text-sm font-medium mb-6">
 					Welcome to Africa Center Hong Kong
 				</div>
-				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
-					Rebranding <span class="text-primary-ochre">Blackness</span> in Asia
+				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading text-primary-ochre">
+					Rebranding <span class="text-secondary-gold">Blackness</span> in Asia
 				</h1>
 				<p class="text-xl mb-8 text-white/90">
 					We are a platform & creative hub that fosters value-creating

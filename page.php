@@ -62,7 +62,7 @@ get_header();
 			<?php headless_breadcrumbs(); ?>
 			<div class="max-w-3xl mx-auto">
 				<?php while (have_posts()) : the_post(); ?>
-					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading"><?php the_title(); ?></h1>
+					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary-ochre"><?php the_title(); ?></h1>
 				<?php endwhile;
 				rewind_posts(); ?>
 			</div>

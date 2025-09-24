@@ -10,7 +10,7 @@
 
 if (! defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define('_S_VERSION', '1.0.0');
+	define('_S_VERSION', '1.0.1');
 }
 
 /**
@@ -51,17 +51,11 @@ function headless_setup()
 	// Add support for Yoast SEO breadcrumbs
 	add_theme_support('yoast-seo-breadcrumbs');
 
-	// Add custom image sizes
-	add_image_size('hero-background', 1920, 1080, true);
-	add_image_size('section-background', 1600, 900, true);
-	add_image_size('card-thumbnail', 600, 400, true);
 
-	// Add theme support for custom components
-	add_theme_support('headless-components');
 
-	// Load required files
-	require_once get_template_directory() . '/inc/components/component-system.php';
-	require_once get_template_directory() . '/inc/components/component-renderer.php';
+
+
+	// Load admin files
 	require_once get_template_directory() . '/inc/admin/theme-options.php';
 	require_once get_template_directory() . '/inc/admin/page-options.php';
 
@@ -147,6 +141,8 @@ function headless_setup()
 }
 add_action('after_setup_theme', 'headless_setup');
 
+
+
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
@@ -186,8 +182,14 @@ add_action('widgets_init', 'headless_widgets_init');
  */
 function headless_scripts()
 {
+	// Google Fonts
+	wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap', array(), null);
+
+	// Font Awesome for icons
+	wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
+
 	wp_enqueue_style('headless-style', get_stylesheet_uri(), array(), _S_VERSION);
-	wp_enqueue_style('tailwind-style', get_template_directory_uri() . '/final.css');
+	wp_enqueue_style('tailwind-style', get_template_directory_uri() . '/final.css', array(), filemtime(get_template_directory() . '/final.css'));
 
 	wp_style_add_data('headless-style', 'rtl', 'replace');
 

@@ -17,7 +17,7 @@ get_header();
 		<div class="container mx-auto px-4 relative z-10">
 			<div class="max-w-3xl mx-auto">
 				<?php while (have_posts()) : the_post(); ?>
-					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading"><?php the_title(); ?></h1>
+					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary-ochre"><?php the_title(); ?></h1>
 					<div class="text-xl mb-4 text-white/90">
 						<?php
 						$categories = get_the_category();

@@ -14,7 +14,7 @@ get_header();
         <div class="absolute inset-0 bg-gradient-to-r from-primary-blue to-secondary-burgundy opacity-95"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl mx-auto">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading"><?php the_title(); ?></h1>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary-ochre"><?php the_title(); ?></h1>
                 <?php if (get_the_content()) : ?>
                     <div class="text-xl mb-8 text-white/90">
                         <?php the_content(); ?>

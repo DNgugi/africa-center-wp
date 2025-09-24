@@ -1,5 +1,15 @@
 # Theme Development Todo List
 
+## ✅ Component System Cleanup (COMPLETED)
+
+- [x] Streamline component system to focus on blocks and shortcodes
+- [x] Register custom block category "Headless Components"
+- [x] Add comprehensive blocks: Hero, Team Members, Events, Cultural Items, News Grid, CTA, Stats, FAQ
+- [x] Update JavaScript blocks with proper category registration
+- [x] Enhance shortcode system with all component types
+- [x] Remove legacy component-system.php admin interface
+- [x] Update functions.php to load streamlined component system
+
 ## 1. Update theme metadata and branding
 
 - [ ] Update style.css with proper theme description

@@ -33,30 +33,29 @@
 
 	<?php headless_post_thumbnail(); ?>
 
-	<div class="entry-content prose prose-lg max-w-none">
-		<?php
-		the_content(
-			sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__('Continue reading<span class="screen-reader-text"> "%s"</span>', 'headless'),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				wp_kses_post(get_the_title())
-			)
-		);
+	<div class="entry-content max-w-none"><?php
+											the_content(
+												sprintf(
+													wp_kses(
+														/* translators: %s: Name of current post. Only visible to screen readers */
+														__('Continue reading<span class="screen-reader-text"> "%s"</span>', 'headless'),
+														array(
+															'span' => array(
+																'class' => array(),
+															),
+														)
+													),
+													wp_kses_post(get_the_title())
+												)
+											);
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links mt-4 pt-4 border-t border-gray-200">' . esc_html__('Pages:', 'headless'),
-				'after'  => '</div>',
-			)
-		);
-		?>
+											wp_link_pages(
+												array(
+													'before' => '<div class="page-links mt-4 pt-4 border-t border-gray-200">' . esc_html__('Pages:', 'headless'),
+													'after'  => '</div>',
+												)
+											);
+											?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">

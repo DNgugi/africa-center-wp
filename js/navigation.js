@@ -6,7 +6,7 @@
  */
 (function () {
   const siteNavigation = document.getElementById("site-navigation");
-  const isMobile = () => window.innerWidth < 768; // Match with Tailwind's md breakpoint
+  const isMobile = () => window.innerWidth < 1024; // Match with Tailwind's lg breakpoint
 
   // Return early if the navigation doesn't exist.
   if (!siteNavigation) {
@@ -36,14 +36,35 @@
   function setupDropdownMenu(menuItem) {
     const link = menuItem.querySelector("a");
     const submenu = menuItem.querySelector(".sub-menu");
+    let hideTimeout;
 
     if (!submenu) return;
 
     // Handle mouse interactions for desktop
     menuItem.addEventListener("mouseenter", () => {
       if (!isMobile()) {
+        // Clear any pending hide timeout
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+          hideTimeout = null;
+        }
+
         menuItem.classList.add("hover");
         submenu.classList.add("show");
+
+        // Dynamically adjust submenu position for wrapped menus
+        setTimeout(() => {
+          const menuItemRect = menuItem.getBoundingClientRect();
+          const menuRect = menuItem.closest(".menu").getBoundingClientRect();
+
+          // If menu item is on a lower row (wrapped), adjust submenu position
+          if (menuItemRect.top > menuRect.top + 10) {
+            // 10px tolerance
+            submenu.style.marginTop = "0.5rem"; // Push submenu down a bit more
+          } else {
+            submenu.style.marginTop = "-0.5rem"; // Default overlap
+          }
+        }, 10); // Small delay to ensure layout is settled
 
         // Keep parent menus open when hovering nested items
         let parent = menuItem.parentElement.closest(".menu-item-has-children");
@@ -57,6 +78,35 @@
 
     menuItem.addEventListener("mouseleave", () => {
       if (!isMobile()) {
+        // Add a delay before hiding to allow users to move mouse to submenu
+        hideTimeout = setTimeout(() => {
+          menuItem.classList.remove("hover");
+          submenu.classList.remove("show");
+
+          // Clean up any orphaned hover states
+          const allHovered = menuItem.querySelectorAll(".hover");
+          allHovered.forEach((el) => {
+            el.classList.remove("hover");
+            el.querySelector(".sub-menu")?.classList.remove("show");
+          });
+        }, 300); // 300ms delay - enough time for mouse movement
+      }
+    });
+
+    // Also add mouseenter/mouseleave to the submenu itself
+    submenu.addEventListener("mouseenter", () => {
+      if (!isMobile()) {
+        // Clear hide timeout when mouse enters submenu
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+          hideTimeout = null;
+        }
+      }
+    });
+
+    submenu.addEventListener("mouseleave", () => {
+      if (!isMobile()) {
+        // Hide immediately when leaving submenu
         menuItem.classList.remove("hover");
         submenu.classList.remove("show");
 
@@ -126,6 +176,18 @@
   button.addEventListener("click", function () {
     siteNavigation.classList.toggle("toggled");
 
+    // Toggle icons
+    const hamburgerIcon = button.querySelector(".hamburger-icon");
+    const closeIcon = button.querySelector(".close-icon");
+
+    if (siteNavigation.classList.contains("toggled")) {
+      hamburgerIcon.classList.add("hidden");
+      closeIcon.classList.remove("hidden");
+    } else {
+      hamburgerIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
+    }
+
     if (button.getAttribute("aria-expanded") === "true") {
       button.setAttribute("aria-expanded", "false");
     } else {
@@ -140,6 +202,15 @@
     if (!isClickInside) {
       siteNavigation.classList.remove("toggled");
       button.setAttribute("aria-expanded", "false");
+
+      // Reset icons to hamburger when menu is closed
+      const hamburgerIcon = button.querySelector(".hamburger-icon");
+      const closeIcon = button.querySelector(".close-icon");
+
+      if (hamburgerIcon && closeIcon) {
+        hamburgerIcon.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+      }
     }
   });
 

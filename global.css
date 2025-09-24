@@ -2,6 +2,277 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Base typography styles */
+  html {
+    font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+    @apply text-base leading-relaxed;
+  }
+
+  body {
+    @apply text-neutral-darkest bg-neutral-lightest leading-relaxed;
+    line-height: 1.7;
+  }
+
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    @apply font-bold leading-tight text-primary-blue mb-4;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl mb-6;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl lg:text-4xl mb-5;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl lg:text-3xl mb-4 text-primary-terracotta;
+  }
+
+  h4 {
+    @apply text-lg md:text-xl lg:text-2xl mb-3 text-primary-green;
+  }
+
+  h5 {
+    @apply text-base md:text-lg lg:text-xl mb-3;
+  }
+
+  h6 {
+    @apply text-sm md:text-base lg:text-lg mb-2 uppercase tracking-wide;
+  }
+
+  /* Paragraphs */
+  p {
+    @apply mb-6 text-base md:text-lg leading-relaxed text-neutral-darkest;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary-light-blue hover:text-primary-blue transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply underline;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    @apply mb-6 pl-6;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  /* Remove list styles from navigation menus */
+  .main-navigation ul,
+  .menu,
+  .sub-menu {
+    @apply list-none;
+  }
+
+  .main-navigation li,
+  .menu li,
+  .sub-menu li {
+    @apply mb-0;
+  }
+
+  li {
+    @apply mb-2 text-base md:text-lg leading-relaxed;
+  }
+
+  li > ul,
+  li > ol {
+    @apply mb-2 mt-2;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    @apply border-l-4 border-primary-ochre pl-6 py-4 mb-6 italic text-neutral-dark bg-secondary-sand/30 rounded-r-lg;
+  }
+
+  blockquote p {
+    @apply mb-4 last:mb-0;
+  }
+
+  blockquote cite {
+    @apply block text-sm text-neutral-medium mt-2 not-italic;
+  }
+
+  blockquote cite::before {
+    content: "— ";
+  }
+
+  /* Code */
+  code {
+    @apply bg-neutral-light px-2 py-1 rounded text-sm font-mono text-neutral-darkest;
+  }
+
+  pre {
+    @apply bg-neutral-darkest text-neutral-lightest p-4 rounded-lg overflow-x-auto mb-6;
+  }
+
+  pre code {
+    @apply bg-transparent text-inherit p-0;
+  }
+
+  /* Tables */
+  table {
+    @apply w-full mb-6 border-collapse;
+  }
+
+  th,
+  td {
+    @apply border border-neutral-light p-3 text-left;
+  }
+
+  th {
+    @apply bg-secondary-sand font-semibold text-neutral-darkest;
+  }
+
+  tbody tr:nth-child(even) {
+    @apply bg-neutral-lightest/50;
+  }
+
+  /* Images */
+  img {
+    @apply max-w-full h-auto rounded-lg;
+  }
+
+  figure {
+    @apply mb-6;
+  }
+
+  figcaption {
+    @apply text-sm text-neutral-medium mt-2 text-center italic;
+  }
+
+  /* Horizontal rule */
+  hr {
+    @apply border-0 border-t-2 border-neutral-light my-8;
+  }
+
+  /* Form elements */
+  input,
+  textarea,
+  select {
+    @apply border border-neutral-light rounded-lg px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent;
+  }
+
+  label {
+    @apply block font-semibold mb-2 text-neutral-darkest;
+  }
+
+  button,
+  input[type="submit"],
+  input[type="button"] {
+    @apply bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-primary-blue/90 transition-colors duration-200 cursor-pointer font-medium;
+  }
+
+  /* WordPress Content Styles */
+  .entry-content {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+
+  .entry-content h1,
+  .entry-content h2,
+  .entry-content h3,
+  .entry-content h4,
+  .entry-content h5,
+  .entry-content h6 {
+    @apply font-heading font-bold leading-tight mb-4;
+  }
+
+  .entry-content h1 {
+    @apply text-3xl md:text-4xl text-primary-blue mb-6;
+  }
+
+  .entry-content h2 {
+    @apply text-2xl md:text-3xl text-primary-blue mb-5;
+  }
+
+  .entry-content h3 {
+    @apply text-xl md:text-2xl text-primary-terracotta mb-4;
+  }
+
+  .entry-content h4 {
+    @apply text-lg md:text-xl text-primary-green mb-3;
+  }
+
+  .entry-content h5 {
+    @apply text-base md:text-lg text-primary-blue mb-3;
+  }
+
+  .entry-content h6 {
+    @apply text-sm md:text-base text-primary-blue mb-2 uppercase tracking-wide;
+  }
+
+  /* WordPress alignment classes */
+  .aligncenter {
+    @apply mx-auto block;
+  }
+
+  .alignleft {
+    @apply float-left mr-6 mb-4;
+  }
+
+  .alignright {
+    @apply float-right ml-6 mb-4;
+  }
+
+  .alignwide,
+  .alignfull {
+    @apply w-full;
+  }
+
+  /* WordPress captions */
+  .wp-caption {
+    @apply max-w-full;
+  }
+
+  .wp-caption-text {
+    @apply text-sm text-neutral-medium mt-2 text-center italic;
+  }
+
+  /* WordPress galleries */
+  .gallery {
+    @apply grid gap-4 mb-6;
+  }
+
+  .gallery-columns-2 {
+    @apply grid-cols-2;
+  }
+
+  .gallery-columns-3 {
+    @apply grid-cols-3;
+  }
+
+  .gallery-columns-4 {
+    @apply grid-cols-2 md:grid-cols-4;
+  }
+
+  .gallery-item {
+    @apply text-center;
+  }
+
+  .gallery-caption {
+    @apply text-sm text-neutral-medium mt-2 italic;
+  }
+}
+
 @layer components {
   /* Sidebar Styles */
   .widget-area {
@@ -39,6 +310,8 @@
 
   .widget_search .search-submit {
     @apply px-4 py-2 bg-primary-blue text-white rounded-r-lg hover:bg-primary-blue/90 transition-colors;
+  }
+
   /* Header Styles */
   .header-style-transparent {
     @apply bg-transparent absolute w-full z-10;
@@ -60,6 +333,12 @@
 
   .header-style-minimal {
     @apply py-4 bg-white shadow-sm;
+  }
+
+  /* Screen reader text */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
   }
 
   /* Content Width Classes */
@@ -94,7 +373,11 @@
   }
 
   .btn-blue {
-    @apply btn bg-primary-blue text-white hover:bg-primary-blue/90 shadow-lg;
+    @apply btn bg-primary-blue text-white hover:bg-primary-light-blue hover:text-white shadow-lg;
+  }
+
+  .btn-ochre {
+    @apply btn bg-primary-ochre text-white hover:bg-primary-ochre/90 hover:text-white shadow-lg;
   }
 
   .btn-small {
@@ -107,27 +390,152 @@
 }
 
 .site-header {
-  @apply p-4 flex justify-between bg-white md:relative fixed top-0 left-0 right-0 z-[100];
+  @apply py-3 px-4 bg-white fixed top-0 left-0 right-0 z-[100];
+  height: 80px; /* Increased height for better logo accommodation on mobile */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .site-header {
+    height: 90px; /* Even larger height on tablet for logo breathing room */
+    padding: 1rem 1.5rem; /* md:py-4 md:px-6 equivalent */
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-header {
+    height: auto; /* Natural height on desktop */
+    position: relative; /* Use natural flow on desktop */
+    padding: 1rem 1.5rem; /* lg:py-4 lg:px-6 equivalent */
+  }
+}
+
+/* Header inner container - better handling for long nav */
+.site-header > div {
+  @apply flex items-center w-full min-w-0; /* min-w-0 allows flex items to shrink */
 }
 
 .site-branding {
-  @apply flex items-center md:static fixed top-4 left-4 z-[101];
+  @apply flex items-center flex-shrink-0 fixed left-4 z-[101]; /* Fixed positioning on mobile */
+  top: 20px; /* Center in 80px mobile header */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .site-branding {
+    top: 25px; /* Center in 90px tablet header */
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-branding {
+    position: static; /* Use natural flow on desktop */
+    left: auto;
+    top: auto;
+  }
+}
+
+/* Logo sizing constraints */
+.custom-logo-link {
+  @apply block;
+}
+
+.custom-logo,
+.site-branding img {
+  @apply max-w-[280px] max-h-[80px] w-auto h-auto object-contain;
 }
 
 #page {
-  @apply pt-16 md:pt-0; /* Add padding to account for fixed header on mobile only */
+  @apply pt-[80px]; /* Account for 80px fixed header on mobile */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  #page {
+    padding-top: 90px; /* Account for 90px fixed header on tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  #page {
+    padding-top: 0; /* No padding needed on desktop since header is relative */
+  }
 }
 
 .menu-toggle {
-  @apply md:hidden fixed top-4 right-4 z-[101] bg-transparent;
+  @apply lg:hidden fixed right-4 z-[101] bg-transparent;
+  top: 20px; /* Center in 80px mobile header */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .menu-toggle {
+    top: 25px; /* Center in 90px tablet header (matches logo) */
+  }
 }
 
 .menu {
-  @apply list-none md:p-2 md:flex md:space-x-2;
+  @apply list-none lg:p-2 lg:flex;
+  gap: 1rem; /* Reduced gap for more compact navigation */
 }
 
-/* Mobile menu styles */
+/* Navigation link styles */
+.menu a {
+  @apply whitespace-nowrap; /* Prevent text wrapping */
+}
+
+/* Desktop navigation font sizing - smaller for better fit */
+@media (min-width: 1024px) {
+  .menu a {
+    @apply text-sm font-medium; /* Smaller, more compact navigation text */
+  }
+
+  /* Compact carets for desktop - simple downward caret */
+  .menu-item-has-children > a::after {
+    content: "v";
+    font-size: 0.625rem; /* Even smaller caret */
+    margin-left: 0.125rem; /* Minimal margin */
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .menu-item-has-children.hover > a::after {
+    transform: rotate(180deg); /* Flip upward on hover */
+  }
+}
+
+/* Main navigation container adjustments */
+.main-navigation {
+  @apply flex-shrink min-w-0; /* Allow shrinking if needed */
+}
+
+/* Navigation wrapper with overflow handling */
+.main-navigation .hidden.lg\\:block {
+  @apply overflow-x-auto; /* Add horizontal scroll if needed */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE */
+}
+
+.main-navigation .hidden.lg\\:block::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Webkit browsers */
+}
+
+/* Mobile logo sizing - more reasonable size */
 @media (max-width: 767px) {
+  .custom-logo,
+  .site-branding img {
+    @apply max-w-[180px] max-h-[50px]; /* Increased from 140x32 for better visibility */
+  }
+}
+
+/* Tablet logo sizing - between mobile and desktop */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .custom-logo,
+  .site-branding img {
+    @apply max-w-[220px] max-h-[65px]; /* Tablet-specific sizing */
+  }
+}
+
+/* Mobile menu styles - Extended to cover tablet range */
+@media (max-width: 1023px) {
   .main-navigation {
     @apply static;
   }
@@ -139,7 +547,8 @@
   }
 
   .menu {
-    @apply fixed top-0 left-0 right-0 bottom-0 bg-white pt-16 px-4 overflow-y-auto opacity-0 pointer-events-none transition-all duration-200 z-[95];
+    @apply fixed top-0 left-0 right-0 bottom-0 bg-white px-4 overflow-y-auto opacity-0 pointer-events-none transition-all duration-200 z-[95];
+    padding-top: 3rem; /* Match the even more reduced page padding */
   }
 
   .toggled .menu {
@@ -175,13 +584,29 @@
 
 /* Desktop menu styles */
 @media (min-width: 768px) {
-  .menu-item-has-children {
-    @apply relative;
+  /* Navigation responsive adjustments */
+  .main-navigation .hidden.lg\\:block {
+    @apply max-w-none; /* Allow navigation to use available space */
   }
 
-  /* Add padding to create a larger hover area */
+  .menu {
+    @apply flex-wrap; /* Allow wrapping if absolutely necessary */
+    gap: 1rem; /* Consistent gap for compact navigation */
+  }
+
+  .menu-item-has-children {
+    @apply relative;
+    /* Ensure consistent positioning base for all menu items */
+    position: relative !important;
+  }
+
+  /* Improved hover area that accounts for menu wrapping */
   .menu-item-has-children > a {
     @apply pb-2;
+    position: relative;
+    /* Add extra padding for larger click/hover area */
+    padding: 0.75rem 1rem;
+    margin: -0.25rem -0.5rem;
   }
 
   .menu-item-has-children > a::after {
@@ -193,14 +618,37 @@
     @apply transform rotate-180;
   }
 
-  /* Create a hover bridge between menu item and submenu */
+  /* Create a larger hover bridge between menu item and submenu */
   .menu-item-has-children::after {
     content: "";
-    @apply absolute w-full h-2 left-0 top-full pointer-events-none;
+    @apply absolute w-full left-0 top-full pointer-events-none;
+    height: 3rem; /* Much larger bridge to handle wrapped menus */
+  }
+
+  /* Add hover tolerance area to the left and right */
+  .menu-item-has-children::before {
+    content: "";
+    @apply absolute top-0 bottom-0 pointer-events-none;
+    left: -1rem;
+    right: -1rem;
+    z-index: 1;
   }
 
   .sub-menu {
-    @apply absolute left-0 top-full hidden min-w-[200px] bg-white shadow-lg rounded-md p-2 pt-3;
+    @apply absolute left-0 top-full hidden min-w-[200px] bg-white shadow-lg rounded-md p-2;
+    padding-top: 1rem; /* Add padding to create overlap with hover bridge */
+    margin-top: -0.5rem; /* Pull submenu up to overlap with parent area */
+  }
+
+  /* Add invisible hover area around submenus for diagonal mouse movement */
+  .sub-menu::before {
+    content: "";
+    position: absolute;
+    top: -1rem;
+    left: -0.5rem;
+    right: -0.5rem;
+    bottom: -0.5rem;
+    z-index: -1;
   }
 
   /* First level submenu */

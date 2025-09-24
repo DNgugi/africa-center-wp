@@ -1,13 +1,7 @@
 <?php
 
 /**
- *	<?php
-	$page_options = headless_page_options();
-	if (!$page_options['hide_title']) : ?>
-		<header class="entry-header">
-			<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-		</header><!-- .entry-header -->
-	<?php endif;te part for displaying page content in page.php
+ * Template part for displaying page content in page.php
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -19,27 +13,24 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	$page_options = headless_get_page_options();
-	if (!$page_options['hide_title']) : ?>
-		<header class="entry-header">
-			<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-		</header><!-- .entry-header -->
-	<?php endif;
+
+	// Title is now displayed in the main page template (page.php) with gradient background
+	// So we skip displaying it here to avoid duplication
 
 	if (!$page_options['hide_title']) {
 		headless_post_thumbnail();
 	} ?>
 
-	<div class="entry-content">
-		<?php
-		the_content();
+	<div class="entry-content max-w-none"><?php
+											the_content();
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__('Pages:', 'headless'),
-				'after'  => '</div>',
-			)
-		);
-		?>
+											wp_link_pages(
+												array(
+													'before' => '<div class="page-links">' . esc_html__('Pages:', 'headless'),
+													'after'  => '</div>',
+												)
+											);
+											?>
 	</div><!-- .entry-content -->
 
 	<?php if (get_edit_post_link()) : ?>
