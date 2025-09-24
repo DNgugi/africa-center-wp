@@ -73,20 +73,29 @@ mark {
 
 /* Pagination styles */
 .pagination {
-  @apply flex justify-center items-center space-x-2 mt-8;
+  @apply flex justify-center items-center gap-2 mt-8;
 }
 
 .pagination a,
 .pagination span {
-  @apply px-4 py-2 rounded-lg transition-colors duration-200;
+  @apply px-4 py-2 rounded-full transition-all duration-200 font-medium;
 }
 
 .pagination a {
-  @apply bg-white text-primary-blue border border-gray-300 hover:bg-primary-blue hover:text-white;
+  @apply bg-neutral-lightest text-primary-blue border border-neutral-light hover:bg-primary-blue hover:text-white hover:border-primary-blue shadow-sm hover:shadow-md;
 }
 
 .pagination .current {
-  @apply bg-primary-blue text-white border border-primary-blue;
+  @apply bg-primary-blue text-white border border-primary-blue shadow-md;
+}
+
+.pagination .prev,
+.pagination .next {
+  @apply bg-primary-ochre text-white border border-primary-ochre hover:bg-primary-ochre/90 shadow-md;
+}
+
+.pagination .dots {
+  @apply text-neutral-medium;
 }
 
 /* Bounce animation that plays once */
@@ -535,6 +544,19 @@ mark {
   overflow: visible !important;
 }
 
+/* WordPress Admin Bar Adjustments */
+/* Desktop admin bar (32px height) */
+.admin-bar .site-header {
+  top: 32px !important;
+}
+
+/* Mobile admin bar (46px height) */
+@media screen and (max-width: 782px) {
+  .admin-bar .site-header {
+    top: 46px !important;
+  }
+}
+
 /* Scrolled state - more transparency and stronger shadow */
 .site-header.header-scrolled {
   background-color: rgba(255, 255, 255, 0.95);
@@ -547,6 +569,19 @@ mark {
 #page {
   padding-top: 80px; /* Match header height exactly */
   margin-top: 0; /* Remove any margin that could cause gaps */
+}
+
+/* WordPress Admin Bar Page Adjustments */
+/* Desktop admin bar (32px + 80px header = 112px total) */
+.admin-bar #page {
+  padding-top: 112px !important;
+}
+
+/* Mobile admin bar (46px + 80px header = 126px total) */
+@media screen and (max-width: 782px) {
+  .admin-bar #page {
+    padding-top: 126px !important;
+  }
 }
 
 /* Logo sizing constraints */
