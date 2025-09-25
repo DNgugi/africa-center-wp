@@ -57,12 +57,23 @@
 
   function handleScroll() {
     const currentScrollY = window.scrollY;
+    const isAdminBar = document.body.classList.contains("admin-bar");
 
     if (header) {
       if (currentScrollY > 50) {
         header.classList.add("header-scrolled");
+
+        // Handle WordPress admin bar on small screens
+        if (isAdminBar && window.innerWidth <= 600 && currentScrollY > 46) {
+          document.body.classList.add("mobile-scrolled");
+        }
       } else {
         header.classList.remove("header-scrolled");
+
+        // Remove mobile scrolled class when back at the top
+        if (isAdminBar) {
+          document.body.classList.remove("mobile-scrolled");
+        }
       }
     }
 
@@ -94,21 +105,76 @@
     if (totalNeeded > headerWidth) {
       if (!headerContainer.classList.contains("two-line-layout")) {
         headerContainer.classList.add("two-line-layout");
-        siteHeader.style.height =
-          "130px"; /* Increased from 110px to give more space for logo */
-        if (pageElement) pageElement.style.paddingTop = "130px";
+        // Use CSS variable instead of direct style manipulation
+        document.documentElement.style.setProperty("--header-height", "130px");
+        if (pageElement)
+          document.documentElement.style.setProperty(
+            "--page-padding-top",
+            "130px"
+          );
       }
     } else {
       if (headerContainer.classList.contains("two-line-layout")) {
         headerContainer.classList.remove("two-line-layout");
-        siteHeader.style.height = "80px"; /* Updated base height */
-        if (pageElement) pageElement.style.paddingTop = "80px";
+        // Use CSS variable instead of direct style manipulation
+        document.documentElement.style.setProperty("--header-height", "80px");
+        if (pageElement)
+          document.documentElement.style.setProperty(
+            "--page-padding-top",
+            "80px"
+          );
       }
     }
   }
 
   window.addEventListener("resize", checkNavigationLayout);
   setTimeout(checkNavigationLayout, 100);
+
+  // Remove complex layout observer and simplify
+  function setupLayoutObserver() {
+    // No longer needed with simplified approach
+  }
+
+  // Position a submenu based on its parent and viewport
+  function positionSubmenu(menuItem, submenu) {
+    const submenuRect = submenu.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const isNested = menuItem.closest(".sub-menu") !== null;
+
+    // Reset any previous positioning to defaults
+    submenu.style.left = "";
+    submenu.style.right = "";
+    submenu.style.top = "";
+
+    // For nested submenus, ensure they open to the side and not over parent
+    if (isNested) {
+      const parentMenuItem = menuItem.closest(".menu-item-has-children");
+      const parentRect = parentMenuItem.getBoundingClientRect();
+
+      // Check if submenu would go off right edge of viewport
+      if (parentRect.right + submenuRect.width > viewportWidth - 20) {
+        // Open to the left of the parent
+        submenu.style.left = "auto";
+        submenu.style.right = "100%";
+        submenu.style.marginRight = "5px"; // Small gap between menus
+      } else {
+        // Default: open to the right of parent with small offset to avoid overlap
+        submenu.style.left = "100%";
+        submenu.style.marginLeft = "5px"; // Small gap between menus
+      }
+
+      // Always position aligned to top of parent item
+      submenu.style.top = "0";
+    }
+    // Top-level submenu positioning (vertical dropdown)
+    else {
+      if (submenuRect.right > viewportWidth - 20) {
+        // Submenu goes off right edge, position to the left
+        submenu.style.left = "auto";
+        submenu.style.right = "0";
+      }
+    }
+  }
 
   // Setup dropdown functionality for all levels
   function setupDropdownMenu(menuItem) {
@@ -127,46 +193,12 @@
           hideTimeout = null;
         }
 
+        // Make menu appearance nearly immediate
         menuItem.classList.add("hover");
         submenu.classList.add("show");
 
         // Smart positioning to prevent submenu from going off-screen
-        setTimeout(() => {
-          const menuItemRect = menuItem.getBoundingClientRect();
-          const submenuRect = submenu.getBoundingClientRect();
-          const viewportWidth = window.innerWidth;
-          const viewportHeight = window.innerHeight;
-
-          // Reset any previous positioning
-          submenu.style.left = "";
-          submenu.style.right = "";
-          submenu.style.top = "";
-          submenu.style.marginTop = "";
-
-          // Check horizontal positioning
-          if (submenuRect.right > viewportWidth - 20) {
-            // Submenu goes off right edge, position to the left
-            submenu.style.left = "auto";
-            submenu.style.right = "0";
-          }
-
-          // Check vertical positioning
-          if (submenuRect.bottom > viewportHeight - 20) {
-            // Submenu goes off bottom, position it upward
-            submenu.style.top = "auto";
-            submenu.style.bottom = "100%";
-            submenu.style.marginTop = "0";
-          } else {
-            // Default downward positioning
-            submenu.style.marginTop = "-0.5rem";
-          }
-
-          // Handle wrapped menu items
-          const menuRect = menuItem.closest(".menu").getBoundingClientRect();
-          if (menuItemRect.top > menuRect.top + 10) {
-            submenu.style.marginTop = "0.5rem";
-          }
-        }, 10);
+        positionSubmenu(menuItem, submenu);
 
         // Keep parent menus open when hovering nested items
         let parent = menuItem.parentElement.closest(".menu-item-has-children");
@@ -180,18 +212,21 @@
 
     menuItem.addEventListener("mouseleave", () => {
       if (!isMobile()) {
-        // Add a delay before hiding to allow users to move mouse to submenu
+        // Add a moderate delay before hiding to allow users to move mouse to submenu
         hideTimeout = setTimeout(() => {
-          menuItem.classList.remove("hover");
-          submenu.classList.remove("show");
+          // Don't hide immediately if the menu has focus
+          if (!menuItem.contains(document.activeElement)) {
+            menuItem.classList.remove("hover");
+            submenu.classList.remove("show");
 
-          // Clean up any orphaned hover states
-          const allHovered = menuItem.querySelectorAll(".hover");
-          allHovered.forEach((el) => {
-            el.classList.remove("hover");
-            el.querySelector(".sub-menu")?.classList.remove("show");
-          });
-        }, 300); // 300ms delay - enough time for mouse movement
+            // Clean up any orphaned hover states that aren't in the active path
+            const allHovered = menuItem.querySelectorAll(".hover");
+            allHovered.forEach((el) => {
+              el.classList.remove("hover");
+              el.querySelector(".sub-menu")?.classList.remove("show");
+            });
+          }
+        }, 150); // 150ms delay - fast enough to feel responsive but still allow movement
       }
     });
 
@@ -203,21 +238,38 @@
           clearTimeout(hideTimeout);
           hideTimeout = null;
         }
+
+        // Ensure parent stays in hover state
+        menuItem.classList.add("hover");
+        submenu.classList.add("show");
+
+        // Make sure submenu is correctly positioned - necessary for dynamic content
+        positionSubmenu(menuItem, submenu);
+
+        // Keep parent menus open
+        let parent = menuItem.parentElement.closest(".menu-item-has-children");
+        while (parent) {
+          parent.classList.add("hover");
+          parent.querySelector(".sub-menu").classList.add("show");
+          parent = parent.parentElement.closest(".menu-item-has-children");
+        }
       }
     });
 
     submenu.addEventListener("mouseleave", () => {
       if (!isMobile()) {
-        // Hide immediately when leaving submenu
-        menuItem.classList.remove("hover");
-        submenu.classList.remove("show");
-
-        // Clean up any orphaned hover states
-        const allHovered = menuItem.querySelectorAll(".hover");
-        allHovered.forEach((el) => {
-          el.classList.remove("hover");
-          el.querySelector(".sub-menu")?.classList.remove("show");
-        });
+        // Add a minimal delay before hiding to allow for mouse movement between elements
+        hideTimeout = setTimeout(() => {
+          // Check if the mouse has moved to the parent or another related element
+          const relatedTarget = event.relatedTarget;
+          if (
+            !menuItem.contains(relatedTarget) &&
+            !submenu.contains(relatedTarget)
+          ) {
+            menuItem.classList.remove("hover");
+            submenu.classList.remove("show");
+          }
+        }, 100); // Minimal delay for responsive nested navigation
       }
     });
 
