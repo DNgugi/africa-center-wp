@@ -5575,6 +5575,62 @@ mark {
   .menu .current_page_item > a:hover {
     text-decoration: none !important;
   }
+
+  /* Fix for text overflow in menu items - especially for 'visiting & consulting...' links */
+
+  .sub-menu {
+    min-width: 240px !important;
+    /* Minimum width for submenus */
+    width: -moz-max-content !important;
+    width: max-content !important;
+    /* Adjust width based on content */
+    max-width: 350px !important;
+    /* Maximum width to prevent excessively wide menus */
+  }
+
+  /* Fix specifically for long menu links that overflow their containers */
+
+  .sub-menu a {
+    white-space: normal !important;
+    /* Force wrapping */
+    overflow-wrap: break-word !important;
+    /* Enable word breaking */
+    word-break: normal !important;
+    /* Use standard word break rules */
+    width: 100% !important;
+    /* Use full width of container */
+    line-height: 1.3 !important;
+    /* Slightly tighter line height for wrapped text */
+    display: block !important;
+    /* Ensure block display */
+    max-width: 100% !important;
+    /* Don't exceed container width */
+    hyphens: auto !important;
+    /* Enable hyphenation for better text wrapping */
+  }
+
+  /* Adjust display of deeply nested submenus */
+
+  .sub-menu .sub-menu {
+    min-width: 220px !important;
+    /* Slightly smaller min-width for nested menus */
+  }
+
+  /* Handle submenus for viewports narrower than 1400px */
+
+  @media (max-width: 1400px) {
+    .sub-menu {
+      max-width: 280px !important;
+      /* Narrower submenus on smaller screens */
+    }
+
+    .sub-menu a {
+      font-size: 0.85rem !important;
+      /* Smaller font size */
+      padding: 8px 12px !important;
+      /* Smaller padding */
+    }
+  }
 }
 
 .hover\:border-primary-ochre:hover {
