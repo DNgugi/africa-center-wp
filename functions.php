@@ -293,3 +293,59 @@ function headless_highlight_search_terms($content)
 }
 add_filter('the_content', 'headless_highlight_search_terms');
 add_filter('the_excerpt', 'headless_highlight_search_terms');
+
+/**
+ * Register Event Custom Post Type
+ */
+function headless_register_event_post_type()
+{
+	$labels = array(
+		'name'               => 'Events',
+		'singular_name'      => 'Event',
+		'menu_name'          => 'Events',
+		'name_admin_bar'     => 'Event',
+		'add_new'            => 'Add New',
+		'add_new_item'       => 'Add New Event',
+		'new_item'           => 'New Event',
+		'edit_item'          => 'Edit Event',
+		'view_item'          => 'View Event',
+		'all_items'          => 'All Events',
+		'search_items'       => 'Search Events',
+		'parent_item_colon'  => 'Parent Events:',
+		'not_found'          => 'No events found.',
+		'not_found_in_trash' => 'No events found in Trash.'
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'description'        => 'Events for the website.',
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array('slug' => 'event', 'with_front' => false),
+		'capability_type'    => 'post',
+		'has_archive'        => 'events', // This sets the archive slug to 'events'
+		'hierarchical'       => false,
+		'menu_position'      => 5,
+		'menu_icon'          => 'dashicons-calendar',
+		'supports'           => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields')
+	);
+
+	register_post_type('event', $args);
+}
+add_action('init', 'headless_register_event_post_type');
+
+/**
+ * Flush rewrite rules on theme activation to ensure event permalinks work
+ */
+function headless_rewrite_flush()
+{
+	// First, we need to ensure our custom post type is registered
+	headless_register_event_post_type();
+
+	// Then flush rewrite rules
+	flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'headless_rewrite_flush');
