@@ -376,7 +376,7 @@ get_header();
 										</svg>
 									</div>
 								</div>
-								<blockquote class="text-neutral-dark italic mb-6">
+								<blockquote class="text-neutral-dark italic mb-6 no-bq-style">
 									"<?php echo esc_html($testimonial['quote']); ?>"
 								</blockquote>
 								<div class="border-t border-neutral-light pt-4">

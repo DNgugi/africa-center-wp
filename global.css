@@ -227,6 +227,19 @@ mark {
     content: "— ";
   }
 
+  /* Remove all blockquote styling for .no-bq-style */
+  .no-bq-style {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 0 1.5em 0 !important;
+    background: none !important;
+    color: inherit !important;
+    font-style: normal !important;
+    font-size: inherit !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
   /* Code */
   code {
     @apply bg-neutral-light px-2 py-1 rounded text-sm font-mono text-neutral-darkest;
@@ -523,14 +536,45 @@ mark {
   }
 }
 
+:root {
+  --header-height: 80px;
+  --page-padding-top: 80px;
+}
+
 .site-header {
   @apply bg-white fixed top-0 left-0 right-0 z-[100];
-  height: 80px; /* Increased from 70px to give more space for logo */
+  height: var(
+    --header-height
+  ); /* Use CSS variable for dynamic height adjustment */
   padding: 0 16px; /* Minimal edge padding */
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  overflow-y: visible; /* Allow dropdowns to extend below header */
+  /* Keep this simple - no overflow handling here at all */
+}
+
+/* WordPress Admin Bar Integration - Prevent header overlap */
+.admin-bar .site-header {
+  top: 32px; /* Standard admin bar height on desktop */
+}
+
+/* Account for mobile admin bar */
+@media screen and (max-width: 782px) {
+  .admin-bar .site-header {
+    top: 46px; /* WordPress uses 46px on mobile */
+  }
+}
+
+/* Very small screens where admin bar becomes absolute */
+@media screen and (max-width: 600px) {
+  .admin-bar .site-header {
+    position: fixed;
+  }
+
+  /* When scrolled down on mobile, WP changes the admin bar to absolute positioning
+     so we need to restore the header to the top */
+  .admin-bar.mobile-scrolled .site-header {
+    top: 0;
+  }
 }
 
 /* Scrolled state - more transparency and stronger shadow */
@@ -543,7 +587,9 @@ mark {
 }
 
 #page {
-  padding-top: 80px; /* Match header height exactly */
+  padding-top: var(
+    --page-padding-top
+  ); /* Using dedicated page padding variable */
   margin-top: 0; /* Remove any margin that could cause gaps */
 }
 
@@ -583,8 +629,7 @@ mark {
 .header-container {
   @apply flex items-center justify-between w-full h-full;
   max-width: 100%;
-  overflow-x: hidden; /* Prevent horizontal overflow only */
-  overflow-y: visible; /* Allow dropdowns to extend vertically */
+  /* No overflow settings - let default browser behavior handle this */
 }
 
 /* Two-line layout fallback for desktop */
@@ -608,6 +653,14 @@ mark {
   .header-container.two-line-layout .main-navigation .menu {
     @apply justify-center;
     gap: 1rem; /* Smaller gap for two-line layout */
+  }
+
+  /* Special handling for two-line layout dropdown positioning */
+  .header-container.two-line-layout
+    .menu
+    > .menu-item-has-children
+    > .sub-menu {
+    margin-top: 0.75rem; /* More space below menu in two-line layout */
   }
 
   /* Increase logo size for two-line layout since we have more space */
@@ -684,14 +737,28 @@ mark {
 }
 
 /* Navigation link styles */
-.menu a {
-  @apply whitespace-nowrap; /* Prevent text wrapping */
+.menu > li > a {
+  @apply whitespace-nowrap; /* Prevent text wrapping in top-level menu only */
+}
+
+/* Allow submenu items to wrap */
+.sub-menu a {
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.4;
+  padding: 8px 10px;
+  display: block;
+  width: 100%;
+  font-size: inherit; /* Inherit from parent to maintain consistency */
 }
 
 /* Desktop navigation font sizing - smaller for better fit */
 @media (min-width: 1024px) {
-  .menu a {
+  /* Apply consistent text size to all menu items, including submenus */
+  .menu a,
+  .sub-menu a {
     @apply text-sm font-medium; /* Smaller, more compact navigation text */
+    font-size: 0.875rem; /* Explicit rem size for consistency */
   }
 
   /* Compact carets for desktop - simple downward caret */
@@ -718,7 +785,7 @@ mark {
 /* Navigation wrapper with overflow handling */
 .main-navigation .hidden.lg\\:block {
   /* Remove overflow-x-auto to prevent dropdown clipping */
-  overflow: visible; /* Allow dropdowns to extend in all directions */
+  overflow: visible !important; /* Allow dropdowns to extend in all directions */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
   -ms-overflow-style: none; /* Hide scrollbar in IE */
 }
@@ -796,6 +863,26 @@ mark {
     pointer-events: none;
     transition: all 0.3s ease;
     z-index: 210;
+  }
+
+  /* Adjust for admin bar in mobile menu */
+  .admin-bar .nav-menu-container {
+    top: 32px; /* Standard WP admin bar height */
+    height: calc(100vh - 32px);
+  }
+
+  @media screen and (max-width: 782px) {
+    .admin-bar .nav-menu-container {
+      top: 46px; /* WP admin bar height on mobile */
+      height: calc(100vh - 46px);
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .admin-bar.mobile-scrolled .nav-menu-container {
+      top: 0; /* When admin bar scrolls away on mobile */
+      height: 100vh;
+    }
   }
 
   /* Ensure the header (with close button) stays above the mobile menu */
@@ -898,12 +985,20 @@ mark {
   .sub-menu a,
   .sub-menu .sub-menu a,
   .sub-menu .sub-menu .sub-menu a {
-    max-width: calc(100vw - 2rem) !important;
-    word-break: break-word !important;
+    max-width: 100% !important; /* Use full width of container */
+    width: 100% !important; /* Ensure full width usage */
+    word-break: normal !important; /* Less aggressive word breaking */
     overflow-wrap: break-word !important;
     white-space: normal !important;
     /* Add more left padding for nested levels */
-    padding-left: 2rem !important;
+    padding-left: 1.25rem !important; /* Reduced padding for more text space */
+    padding-right: 1.25rem !important; /* Reduced padding for more text space */
+    /* Ensure consistent font size across all levels */
+    font-size: 0.875rem !important; /* Match text-sm from Tailwind */
+    box-sizing: border-box !important; /* Include padding in width calculation */
+    line-height: 1.5 !important; /* Improved line height for readability */
+    display: block !important; /* Ensure block display */
+    hyphens: auto !important; /* Enable hyphenation for better text wrapping */
   }
 
   /* Third level nesting */
@@ -976,25 +1071,62 @@ mark {
   /* Create a larger hover bridge between menu item and submenu */
   .menu-item-has-children::after {
     content: "";
-    @apply absolute w-full left-0 top-full pointer-events-none;
-    height: 3rem; /* Much larger bridge to handle wrapped menus */
+    @apply absolute w-full left-0 top-full;
+    height: 2rem; /* Bridge to handle wrapped menus */
+    pointer-events: auto; /* Important: capture mouse events */
   }
 
   /* Add hover tolerance area to the left and right */
   .menu-item-has-children::before {
     content: "";
-    @apply absolute top-0 bottom-0 pointer-events-none;
+    @apply absolute top-0 bottom-0;
     left: -1rem;
     right: -1rem;
     z-index: 1;
+    pointer-events: auto; /* Important: capture mouse events */
   }
 
   .sub-menu {
-    @apply absolute left-0 top-full hidden min-w-[200px] bg-white shadow-lg rounded-md p-2;
-    padding-top: 1rem; /* Add padding to create overlap with hover bridge */
-    margin-top: 0.25rem; /* Position below header shadow */
-    max-width: 300px; /* Prevent overly wide submenus */
-    /* Removed max-height and overflow-y to allow natural expansion */
+    @apply absolute left-0 top-full min-w-[200px] bg-white shadow-lg rounded-md;
+    padding: 0.5rem; /* Consistent padding */
+    margin-top: 0.5rem; /* Position below header shadow with more space */
+    width: max-content; /* Use natural width based on content */
+    min-width: 200px; /* Minimum width for short items */
+    max-width: 350px; /* Maximum width constraint to prevent excessive width */
+    z-index: 9999 !important; /* Ensure always on top */
+
+    /* Transition settings for immediate appearance */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-3px);
+    transition:
+      opacity 0.1s ease,
+      visibility 0s linear,
+      transform 0.1s ease;
+    pointer-events: none; /* Don't catch mouse events when hidden */
+  }
+
+  /* Style for menu items in submenus for better readability with wrapped text */
+  .sub-menu li {
+    margin-bottom: 2px;
+  }
+
+  .sub-menu li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Add hover effect to menu items */
+  .sub-menu a:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+  }
+
+  /* When shown, make visible with transition */
+  .sub-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto; /* Re-enable pointer events when visible */
   }
 
   /* Add invisible hover area around submenus for diagonal mouse movement */
@@ -1002,39 +1134,16 @@ mark {
     content: "";
     position: absolute;
     top: -1rem;
-    left: -0.5rem;
-    right: -0.5rem;
-    bottom: -0.5rem;
+    left: -1rem;
+    right: -1rem;
+    bottom: -1rem; /* Larger area below for approaching from underneath */
     z-index: -1;
-  }
-
-  /* First level submenu - Above header z-[100] */
-  .menu > .menu-item-has-children > .sub-menu {
-    @apply z-[150];
+    pointer-events: auto; /* Ensure it captures mouse events */
   }
 
   /* Handle last two items differently to prevent overflow */
   .menu > .menu-item-has-children:nth-last-child(-n + 2) > .sub-menu {
     @apply right-0 left-auto;
-  }
-
-  /* Second level submenu - Above first level */
-  .menu
-    > .menu-item-has-children
-    > .sub-menu
-    > .menu-item-has-children
-    > .sub-menu {
-    @apply z-[151];
-  }
-
-  /* Third level and deeper submenus - Above second level */
-  .menu
-    > .menu-item-has-children
-    > .sub-menu
-    > .menu-item-has-children
-    > .sub-menu
-    .sub-menu {
-    @apply z-[152];
   }
 
   /* Nested submenus */
@@ -1046,12 +1155,26 @@ mark {
   /* Create hover bridge for nested submenus */
   .sub-menu .menu-item-has-children::after {
     content: "";
-    @apply absolute w-3 h-full right-0 top-0 pointer-events-none;
+    @apply absolute w-16 h-full right-0 top-0;
+    pointer-events: auto; /* Important: capture mouse events */
+    /* Wider bridge (16px instead of 8px) for better hover detection between menus */
   }
 
   /* Position nested submenus */
   .sub-menu .menu-item-has-children > .sub-menu {
     @apply left-full top-0 pl-3; /* Default position */
+    margin-top: 0; /* Align with the top of parent */
+    margin-left: 10px; /* Larger offset to ensure no overlap with parent */
+    z-index: 9999 !important; /* Ensure always on top */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Distinct shadow for better separation */
+    max-width: 300px; /* Ensure consistent width for nested menus */
+    width: max-content; /* Use natural width based on content */
+  }
+
+  /* Special styles for nested submenu items with long text */
+  .sub-menu .sub-menu a {
+    font-size: 0.875rem; /* Keep consistent font size across all levels */
+    padding: 6px 10px; /* Slightly less padding for nested items */
   }
 
   /* Handle nested submenus for items that might overflow */
@@ -1061,6 +1184,7 @@ mark {
     .menu-item-has-children
     > .sub-menu {
     @apply right-full left-auto pl-0 pr-3; /* Position to the left instead */
+    margin-right: 10px; /* Larger offset to ensure no overlap with parent */
   }
 
   /* Adjust the arrow for right-aligned submenus */
@@ -1079,5 +1203,82 @@ mark {
 
   .sub-menu.show {
     @apply block;
+  }
+}
+
+/* 
+ * Menu overflow and navigation fixes
+ * Ensures proper dropdown menu display outside fixed headers
+ */
+
+/* Ensure header allows content to extend beyond its boundaries */
+.site-header {
+  overflow: visible !important;
+  overflow-y: visible !important;
+}
+
+.header-container {
+  overflow: visible !important;
+  overflow-y: visible !important;
+}
+
+/* Make sure menu items with dropdowns aren't clipped */
+.menu-item-has-children {
+  overflow: visible !important;
+}
+
+/* Desktop menu navigation enhancements */
+@media (min-width: 1024px) {
+  /* Ensure proper overflow handling for navigation elements at all breakpoints */
+  .site-header,
+  .site-header.header-scrolled,
+  .header-container {
+    overflow-y: visible !important;
+  }
+
+  /* Position submenus properly and ensure visibility */
+  .menu-item-has-children > .sub-menu {
+    /* Position below the parent item */
+    top: 100%;
+    /* Ensure dropdown is visible outside header */
+    z-index: 9999;
+    /* Ensure no clipping */
+    overflow: visible;
+    display: none;
+  }
+
+  /* When showing submenus, make sure they're visible */
+  .menu-item-has-children.hover > .sub-menu,
+  .sub-menu.show {
+    display: block !important;
+  }
+
+  /* Remove underline on hover for all navigation menu items */
+  .main-navigation .menu a:hover {
+    text-decoration: none !important;
+  }
+
+  /* Make background slightly darker for menu items on hover */
+  .main-navigation .menu > li > a:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+  }
+
+  /* Ensure submenu items also have darker backgrounds on hover but no underline */
+  .sub-menu a:hover {
+    background-color: rgba(
+      0,
+      0,
+      0,
+      0.07
+    ) !important; /* Slightly darker than parent items */
+    text-decoration: none !important;
+    border-radius: 4px;
+  }
+
+  /* Ensure current active items maintain their styles but without underline */
+  .menu .current-menu-item > a:hover,
+  .menu .current_page_item > a:hover {
+    text-decoration: none !important;
   }
 }
