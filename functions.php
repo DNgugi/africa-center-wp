@@ -73,19 +73,6 @@ function headless_setup()
 		}
 	}
 
-	// Register main sidebar
-	register_sidebar(
-		array(
-			'name'          => esc_html__('Main Sidebar', 'headless'),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__('Add widgets here.', 'headless'),
-			'before_widget' => '<section id="%1$s" class="widget %2$s p-4 bg-white rounded-lg shadow-sm mb-6">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title text-lg font-semibold mb-4">',
-			'after_title'   => '</h2>',
-		)
-	);
-
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
@@ -166,12 +153,12 @@ function headless_widgets_init()
 {
 	register_sidebar(
 		array(
-			'name'          => esc_html__('Sidebar', 'headless'),
+			'name'          => esc_html__('Main Sidebar', 'headless'),
 			'id'            => 'sidebar-1',
 			'description'   => esc_html__('Add widgets here.', 'headless'),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'before_widget' => '<section id="%1$s" class="widget %2$s p-4 bg-white rounded-lg shadow-sm mb-6">',
 			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
+			'before_title'  => '<h2 class="widget-title text-lg font-semibold mb-4">',
 			'after_title'   => '</h2>',
 		)
 	);
