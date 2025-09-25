@@ -195,6 +195,11 @@ function headless_scripts()
 
 	wp_enqueue_script('headless-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
+	// GLightbox scripts and styles for gallery and image lightbox
+	wp_enqueue_style('glightbox-css', get_template_directory_uri() . '/js/vendor/glightbox/dist/css/glightbox.min.css', array(), '3.2.0');
+	wp_enqueue_script('glightbox-js', get_template_directory_uri() . '/js/vendor/glightbox/dist/js/glightbox.min.js', array(), '3.2.0', true);
+	wp_enqueue_script('headless-gallery-init', get_template_directory_uri() . '/js/gallery-init.js', array('glightbox-js'), _S_VERSION, true);
+
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
@@ -220,6 +225,26 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Gallery and lightbox functionality.
+ */
+require get_template_directory() . '/inc/gallery-functions.php';
+
+/**
+ * Enqueue block editor assets
+ */
+function headless_enqueue_block_editor_assets()
+{
+	wp_enqueue_script(
+		'headless-gallery-editor',
+		get_template_directory_uri() . '/js/gallery-block-editor.js',
+		array('wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-element', 'wp-hooks', 'wp-components', 'wp-data'),
+		_S_VERSION,
+		true
+	);
+}
+add_action('enqueue_block_editor_assets', 'headless_enqueue_block_editor_assets');
 
 /**
  * Load Jetpack compatibility file.
