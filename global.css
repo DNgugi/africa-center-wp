@@ -73,29 +73,20 @@ mark {
 
 /* Pagination styles */
 .pagination {
-  @apply flex justify-center items-center gap-2 mt-8;
+  @apply flex justify-center items-center space-x-2 mt-8;
 }
 
 .pagination a,
 .pagination span {
-  @apply px-4 py-2 rounded-full transition-all duration-200 font-medium;
+  @apply px-4 py-2 rounded-lg transition-colors duration-200;
 }
 
 .pagination a {
-  @apply bg-neutral-lightest text-primary-blue border border-neutral-light hover:bg-primary-blue hover:text-white hover:border-primary-blue shadow-sm hover:shadow-md;
+  @apply bg-white text-primary-blue border border-gray-300 hover:bg-primary-blue hover:text-white;
 }
 
 .pagination .current {
-  @apply bg-primary-blue text-white border border-primary-blue shadow-md;
-}
-
-.pagination .prev,
-.pagination .next {
-  @apply bg-primary-ochre text-white border border-primary-ochre hover:bg-primary-ochre/90 shadow-md;
-}
-
-.pagination .dots {
-  @apply text-neutral-medium;
+  @apply bg-primary-blue text-white border border-primary-blue;
 }
 
 /* Bounce animation that plays once */
@@ -534,27 +525,12 @@ mark {
 
 .site-header {
   @apply bg-white fixed top-0 left-0 right-0 z-[100];
-  min-height: 80px; /* Minimum height but allow expansion for dropdowns */
+  height: 80px; /* Increased from 70px to give more space for logo */
   padding: 0 16px; /* Minimal edge padding */
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  overflow-x: hidden !important; /* Prevent horizontal scroll */
-  overflow-y: visible !important; /* Allow dropdowns to extend below header */
-  /* Force override any browser defaults or resets */
-  overflow: visible !important;
-}
-
-/* WordPress Admin Bar Adjustments */
-/* Desktop admin bar (32px height) */
-.admin-bar .site-header {
-  top: 32px !important;
-}
-
-/* Mobile admin bar (46px height) */
-@media screen and (max-width: 782px) {
-  .admin-bar .site-header {
-    top: 46px !important;
-  }
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: visible; /* Allow dropdowns to extend below header */
 }
 
 /* Scrolled state - more transparency and stronger shadow */
@@ -569,19 +545,6 @@ mark {
 #page {
   padding-top: 80px; /* Match header height exactly */
   margin-top: 0; /* Remove any margin that could cause gaps */
-}
-
-/* WordPress Admin Bar Page Adjustments */
-/* Desktop admin bar (32px + 80px header = 112px total) */
-.admin-bar #page {
-  padding-top: 112px !important;
-}
-
-/* Mobile admin bar (46px + 80px header = 126px total) */
-@media screen and (max-width: 782px) {
-  .admin-bar #page {
-    padding-top: 126px !important;
-  }
 }
 
 /* Logo sizing constraints */
@@ -618,69 +581,10 @@ mark {
 
 /* Header layout styles */
 .header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
+  @apply flex items-center justify-between w-full h-full;
   max-width: 100%;
-  overflow-x: hidden !important; /* Prevent horizontal overflow only */
-  overflow-y: visible !important; /* Allow dropdowns to extend vertically */
-  /* Ensure no new stacking contexts are created that would contain dropdowns */
-  position: relative;
-}
-
-/* Additional specificity to override any conflicting styles */
-.site-header .header-container {
-  overflow-y: visible !important;
-}
-
-header.site-header .header-container {
-  overflow-y: visible !important;
-}
-
-/* Override any Tailwind utility classes */
-.site-header.overflow-auto {
-  overflow-y: visible !important;
-}
-
-.header-container.overflow-auto {
-  overflow-y: visible !important;
-}
-
-.site-header.overflow-y-auto {
-  overflow-y: visible !important;
-}
-
-.header-container.overflow-y-auto {
-  overflow-y: visible !important;
-}
-
-/* Maximum specificity override */
-#masthead.site-header {
-  overflow-y: visible !important;
-}
-
-#masthead.site-header .header-container {
-  overflow-y: visible !important;
-}
-
-/* Ultimate specificity - target by element and class combination */
-header#masthead.site-header div.header-container {
-  overflow-y: visible !important;
-  overflow: visible !important;
-}
-
-/* Attribute selector for maximum specificity */
-div[class="header-container"] {
-  overflow-y: visible !important;
-  overflow: visible !important;
-}
-
-/* CSS custom property override */
-.header-container {
-  --overflow-y: visible;
-  overflow-y: var(--overflow-y) !important;
+  overflow-x: hidden; /* Prevent horizontal overflow only */
+  overflow-y: visible; /* Allow dropdowns to extend vertically */
 }
 
 /* Two-line layout fallback for desktop */
@@ -729,13 +633,11 @@ div[class="header-container"] {
 .main-navigation {
   @apply items-center;
   /* Remove max-width constraint to allow dropdowns to extend */
-  overflow: visible; /* Ensure dropdowns can extend beyond navigation boundaries */
 }
 
 .main-navigation .nav-menu-container {
   @apply flex items-center;
   /* Remove max-width constraint to allow dropdowns to extend */
-  overflow: visible; /* Ensure dropdowns can extend beyond container boundaries */
 }
 
 .main-navigation .menu {
@@ -755,9 +657,6 @@ div[class="header-container"] {
 .nav-menu-container {
   /* Desktop: flex-1 and visible */
   @apply flex-1 block;
-  /* Ensure dropdowns can extend beyond this container */
-  overflow: visible;
-  position: relative; /* Maintain positioning context without constraining children */
 }
 
 @media (max-width: 1023px) {
@@ -818,12 +717,10 @@ div[class="header-container"] {
 
 /* Navigation wrapper with overflow handling */
 .main-navigation .hidden.lg\\:block {
-  @apply overflow-x-auto; /* Add horizontal scroll if needed */
-  overflow-y: visible; /* Allow dropdowns to extend vertically */
+  /* Remove overflow-x-auto to prevent dropdown clipping */
+  overflow: visible; /* Allow dropdowns to extend in all directions */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
   -ms-overflow-style: none; /* Hide scrollbar in IE */
-  /* Ensure dropdowns can escape this container */
-  position: static; /* Remove any positioning that might contain dropdowns */
 }
 
 .main-navigation .hidden.lg\\:block::-webkit-scrollbar {
@@ -1041,7 +938,7 @@ div[class="header-container"] {
 }
 
 /* Desktop menu styles */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   /* Navigation responsive adjustments */
   .main-navigation .hidden.lg\\:block {
     @apply max-w-none; /* Allow navigation to use available space */
@@ -1056,8 +953,6 @@ div[class="header-container"] {
     @apply relative;
     /* Ensure consistent positioning base for all menu items */
     position: relative !important;
-    /* Ensure dropdowns can extend beyond menu item boundaries */
-    overflow: visible;
   }
 
   /* Improved hover area that accounts for menu wrapping */
@@ -1100,18 +995,6 @@ div[class="header-container"] {
     margin-top: 0.25rem; /* Position below header shadow */
     max-width: 300px; /* Prevent overly wide submenus */
     /* Removed max-height and overflow-y to allow natural expansion */
-    /* Ensure positioning is applied with high specificity */
-    position: absolute !important;
-  }
-
-  /* Desktop dropdown text handling */
-  .sub-menu a {
-    white-space: nowrap !important; /* Prevent text wrapping on desktop */
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    max-width: 280px !important; /* Fit within dropdown width */
-    display: block !important;
-    padding: 0.5rem 1rem !important;
   }
 
   /* Add invisible hover area around submenus for diagonal mouse movement */
@@ -1128,10 +1011,6 @@ div[class="header-container"] {
   /* First level submenu - Above header z-[100] */
   .menu > .menu-item-has-children > .sub-menu {
     @apply z-[150];
-    /* Ensure desktop positioning overrides any mobile styles */
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
   }
 
   /* Handle last two items differently to prevent overflow */
@@ -1173,22 +1052,6 @@ div[class="header-container"] {
   /* Position nested submenus */
   .sub-menu .menu-item-has-children > .sub-menu {
     @apply left-full top-0 pl-3; /* Default position */
-    /* Ensure proper positioning context */
-    position: absolute !important;
-    left: 100% !important;
-    top: 0 !important;
-  }
-
-  /* Override mobile text wrapping for desktop nested dropdowns */
-  .sub-menu .sub-menu a,
-  .sub-menu .sub-menu .sub-menu a {
-    white-space: nowrap !important;
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-    max-width: 280px !important;
-    padding-left: 1rem !important; /* Reset excessive padding */
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
   }
 
   /* Handle nested submenus for items that might overflow */

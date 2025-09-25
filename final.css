@@ -4520,8 +4520,8 @@ mark {
   z-index: 100;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  min-height: 80px;
-  /* Minimum height but allow expansion for dropdowns */
+  height: 80px;
+  /* Fixed height for consistent positioning */
   padding: 0 16px;
   /* Minimal edge padding */
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -4532,6 +4532,13 @@ mark {
   /* Allow dropdowns to extend below header */
   /* Force override any browser defaults or resets */
   overflow: visible !important;
+}
+
+/* Ensure main content starts right under the header */
+
+.site-main {
+  margin-top: 80px;
+  /* Push content down by header height */
 }
 
 /* WordPress Admin Bar Adjustments */
@@ -4561,25 +4568,25 @@ mark {
 }
 
 #page {
-  padding-top: 80px;
-  /* Match header height exactly */
+  padding-top: 0;
+  /* Remove gap between header and content */
   margin-top: 0;
   /* Remove any margin that could cause gaps */
 }
 
 /* WordPress Admin Bar Page Adjustments */
 
-/* Desktop admin bar (32px + 80px header = 112px total) */
+/* Desktop admin bar (32px only) */
 
 .admin-bar #page {
-  padding-top: 112px !important;
+  padding-top: 32px !important;
 }
 
-/* Mobile admin bar (46px + 80px header = 126px total) */
+/* Mobile admin bar (46px only) */
 
 @media screen and (max-width: 782px) {
   .admin-bar #page {
-    padding-top: 126px !important;
+    padding-top: 46px !important;
   }
 }
 
@@ -4650,6 +4657,11 @@ mark {
   /* Allow dropdowns to extend vertically */
   /* Ensure no new stacking contexts are created that would contain dropdowns */
   position: relative;
+  /* Remove any properties that might create new stacking contexts */
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 /* Additional specificity to override any conflicting styles */
@@ -4772,16 +4784,26 @@ div[class="header-container"] {
 .main-navigation {
   align-items: center;
   /* Remove max-width constraint to allow dropdowns to extend */
-  overflow: visible;
+  overflow: visible !important;
   /* Ensure dropdowns can extend beyond navigation boundaries */
+  /* Prevent creating new stacking contexts */
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .main-navigation .nav-menu-container {
   display: flex;
   align-items: center;
   /* Remove max-width constraint to allow dropdowns to extend */
-  overflow: visible;
+  overflow: visible !important;
   /* Ensure dropdowns can extend beyond container boundaries */
+  /* Prevent creating new stacking contexts */
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .main-navigation .menu {
@@ -4830,9 +4852,14 @@ div[class="header-container"] {
   display: block;
   flex: 1 1 0%;
   /* Ensure dropdowns can extend beyond this container */
-  overflow: visible;
+  overflow: visible !important;
   position: relative;
   /* Maintain positioning context without constraining children */
+  /* Prevent creating new stacking contexts */
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 @media (max-width: 1023px) {
@@ -4853,6 +4880,11 @@ div[class="header-container"] {
     /* Ensure dropdowns can escape this container */
     position: static;
     /* Remove any positioning that might contain dropdowns */
+    /* Prevent creating new stacking contexts */
+    transform: none;
+    filter: none;
+    perspective: none;
+    contain: none;
   }
 
   .main-navigation .nav-menu-container.lg\\:block::-webkit-scrollbar {
@@ -4944,7 +4976,7 @@ div[class="header-container"] {
 .main-navigation .hidden.lg\\:block {
   overflow-x: auto;
   /* Add horizontal scroll if needed */
-  overflow-y: visible;
+  overflow-y: visible !important;
   /* Allow dropdowns to extend vertically */
   scrollbar-width: none;
   /* Hide scrollbar in Firefox */
@@ -4953,6 +4985,11 @@ div[class="header-container"] {
   /* Ensure dropdowns can escape this container */
   position: static;
   /* Remove any positioning that might contain dropdowns */
+  /* Prevent creating new stacking contexts */
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  contain: none !important;
 }
 
 .main-navigation .hidden.lg\\:block::-webkit-scrollbar {
@@ -5205,6 +5242,11 @@ div[class="header-container"] {
     /* Ensure dropdowns can escape this container */
     position: static;
     /* Remove any positioning that might contain dropdowns */
+    /* Prevent creating new stacking contexts */
+    transform: none;
+    filter: none;
+    perspective: none;
+    contain: none;
   }
 
   .main-navigation .sub-menu.lg\\:block::-webkit-scrollbar {
@@ -5380,6 +5422,11 @@ div[class="header-container"] {
     /* Ensure dropdowns can escape this container */
     position: static;
     /* Remove any positioning that might contain dropdowns */
+    /* Prevent creating new stacking contexts */
+    transform: none;
+    filter: none;
+    perspective: none;
+    contain: none;
   }
 
   .main-navigation .sub-menu.lg\\:block::-webkit-scrollbar {
