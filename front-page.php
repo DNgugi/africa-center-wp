@@ -21,8 +21,7 @@ get_header();
 ?><main id="primary" class="site-main">
 
 	<!-- Hero Section -->
-	<section class="relative bg-pattern-lines text-white py-20 lg:py-28 overflow-hidden">
-		<div class="absolute inset-0 bg-gradient-to-r from-primary-blue to-secondary-burgundy opacity-95"></div>
+	<section class="relative text-white py-20 lg:py-28 overflow-hidden" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/background-patterns/hero-background.svg'); background-size: cover;">
 		<div class="container mx-auto px-4 relative z-10">
 			<div class="max-w-3xl mx-auto lg:mx-0">
 				<div class="inline-block bg-primary-terracotta px-4 py-1 rounded-full text-sm font-medium mb-6">
@@ -140,8 +139,8 @@ get_header();
 								</p>
 							<?php endif; ?>
 							<a href="<?php echo esc_url($program['url']); ?>" class="inline-flex items-center text-primary-terracotta font-medium">
-								Learn More
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+								<span>Learn More</span>
+								<svg class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
 									<path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
 								</svg>
 							</a>
@@ -175,7 +174,7 @@ get_header();
 		)
 	);
 	?>
-	<section class="py-16 bg-pattern-dots">
+	<section class="py-16" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/background-patterns/our-purpose-background.svg'); background-size: cover;">
 		<div class="container mx-auto px-4">
 			<div class="text-center mb-12">
 				<div class="inline-block bg-white px-3 py-1 rounded-full text-sm font-medium text-primary-terracotta mb-2">
@@ -202,8 +201,8 @@ get_header();
 						</p>
 						<a href="<?php echo esc_url($item['url']); ?>"
 							class="inline-flex items-center text-primary-terracotta font-medium hover:text-primary-ochre transition-colors">
-							Learn More
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+							<span>Learn More</span>
+							<svg class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
 								<path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
 							</svg>
 						</a>
@@ -343,26 +342,20 @@ get_header();
 		)
 	);
 	?>
-	<section class="py-16 bg-pattern-lines relative overflow-hidden">
-		<div class="absolute inset-0 bg-gradient-to-b from-primary-blue to-secondary-burgundy opacity-90"></div>
+	<section class="py-16 relative overflow-hidden" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/background-patterns/community-voices-lines-only.svg'); background-repeat: repeat;">
 		<div class="container mx-auto px-4 relative z-10">
 			<div class="max-w-3xl mx-auto text-center mb-12">
-				<div class="inline-block bg-white/90 px-3 py-1 rounded-full text-sm font-medium text-primary-terracotta mb-2">
+				<div class="inline-block bg-white px-3 py-1 rounded-full text-sm font-medium text-primary-terracotta mb-2">
 					What People Say
 				</div>
-				<h2 class="text-3xl font-bold text-primary-ochre">Community Voices</h2>
+				<h2 class="text-3xl font-bold text-primary-blue">Community Voices</h2>
 			</div>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				<?php foreach ($testimonials as $testimonial) : ?>
 					<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
 						<div class="p-6">
 							<div class="flex flex-col items-center text-center">
-								<div class="mb-6 relative">
-									<div class="absolute -left-4 -top-4 w-8 h-8 text-primary-terracotta">
-										<svg viewBox="0 0 24 24" fill="currentColor">
-											<path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-										</svg>
-									</div>
+								<div class="mb-8">
 									<div class="w-20 h-20 mx-auto relative rounded-full border-4 border-secondary-sand overflow-hidden">
 										<img
 											src="<?php echo esc_url($testimonial['image']); ?>"
@@ -370,15 +363,18 @@ get_header();
 											class="w-full h-full object-cover"
 											loading="lazy" />
 									</div>
-									<div class="absolute -right-4 -bottom-4 w-8 h-8 text-primary-terracotta rotate-180">
-										<svg viewBox="0 0 24 24" fill="currentColor">
-											<path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-										</svg>
+								</div>
+								<div class="relative mb-6 mx-3">
+									<div class="absolute -left-4 -top-3 w-6 h-6 text-primary-terracotta">
+										<img src="<?php echo get_template_directory_uri(); ?>/images/custom-svgs/quote.svg" alt="Quote" class="w-full h-full">
+									</div>
+									<blockquote class="text-neutral-dark italic px-8 py-3 no-bq-style">
+										<?php echo esc_html($testimonial['quote']); ?>
+									</blockquote>
+									<div class="absolute -right-4 -bottom-3 w-6 h-6 text-primary-terracotta">
+										<img src="<?php echo get_template_directory_uri(); ?>/images/custom-svgs/quote-flipped.svg" alt="Quote" class="w-full h-full">
 									</div>
 								</div>
-								<blockquote class="text-neutral-dark italic mb-6 no-bq-style">
-									"<?php echo esc_html($testimonial['quote']); ?>"
-								</blockquote>
 								<div class="border-t border-neutral-light pt-4">
 									<h4 class="font-semibold text-primary-blue">
 										<?php echo esc_html($testimonial['name']); ?>
@@ -455,33 +451,29 @@ get_header();
 							</div>
 						<?php endif; ?>
 						<div class="p-6">
-							<div class="flex items-center gap-2 mb-3 text-sm text-neutral-dark">
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-								</svg>
-								<?php
-								$date = new DateTime($event['date']);
-								echo esc_html($date->format('F j, Y'));
-								?>
+							<div class="flex items-center gap-3 mb-3 text-sm text-neutral-dark">
+								<img src="<?php echo get_template_directory_uri(); ?>/images/custom-svgs/calendar.svg" class="h-5 w-5" alt="Calendar">
+								<span>
+									<?php
+									$date = new DateTime($event['date']);
+									echo esc_html($date->format('F j, Y'));
+									?>
+								</span>
 								<span class="mx-2">|</span>
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-								</svg>
-								<?php echo esc_html($event['time']); ?>
+								<img src="<?php echo get_template_directory_uri(); ?>/images/custom-svgs/clock.svg" class="h-5 w-5" alt="Clock">
+								<span><?php echo esc_html($event['time']); ?></span>
 							</div>
 							<h3 class="text-xl font-bold mb-2 text-primary-blue">
 								<?php echo esc_html($event['title']); ?>
 							</h3>
-							<div class="flex items-center gap-2 text-sm text-neutral-dark mb-4">
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-								</svg>
-								<?php echo esc_html($event['location']); ?>
+							<div class="flex items-center gap-3 text-sm text-neutral-dark mb-4">
+								<img src="<?php echo get_template_directory_uri(); ?>/images/custom-svgs/location-pin.svg" class="h-5 w-5" alt="Location Pin">
+								<span><?php echo esc_html($event['location']); ?></span>
 							</div>
 							<a href="<?php echo esc_url($event['url']); ?>"
 								class="inline-flex items-center text-primary-terracotta font-medium hover:text-primary-ochre transition-colors">
-								Learn More
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+								<span>Learn More</span>
+								<svg class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
 									<path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H3a1 1 0 110-2h9.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
 								</svg>
 							</a>

@@ -1,0 +1,52 @@
+/* 
+ * Background Patterns for Africa Center Hong Kong Theme
+ * These styles can be added to your theme's style.css file
+ * or loaded as a separate stylesheet
+ */
+
+.hero-background {
+  background-image: url("../images/background-patterns/hero-background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.community-voices-background {
+  background-image: url("../images/background-patterns/community-voices-background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.community-voices-lines-only {
+  background-image: url("../images/background-patterns/community-voices-lines-only.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.our-purpose-background {
+  background-image: url("../images/background-patterns/our-purpose-background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Basic pattern backgrounds */
+.pattern-dots {
+  background-image: url("../images/background-patterns/pattern-dots.svg");
+  background-repeat: repeat;
+}
+
+.pattern-lines {
+  background-image: url("../images/background-patterns/pattern-lines.svg");
+  background-repeat: repeat;
+}
+
+/* Hero gradient without pattern */
+.hero-gradient {
+  background: linear-gradient(to right, #1e5091 0%, #772f35 100%);
+  opacity: 0.95;
+}
+
+/* Community voices gradient without pattern */
+.community-gradient {
+  background: linear-gradient(to bottom, #1e5091 0%, #772f35 100%);
+  opacity: 0.9;
+}

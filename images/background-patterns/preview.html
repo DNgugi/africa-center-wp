@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Africa Center Background Patterns</title>
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      h1,
+      h2 {
+        font-family: "Montserrat", sans-serif;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .sample {
+        margin-bottom: 40px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .sample-content {
+        padding: 40px;
+        color: white;
+        min-height: 200px;
+      }
+      .pattern-dots {
+        background-image: url("./pattern-dots.svg");
+        background-repeat: repeat;
+      }
+      .pattern-lines {
+        background-image: url("./pattern-lines.svg");
+        background-repeat: repeat;
+      }
+      .hero-background {
+        background-image: url("./hero-background.svg");
+        background-size: cover;
+      }
+      .community-voices-background {
+        background-image: url("./community-voices-background.svg");
+        background-size: cover;
+      }
+      .community-voices-lines-only {
+        background-image: url("./community-voices-lines-only.svg");
+        background-size: cover;
+      }
+      .our-purpose-background {
+        background-image: url("./our-purpose-background.svg");
+        background-size: cover;
+      }
+      pre {
+        background-color: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Africa Center Background Patterns</h1>
+      <p>
+        This page showcases the background patterns used in the Africa Center
+        Hong Kong website theme.
+      </p>
+
+      <h2>Hero Background (horizontal gradient)</h2>
+      <div class="sample">
+        <div class="sample-content hero-background">
+          <h3>Hero Section Example</h3>
+          <p>
+            This is how the hero section background appears with pattern and
+            gradient overlay.
+          </p>
+        </div>
+      </div>
+
+      <h2>Community Voices Background (vertical gradient)</h2>
+      <div class="sample">
+        <div class="sample-content community-voices-background">
+          <h3>Community Voices Section Example</h3>
+          <p>
+            This is how the community voices section background appears with
+            pattern and gradient overlay.
+          </p>
+        </div>
+      </div>
+
+      <h2>Community Voices - Lines Pattern Only (no gradient)</h2>
+      <div class="sample">
+        <div class="sample-content community-voices-lines-only">
+          <h3 style="color: #1e5091">Community Voices Section - Lines Only</h3>
+          <p style="color: #333">
+            This version shows just the lines pattern without the gradient
+            overlay.
+          </p>
+        </div>
+      </div>
+
+      <h2>Our Purpose Background (dots pattern)</h2>
+      <div class="sample">
+        <div class="sample-content our-purpose-background">
+          <h3>Our Purpose Section Example</h3>
+          <p>
+            This is how the 'Our Purpose' section background appears with dots
+            pattern.
+          </p>
+        </div>
+      </div>
+
+      <h2>Pattern Dots</h2>
+      <div class="sample">
+        <div class="sample-content pattern-dots" style="color: black">
+          <h3>Dots Pattern</h3>
+          <p>This is the dots pattern without any gradient overlay.</p>
+        </div>
+      </div>
+
+      <h2>Pattern Lines</h2>
+      <div class="sample">
+        <div class="sample-content pattern-lines" style="color: black">
+          <h3>Lines Pattern</h3>
+          <p>This is the lines pattern without any gradient overlay.</p>
+        </div>
+      </div>
+
+      <h2>How to Use</h2>
+      <p>
+        You can use these background patterns in your CSS by referencing the SVG
+        files:
+      </p>
+      <pre>
+/* To use the hero background */
+.your-element {
+  background-image: url('./hero-background.svg');
+  background-size: cover;
+}
+
+/* To use the community voices background */
+.your-element {
+  background-image: url('./community-voices-background.svg');
+  background-size: cover;
+}
+
+/* To use the community voices background without gradient */
+.your-element {
+  background-image: url('./community-voices-lines-only.svg');
+  background-size: cover;
+}
+
+/* To use the our purpose background */
+.your-element {
+  background-image: url('./our-purpose-background.svg');
+  background-size: cover;
+}
+
+/* To use just the patterns */
+.your-element {
+  background-image: url('./pattern-dots.svg');
+  background-repeat: repeat;
+}
+
+.your-element {
+  background-image: url('./pattern-lines.svg');
+  background-repeat: repeat;
+}
+    </pre
+      >
+    </div>
+  </body>
+</html>
