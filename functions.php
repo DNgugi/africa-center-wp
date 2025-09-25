@@ -58,6 +58,7 @@ function headless_setup()
 	// Load admin files
 	require_once get_template_directory() . '/inc/admin/theme-options.php';
 	require_once get_template_directory() . '/inc/admin/page-options.php';
+	require_once get_template_directory() . '/inc/front-page-options.php';
 
 	// Add support for breadcrumbs
 	add_theme_support('yoast-seo-breadcrumbs');
