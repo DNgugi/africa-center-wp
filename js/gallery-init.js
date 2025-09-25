@@ -39,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to prepare gallery images for lightbox
   function prepareGalleryImages() {
-    // Target both grid and slideshow galleries
+    // Target both native WordPress galleries and our custom slideshow galleries
     const galleryImages = document.querySelectorAll(
-      ".wp-block-gallery.is-style-headless-grid .wp-block-image img, " +
-        ".wp-block-gallery.is-style-headless-grid .blocks-gallery-item img, " +
+      ".wp-block-gallery .wp-block-image img, " +
+        ".wp-block-gallery .blocks-gallery-item img, " +
         ".wp-block-gallery.is-style-headless-slideshow .wp-block-image img, " +
         ".wp-block-gallery.is-style-headless-slideshow .blocks-gallery-item img"
     );

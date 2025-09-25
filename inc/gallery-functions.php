@@ -13,16 +13,7 @@ function headless_register_gallery_block_styles()
 {
     // Make sure the function exists (WordPress 5.8+)
     if (function_exists('register_block_style')) {
-        // Register block styles
-        register_block_style(
-            'core/gallery',
-            array(
-                'name'         => 'headless-grid',
-                'label'        => __('Grid Gallery', 'headless'),
-                'style_handle' => 'headless-gallery-styles',
-            )
-        );
-
+        // Only register slideshow block style
         register_block_style(
             'core/gallery',
             array(
@@ -51,68 +42,40 @@ function headless_gallery_styles()
 
     // Now add our inline styles
     $css = '
-        /* Grid Gallery Styles */
-        .wp-block-gallery.is-style-headless-grid {
-            display: grid;
-            grid-template-columns: repeat(var(--wp-gallery-columns, 3), 1fr); /* Use CSS variables for columns */
-            gap: 0.25rem; /* Reduced gap between images */
-            max-width: 100%; /* Ensure gallery respects container width */
-            overflow: hidden; /* Prevent horizontal scrolling */
-            margin: 0 -0.25rem; /* Negative margin to compensate for outer gap */
-            padding: 0.25rem; /* Add padding to maintain spacing */
+        /* Native WordPress Gallery Styling for Brand Consistency */
+        .wp-block-gallery {
+            margin-bottom: 1.5rem;
         }
-
-        /* Dynamic column support using CSS variables - handles any number of columns */
-        .wp-block-gallery.is-style-headless-grid.columns-1 { --wp-gallery-columns: 1; }
-        .wp-block-gallery.is-style-headless-grid.columns-2 { --wp-gallery-columns: 2; }
-        .wp-block-gallery.is-style-headless-grid.columns-3 { --wp-gallery-columns: 3; }
-        .wp-block-gallery.is-style-headless-grid.columns-4 { --wp-gallery-columns: 4; }
-        .wp-block-gallery.is-style-headless-grid.columns-5 { --wp-gallery-columns: 5; }
-        .wp-block-gallery.is-style-headless-grid.columns-6 { --wp-gallery-columns: 6; }
-        .wp-block-gallery.is-style-headless-grid.columns-7 { --wp-gallery-columns: 7; }
-        .wp-block-gallery.is-style-headless-grid.columns-8 { --wp-gallery-columns: 8; }
         
-        /* Support for higher column counts (9+) - cap at 8 columns */
-        .wp-block-gallery.is-style-headless-grid.columns-9, 
-        .wp-block-gallery.is-style-headless-grid.columns-10, 
-        .wp-block-gallery.is-style-headless-grid.columns-11, 
-        .wp-block-gallery.is-style-headless-grid.columns-12 { 
-            --wp-gallery-columns: 8;
-        }
-
-        .wp-block-gallery.is-style-headless-grid figure {
-            margin: 0;
-            height: 100%;
+        /* Add subtle styling to gallery items */
+        .wp-block-gallery .wp-block-image,
+        .wp-block-gallery .blocks-gallery-item {
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
-            width: 100%;
         }
-
-        .wp-block-gallery.is-style-headless-grid figure:hover {
+        
+        .wp-block-gallery .wp-block-image:hover,
+        .wp-block-gallery .blocks-gallery-item:hover {
             transform: translateY(-3px);
         }
-
-        /* Improved grid item styling for larger images */
-        .wp-block-gallery.is-style-headless-grid .wp-block-image,
-        .wp-block-gallery.is-style-headless-grid .blocks-gallery-item {
-            width: 100%; 
-            aspect-ratio: 4/3; /* Slightly taller aspect ratio */
-            display: block;
-            overflow: hidden;
-            margin-bottom: 0.25rem; /* Added bottom margin for vertical spacing */
-            border-radius: 4px; /* Add border radius to item itself */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        
+        /* Style gallery images */
+        .wp-block-gallery img {
+            transition: transform 0.3s ease;
         }
         
-        .wp-block-gallery.is-style-headless-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease; /* Add transition to image */
-        }
-        
-        /* Hover effect on the image itself */
-        .wp-block-gallery.is-style-headless-grid a:hover img {
+        .wp-block-gallery a:hover img {
             transform: scale(1.05);
+        }
+        
+        /* Ensure captions look good */
+        .wp-block-gallery figcaption {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            font-size: 0.85rem;
         }
         
         /* Responsive adjustments using CSS variables */
@@ -395,16 +358,7 @@ function headless_register_gallery_block_patterns()
         array('label' => __('Headless Galleries', 'headless'))
     );
 
-    // Register a grid gallery pattern
-    register_block_pattern(
-        'headless/gallery-grid',
-        array(
-            'title'       => __('Gallery Grid with Lightbox', 'headless'),
-            'description' => __('A grid layout gallery with lightbox support', 'headless'),
-            'categories'  => array('headless-galleries'),
-            'content'     => '<!-- wp:gallery {"linkTo":"media","className":"is-style-headless-grid"} --><figure class="wp-block-gallery has-nested-images columns-3 is-cropped is-style-headless-grid"><!-- wp:image {"sizeSlug":"large","linkDestination":"media"} --><figure class="wp-block-image size-large"><img src="' . get_template_directory_uri() . '/images/placeholder-1.jpg" alt="Gallery Image 1"/><figcaption class="wp-element-caption">Image caption</figcaption></figure><!-- /wp:image --><!-- wp:image {"sizeSlug":"large","linkDestination":"media"} --><figure class="wp-block-image size-large"><img src="' . get_template_directory_uri() . '/images/placeholder-2.jpg" alt="Gallery Image 2"/></figure><!-- /wp:image --><!-- wp:image {"sizeSlug":"large","linkDestination":"media"} --><figure class="wp-block-image size-large"><img src="' . get_template_directory_uri() . '/images/placeholder-3.jpg" alt="Gallery Image 3"/></figure><!-- /wp:image --></figure><!-- /wp:gallery -->',
-        )
-    );
+    // No grid pattern - we're using native WordPress gallery instead
 
     // Register a slideshow gallery pattern
     register_block_pattern(
