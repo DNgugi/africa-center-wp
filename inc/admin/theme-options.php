@@ -3,14 +3,14 @@
 /**
  * Theme Options Customizer
  *
- * @package headless
+ * @package wpac
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class Headless_Theme_Options
+class WPAC_Theme_Options
 {
     private static $instance = null;
 
@@ -31,7 +31,7 @@ class Headless_Theme_Options
     {
         // Add Theme Options Panel
         $wp_customize->add_panel('theme_options', array(
-            'title' => __('Theme Options', 'headless'),
+            'title' => __('Theme Options', 'wpac'),
             'priority' => 30,
         ));
 
@@ -54,15 +54,15 @@ class Headless_Theme_Options
     private function add_typography_section($wp_customize)
     {
         $wp_customize->add_section('typography_options', array(
-            'title' => __('Typography', 'headless'),
+            'title' => __('Typography', 'wpac'),
             'panel' => 'theme_options',
         ));
 
         $elements = array(
-            'body' => __('Body Text', 'headless'),
-            'headings' => __('Headings', 'headless'),
-            'nav' => __('Navigation', 'headless'),
-            'buttons' => __('Buttons', 'headless'),
+            'body' => __('Body Text', 'wpac'),
+            'headings' => __('Headings', 'wpac'),
+            'nav' => __('Navigation', 'wpac'),
+            'buttons' => __('Buttons', 'wpac'),
         );
 
         foreach ($elements as $key => $label) {
@@ -73,14 +73,14 @@ class Headless_Theme_Options
             ));
 
             $wp_customize->add_control("typography_{$key}_font", array(
-                'label' => sprintf(__('%s Font Family', 'headless'), $label),
+                'label' => sprintf(__('%s Font Family', 'wpac'), $label),
                 'section' => 'typography_options',
                 'type' => 'select',
                 'choices' => array(
-                    'default' => __('Theme Default', 'headless'),
-                    'sans' => __('Sans Serif', 'headless'),
-                    'serif' => __('Serif', 'headless'),
-                    'display' => __('Display', 'headless'),
+                    'default' => __('Theme Default', 'wpac'),
+                    'sans' => __('Sans Serif', 'wpac'),
+                    'serif' => __('Serif', 'wpac'),
+                    'display' => __('Display', 'wpac'),
                 ),
             ));
 
@@ -91,15 +91,15 @@ class Headless_Theme_Options
             ));
 
             $wp_customize->add_control("typography_{$key}_weight", array(
-                'label' => sprintf(__('%s Font Weight', 'headless'), $label),
+                'label' => sprintf(__('%s Font Weight', 'wpac'), $label),
                 'section' => 'typography_options',
                 'type' => 'select',
                 'choices' => array(
-                    'light' => __('Light', 'headless'),
-                    'normal' => __('Normal', 'headless'),
-                    'medium' => __('Medium', 'headless'),
-                    'semibold' => __('Semibold', 'headless'),
-                    'bold' => __('Bold', 'headless'),
+                    'light' => __('Light', 'wpac'),
+                    'normal' => __('Normal', 'wpac'),
+                    'medium' => __('Medium', 'wpac'),
+                    'semibold' => __('Semibold', 'wpac'),
+                    'bold' => __('Bold', 'wpac'),
                 ),
             ));
 
@@ -110,14 +110,14 @@ class Headless_Theme_Options
             ));
 
             $wp_customize->add_control("typography_{$key}_size", array(
-                'label' => sprintf(__('%s Font Size', 'headless'), $label),
+                'label' => sprintf(__('%s Font Size', 'wpac'), $label),
                 'section' => 'typography_options',
                 'type' => 'select',
                 'choices' => array(
-                    'small' => __('Small', 'headless'),
-                    'medium' => __('Medium', 'headless'),
-                    'large' => __('Large', 'headless'),
-                    'xl' => __('Extra Large', 'headless'),
+                    'small' => __('Small', 'wpac'),
+                    'medium' => __('Medium', 'wpac'),
+                    'large' => __('Large', 'wpac'),
+                    'xl' => __('Extra Large', 'wpac'),
                 ),
             ));
         }
@@ -126,7 +126,7 @@ class Headless_Theme_Options
     private function add_layout_section($wp_customize)
     {
         $wp_customize->add_section('layout_options', array(
-            'title' => __('Layout', 'headless'),
+            'title' => __('Layout', 'wpac'),
             'panel' => 'theme_options',
             'priority' => 30,
         ));
@@ -139,13 +139,13 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control('page_sidebar_layout', array(
-            'label' => __('Default Page Sidebar Layout', 'headless'),
+            'label' => __('Default Page Sidebar Layout', 'wpac'),
             'section' => 'layout_options',
             'type' => 'select',
             'choices' => array(
-                'no-sidebar' => __('No Sidebar', 'headless'),
-                'left-sidebar' => __('Left Sidebar', 'headless'),
-                'right-sidebar' => __('Right Sidebar', 'headless'),
+                'no-sidebar' => __('No Sidebar', 'wpac'),
+                'left-sidebar' => __('Left Sidebar', 'wpac'),
+                'right-sidebar' => __('Right Sidebar', 'wpac'),
             ),
             'priority' => 10,
         ));
@@ -157,13 +157,13 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control('page_sidebar_layout', array(
-            'label' => __('Page Sidebar Layout', 'headless'),
+            'label' => __('Page Sidebar Layout', 'wpac'),
             'section' => 'layout_options',
             'type' => 'select',
             'choices' => array(
-                'no-sidebar' => __('No Sidebar', 'headless'),
-                'left-sidebar' => __('Left Sidebar', 'headless'),
-                'right-sidebar' => __('Right Sidebar', 'headless'),
+                'no-sidebar' => __('No Sidebar', 'wpac'),
+                'left-sidebar' => __('Left Sidebar', 'wpac'),
+                'right-sidebar' => __('Right Sidebar', 'wpac'),
             ),
         ));
 
@@ -174,14 +174,14 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control('container_width', array(
-            'label' => __('Container Width', 'headless'),
+            'label' => __('Container Width', 'wpac'),
             'section' => 'layout_options',
             'type' => 'select',
             'choices' => array(
-                'narrow' => __('Narrow', 'headless'),
-                'standard' => __('Standard', 'headless'),
-                'wide' => __('Wide', 'headless'),
-                'full' => __('Full Width', 'headless'),
+                'narrow' => __('Narrow', 'wpac'),
+                'standard' => __('Standard', 'wpac'),
+                'wide' => __('Wide', 'wpac'),
+                'full' => __('Full Width', 'wpac'),
             ),
         ));
 
@@ -192,13 +192,13 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control('spacing_scale', array(
-            'label' => __('Spacing Scale', 'headless'),
+            'label' => __('Spacing Scale', 'wpac'),
             'section' => 'layout_options',
             'type' => 'select',
             'choices' => array(
-                'compact' => __('Compact', 'headless'),
-                'standard' => __('Standard', 'headless'),
-                'relaxed' => __('Relaxed', 'headless'),
+                'compact' => __('Compact', 'wpac'),
+                'standard' => __('Standard', 'wpac'),
+                'relaxed' => __('Relaxed', 'wpac'),
             ),
         ));
     }
@@ -206,7 +206,7 @@ class Headless_Theme_Options
     private function add_colors_section($wp_customize)
     {
         $wp_customize->add_section('colors_options', array(
-            'title' => __('Colors', 'headless'),
+            'title' => __('Colors', 'wpac'),
             'panel' => 'theme_options',
         ));
 
@@ -217,7 +217,7 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'primary_color', array(
-            'label' => __('Primary Color', 'headless'),
+            'label' => __('Primary Color', 'wpac'),
             'section' => 'colors_options',
         )));
 
@@ -228,7 +228,7 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'secondary_color', array(
-            'label' => __('Secondary Color', 'headless'),
+            'label' => __('Secondary Color', 'wpac'),
             'section' => 'colors_options',
         )));
 
@@ -239,7 +239,7 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'accent_color', array(
-            'label' => __('Accent Color', 'headless'),
+            'label' => __('Accent Color', 'wpac'),
             'section' => 'colors_options',
         )));
     }
@@ -247,7 +247,7 @@ class Headless_Theme_Options
     private function add_navigation_section($wp_customize)
     {
         $wp_customize->add_section('nav_options', array(
-            'title' => __('Navigation', 'headless'),
+            'title' => __('Navigation', 'wpac'),
             'panel' => 'theme_options',
         ));
 
@@ -258,25 +258,25 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control('nav_style', array(
-            'label' => __('Navigation Style', 'headless'),
+            'label' => __('Navigation Style', 'wpac'),
             'section' => 'nav_options',
             'type' => 'select',
             'choices' => array(
-                'standard' => __('Standard', 'headless'),
-                'centered' => __('Centered', 'headless'),
-                'split' => __('Split with Logo', 'headless'),
-                'fullscreen' => __('Full Screen Overlay', 'headless'),
+                'standard' => __('Standard', 'wpac'),
+                'centered' => __('Centered', 'wpac'),
+                'split' => __('Split with Logo', 'wpac'),
+                'fullscreen' => __('Full Screen Overlay', 'wpac'),
             ),
         ));
 
         // Sticky Header
         $wp_customize->add_setting('sticky_header', array(
             'default' => false,
-            'sanitize_callback' => 'headless_sanitize_checkbox',
+            'sanitize_callback' => 'wpac_sanitize_checkbox',
         ));
 
         $wp_customize->add_control('sticky_header', array(
-            'label' => __('Enable Sticky Header', 'headless'),
+            'label' => __('Enable Sticky Header', 'wpac'),
             'section' => 'nav_options',
             'type' => 'checkbox',
         ));
@@ -285,18 +285,18 @@ class Headless_Theme_Options
     private function add_performance_section($wp_customize)
     {
         $wp_customize->add_section('performance_options', array(
-            'title' => __('Performance', 'headless'),
+            'title' => __('Performance', 'wpac'),
             'panel' => 'theme_options',
         ));
 
         // Lazy Loading
         $wp_customize->add_setting('lazy_load_images', array(
             'default' => true,
-            'sanitize_callback' => 'headless_sanitize_checkbox',
+            'sanitize_callback' => 'wpac_sanitize_checkbox',
         ));
 
         $wp_customize->add_control('lazy_load_images', array(
-            'label' => __('Enable Lazy Loading for Images', 'headless'),
+            'label' => __('Enable Lazy Loading for Images', 'wpac'),
             'section' => 'performance_options',
             'type' => 'checkbox',
         ));
@@ -308,24 +308,24 @@ class Headless_Theme_Options
         ));
 
         $wp_customize->add_control('image_quality', array(
-            'label' => __('Image Quality', 'headless'),
+            'label' => __('Image Quality', 'wpac'),
             'section' => 'performance_options',
             'type' => 'select',
             'choices' => array(
-                'high' => __('High Quality', 'headless'),
-                'balanced' => __('Balanced', 'headless'),
-                'optimized' => __('Performance Optimized', 'headless'),
+                'high' => __('High Quality', 'wpac'),
+                'balanced' => __('Balanced', 'wpac'),
+                'optimized' => __('Performance Optimized', 'wpac'),
             ),
         ));
 
         // Critical CSS
         $wp_customize->add_setting('load_critical_css', array(
             'default' => true,
-            'sanitize_callback' => 'headless_sanitize_checkbox',
+            'sanitize_callback' => 'wpac_sanitize_checkbox',
         ));
 
         $wp_customize->add_control('load_critical_css', array(
-            'label' => __('Load Critical CSS Inline', 'headless'),
+            'label' => __('Load Critical CSS Inline', 'wpac'),
             'section' => 'performance_options',
             'type' => 'checkbox',
         ));
@@ -333,8 +333,8 @@ class Headless_Theme_Options
 }
 
 // Initialize the theme options
-function headless_theme_options()
+function wpac_theme_options()
 {
-    return Headless_Theme_Options::get_instance();
+    return WPAC_Theme_Options::get_instance();
 }
-headless_theme_options();
+wpac_theme_options();

@@ -3,7 +3,7 @@
 ## ✅ Component System Cleanup (COMPLETED)
 
 - [x] Streamline component system to focus on blocks and shortcodes
-- [x] Register custom block category "Headless Components"
+- [x] Register custom block category "WPAC Components"
 - [x] Add comprehensive blocks: Hero, Team Members, Events, Cultural Items, News Grid, CTA, Stats, FAQ
 - [x] Update JavaScript blocks with proper category registration
 - [x] Enhance shortcode system with all component types
@@ -14,7 +14,7 @@
 
 - [ ] Update style.css with proper theme description
 - [ ] Update Theme URI and author information
-- [ ] Replace all instances of 'headless' text domain
+- [x] Replace all instances of 'headless' text domain
 - [ ] Create and add proper screenshot.png
 
 ## 2. Modernize WordPress compatibility

@@ -5,7 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package headless
+ * @package wpac
  */
 
 get_header();
@@ -29,12 +29,12 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 						<?php
 						/* translators: %s: search query. */
 						printf(
-							esc_html__('Search Results for: %s', 'headless'),
+							esc_html__('Search Results for: %s', 'wpac'),
 							'<span class="text-secondary-gold">"' . esc_html($search_query) . '"</span>'
 						);
 						?>
 					<?php else : ?>
-						<?php esc_html_e('Search Our Content', 'headless'); ?>
+						<?php esc_html_e('Search Our Content', 'wpac'); ?>
 					<?php endif; ?>
 				</h1>
 
@@ -43,13 +43,13 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 					<div class="flex">
 						<input type="search"
 							class="search-field flex-1 px-4 py-3 rounded-l-lg border-0 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-ochre"
-							placeholder="<?php echo esc_attr_x('Search for content...', 'placeholder', 'headless'); ?>"
+							placeholder="<?php echo esc_attr_x('Search for content...', 'placeholder', 'wpac'); ?>"
 							value="<?php echo esc_attr($search_query); ?>"
 							name="s" />
 						<button type="submit"
 							class="search-submit px-6 py-3 bg-primary-ochre text-white rounded-r-lg hover:bg-primary-terracotta transition-colors duration-200">
 							<i class="fas fa-search" aria-hidden="true"></i>
-							<span class="sr-only"><?php echo esc_html_x('Search', 'submit button', 'headless'); ?></span>
+							<span class="sr-only"><?php echo esc_html_x('Search', 'submit button', 'wpac'); ?></span>
 						</button>
 					</div>
 				</form>
@@ -65,7 +65,7 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 				<?php if ($search_query) : ?>
 					<!-- Search Filters -->
 					<div class="bg-white rounded-lg shadow-sm p-6 mb-8">
-						<h3 class="text-lg font-semibold mb-4 text-gray-900"><?php esc_html_e('Refine Your Search', 'headless'); ?></h3>
+						<h3 class="text-lg font-semibold mb-4 text-gray-900"><?php esc_html_e('Refine Your Search', 'wpac'); ?></h3>
 
 						<form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex flex-wrap gap-4">
 							<input type="hidden" name="s" value="<?php echo esc_attr($search_query); ?>">
@@ -73,10 +73,10 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 							<!-- Category Filter -->
 							<div class="flex-1 min-w-0">
 								<label for="category-filter" class="block text-sm font-medium text-gray-700 mb-1">
-									<?php esc_html_e('Category', 'headless'); ?>
+									<?php esc_html_e('Category', 'wpac'); ?>
 								</label>
 								<select name="category" id="category-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-ochre">
-									<option value=""><?php esc_html_e('All Categories', 'headless'); ?></option>
+									<option value=""><?php esc_html_e('All Categories', 'wpac'); ?></option>
 									<?php
 									$categories = get_categories();
 									foreach ($categories as $category) :
@@ -91,32 +91,32 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 							<!-- Post Type Filter -->
 							<div class="flex-1 min-w-0">
 								<label for="post-type-filter" class="block text-sm font-medium text-gray-700 mb-1">
-									<?php esc_html_e('Content Type', 'headless'); ?>
+									<?php esc_html_e('Content Type', 'wpac'); ?>
 								</label>
 								<select name="post_type" id="post-type-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-ochre">
-									<option value=""><?php esc_html_e('All Types', 'headless'); ?></option>
-									<option value="post" <?php selected($selected_post_type, 'post'); ?>><?php esc_html_e('Posts', 'headless'); ?></option>
-									<option value="page" <?php selected($selected_post_type, 'page'); ?>><?php esc_html_e('Pages', 'headless'); ?></option>
-									<option value="event" <?php selected($selected_post_type, 'event'); ?>><?php esc_html_e('Events', 'headless'); ?></option>
+									<option value=""><?php esc_html_e('All Types', 'wpac'); ?></option>
+									<option value="post" <?php selected($selected_post_type, 'post'); ?>><?php esc_html_e('Posts', 'wpac'); ?></option>
+									<option value="page" <?php selected($selected_post_type, 'page'); ?>><?php esc_html_e('Pages', 'wpac'); ?></option>
+									<option value="event" <?php selected($selected_post_type, 'event'); ?>><?php esc_html_e('Events', 'wpac'); ?></option>
 								</select>
 							</div>
 
 							<!-- Date Filter -->
 							<div class="flex-1 min-w-0">
 								<label for="date-filter" class="block text-sm font-medium text-gray-700 mb-1">
-									<?php esc_html_e('Date Range', 'headless'); ?>
+									<?php esc_html_e('Date Range', 'wpac'); ?>
 								</label>
 								<select name="date" id="date-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-ochre">
-									<option value=""><?php esc_html_e('Any Time', 'headless'); ?></option>
-									<option value="week" <?php selected($selected_date, 'week'); ?>><?php esc_html_e('Past Week', 'headless'); ?></option>
-									<option value="month" <?php selected($selected_date, 'month'); ?>><?php esc_html_e('Past Month', 'headless'); ?></option>
-									<option value="year" <?php selected($selected_date, 'year'); ?>><?php esc_html_e('Past Year', 'headless'); ?></option>
+									<option value=""><?php esc_html_e('Any Time', 'wpac'); ?></option>
+									<option value="week" <?php selected($selected_date, 'week'); ?>><?php esc_html_e('Past Week', 'wpac'); ?></option>
+									<option value="month" <?php selected($selected_date, 'month'); ?>><?php esc_html_e('Past Month', 'wpac'); ?></option>
+									<option value="year" <?php selected($selected_date, 'year'); ?>><?php esc_html_e('Past Year', 'wpac'); ?></option>
 								</select>
 							</div>
 
 							<div class="flex items-end">
 								<button type="submit" class="px-6 py-2 bg-primary-blue text-white rounded-md hover:bg-primary-blue/90 transition-colors duration-200">
-									<?php esc_html_e('Filter Results', 'headless'); ?>
+									<?php esc_html_e('Filter Results', 'wpac'); ?>
 								</button>
 							</div>
 						</form>
@@ -135,7 +135,7 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 										'Found %1$s result for "%2$s"',
 										'Found %1$s results for "%2$s"',
 										$total_results,
-										'headless'
+										'wpac'
 									)),
 									'<strong>' . number_format_i18n($total_results) . '</strong>',
 									'<strong>' . esc_html($search_query) . '</strong>'
@@ -146,7 +146,7 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 
 						<?php if ($selected_category || $selected_post_type || $selected_date) : ?>
 							<div class="text-sm text-gray-500">
-								<span><?php esc_html_e('Active filters:', 'headless'); ?></span>
+								<span><?php esc_html_e('Active filters:', 'wpac'); ?></span>
 								<?php if ($selected_category) : ?>
 									<span class="inline-block bg-primary-ochre/10 text-primary-ochre px-2 py-1 rounded text-xs ml-1">
 										<?php echo esc_html(get_category_by_slug($selected_category)->name ?? $selected_category); ?>
@@ -212,7 +212,7 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 										</time>
 										<?php if (get_the_author()) : ?>
 											<span class="mx-2">•</span>
-											<span><?php esc_html_e('By', 'headless'); ?> <?php the_author(); ?></span>
+											<span><?php esc_html_e('By', 'wpac'); ?> <?php the_author(); ?></span>
 										<?php endif; ?>
 									</div>
 
@@ -227,7 +227,7 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 									</div>
 
 									<a href="<?php the_permalink(); ?>" class="inline-flex items-center text-primary-blue hover:text-primary-blue/80 font-medium transition-colors duration-200">
-										<?php esc_html_e('Read More', 'headless'); ?>
+										<?php esc_html_e('Read More', 'wpac'); ?>
 										<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
 										</svg>
@@ -240,8 +240,8 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 						<div class="mt-8">
 							<?php
 							the_posts_pagination(array(
-								'prev_text' => '<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>' . __('Previous', 'headless'),
-								'next_text' => __('Next', 'headless') . '<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>',
+								'prev_text' => '<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>' . __('Previous', 'wpac'),
+								'next_text' => __('Next', 'wpac') . '<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>',
 								'class' => 'pagination flex justify-center space-x-2',
 							));
 							?>
@@ -256,7 +256,7 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 								</div>
 
 								<h3 class="text-xl font-semibold text-gray-900 mb-2">
-									<?php esc_html_e('No Results Found', 'headless'); ?>
+									<?php esc_html_e('No Results Found', 'wpac'); ?>
 								</h3>
 
 								<p class="text-gray-600 mb-6">
@@ -264,22 +264,22 @@ $selected_date = isset($_GET['date']) ? sanitize_text_field($_GET['date']) : '';
 									if ($search_query) {
 										printf(
 											/* translators: %s: search query */
-											esc_html__('Sorry, no results were found for "%s". Try adjusting your search or filters.', 'headless'),
+											esc_html__('Sorry, no results were found for "%s". Try adjusting your search or filters.', 'wpac'),
 											esc_html($search_query)
 										);
 									} else {
-										esc_html_e('Please enter a search term to find content.', 'headless');
+										esc_html_e('Please enter a search term to find content.', 'wpac');
 									}
 									?>
 								</p>
 
 								<div class="space-y-3">
-									<p class="text-sm text-gray-500 font-medium"><?php esc_html_e('Suggestions:', 'headless'); ?></p>
+									<p class="text-sm text-gray-500 font-medium"><?php esc_html_e('Suggestions:', 'wpac'); ?></p>
 									<ul class="text-sm text-gray-600 space-y-1">
-										<li><?php esc_html_e('• Check your spelling', 'headless'); ?></li>
-										<li><?php esc_html_e('• Try different keywords', 'headless'); ?></li>
-										<li><?php esc_html_e('• Use more general terms', 'headless'); ?></li>
-										<li><?php esc_html_e('• Remove filters to see more results', 'headless'); ?></li>
+										<li><?php esc_html_e('• Check your spelling', 'wpac'); ?></li>
+										<li><?php esc_html_e('• Try different keywords', 'wpac'); ?></li>
+										<li><?php esc_html_e('• Use more general terms', 'wpac'); ?></li>
+										<li><?php esc_html_e('• Remove filters to see more results', 'wpac'); ?></li>
 									</ul>
 								</div>
 							</div>

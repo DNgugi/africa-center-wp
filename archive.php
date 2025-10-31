@@ -5,7 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package headless
+ * @package wpac
  */
 
 get_header();
@@ -57,7 +57,7 @@ get_header();
 
 						<span class="inline-block bg-neutral-medium px-4 py-2 rounded-full font-medium">
 							<i class="fas fa-file-alt mr-2"></i>
-							<?php echo esc_html(sprintf(_n('%d Post', '%d Posts', $wp_query->found_posts, 'headless'), $wp_query->found_posts)); ?>
+							<?php echo esc_html(sprintf(_n('%d Post', '%d Posts', $wp_query->found_posts, 'wpac'), $wp_query->found_posts)); ?>
 						</span>
 					</div>
 				</div>
@@ -104,9 +104,9 @@ get_header();
 							<?php
 							the_posts_pagination(array(
 								'mid_size' => 2,
-								'prev_text' => '<i class="fas fa-chevron-left mr-2"></i>' . __('Previous', 'headless'),
-								'next_text' => __('Next', 'headless') . '<i class="fas fa-chevron-right ml-2"></i>',
-								'before_page_number' => '<span class="sr-only">' . __('Page', 'headless') . ' </span>',
+								'prev_text' => '<i class="fas fa-chevron-left mr-2"></i>' . __('Previous', 'wpac'),
+								'next_text' => __('Next', 'wpac') . '<i class="fas fa-chevron-right ml-2"></i>',
+								'before_page_number' => '<span class="sr-only">' . __('Page', 'wpac') . ' </span>',
 								'class' => 'pagination flex flex-wrap justify-center items-center gap-2',
 							));
 							?>
@@ -131,10 +131,10 @@ get_header();
 			<div class="container mx-auto px-4 relative z-10">
 				<div class="max-w-2xl mx-auto text-center">
 					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary-ochre">
-						<?php esc_html_e('Nothing Found', 'headless'); ?>
+						<?php esc_html_e('Nothing Found', 'wpac'); ?>
 					</h1>
 					<p class="text-xl text-white/90">
-						<?php esc_html_e('It seems we can\'t find what you\'re looking for. Perhaps searching can help.', 'headless'); ?>
+						<?php esc_html_e('It seems we can\'t find what you\'re looking for. Perhaps searching can help.', 'wpac'); ?>
 					</p>
 				</div>
 			</div>

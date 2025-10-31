@@ -7,7 +7,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package headless
+ * @package wpac
  */
 
 ?>
@@ -25,10 +25,10 @@
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 	<div id="page" class="site">
-		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'headless'); ?></a>
+		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'wpac'); ?></a>
 
 		<?php
-		$page_options = headless_get_page_options();
+		$page_options = wpac_get_page_options();
 
 		// Don't show header if it's hidden
 		if (!empty($page_options['hide_header'])) {
@@ -63,10 +63,10 @@
 						<p class="site-title text-xl font-bold"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home" class="text-gray-900 hover:text-gray-600"><?php bloginfo('name'); ?></a></p>
 					<?php
 					endif;
-					$headless_description = get_bloginfo('description', 'display');
-					if ($headless_description || is_customize_preview()) :
+					$wpac_description = get_bloginfo('description', 'display');
+					if ($wpac_description || is_customize_preview()) :
 					?>
-						<p class="site-description ml-4 text-sm text-gray-600"><?php echo $headless_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+						<p class="site-description ml-4 text-sm text-gray-600"><?php echo $wpac_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 																				?></p>
 					<?php endif; ?>
 				</div><!-- .site-branding -->
@@ -77,7 +77,7 @@
 						<div class="search-toggle">
 							<a href="<?php echo esc_url(home_url('/?s=')); ?>"
 								class="inline-flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-full shadow-lg hover:shadow-xl hover:bg-primary-blue/90 transition-all duration-300"
-								aria-label="<?php esc_attr_e('Search', 'headless'); ?>">
+								aria-label="<?php esc_attr_e('Search', 'wpac'); ?>">
 								<i class="fas fa-search text-sm" aria-hidden="true"></i>
 							</a>
 						</div>
@@ -88,7 +88,7 @@
 							<span class="close-icon hidden">
 								<i class="fas fa-times" aria-hidden="true"></i>
 							</span>
-							<span class="sr-only"><?php esc_html_e('Menu', 'headless'); ?></span>
+							<span class="sr-only"><?php esc_html_e('Menu', 'wpac'); ?></span>
 						</button>
 					</div>
 
@@ -107,7 +107,7 @@
 						<div class="search-toggle ml-6">
 							<a href="<?php echo esc_url(home_url('/?s=')); ?>"
 								class="inline-flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-full shadow-lg hover:shadow-xl hover:bg-primary-blue/90 transition-all duration-300"
-								aria-label="<?php esc_attr_e('Search', 'headless'); ?>">
+								aria-label="<?php esc_attr_e('Search', 'wpac'); ?>">
 								<i class="fas fa-search text-sm" aria-hidden="true"></i>
 							</a>
 						</div>

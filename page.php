@@ -10,7 +10,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package headless
+ * @package wpac
  */
 
 get_header();
@@ -18,7 +18,7 @@ get_header();
 
 <main id="primary" class="site-main">
 	<?php
-	$page_options = headless_get_page_options();
+	$page_options = wpac_get_page_options();
 
 	// Set up content width classes
 	$content_width_classes = array(
@@ -59,7 +59,7 @@ get_header();
 		<?php endif; ?>
 
 		<div class="container mx-auto px-4 relative z-10">
-			<?php headless_breadcrumbs(); ?>
+			<?php wpac_breadcrumbs(); ?>
 			<div class="max-w-3xl mx-auto">
 				<?php while (have_posts()) : the_post(); ?>
 					<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary-ochre"><?php the_title(); ?></h1>
@@ -77,7 +77,7 @@ get_header();
 		<div class="container mx-auto px-4">
 			<?php
 			// Get page options
-			$page_options = headless_get_page_options();
+			$page_options = wpac_get_page_options();
 
 			// Check if sidebar is disabled for this specific page
 			$disable_sidebar = !empty($page_options['disable_sidebar']);
@@ -138,11 +138,11 @@ get_header();
 			<div class="container mx-auto px-4">
 				<div class="max-w-3xl mx-auto text-center">
 					<h2 class="text-3xl md:text-4xl font-bold mb-6">
-						<?php echo esc_html(get_theme_mod('page_cta_text', __('Ready to get started?', 'headless'))); ?>
+						<?php echo esc_html(get_theme_mod('page_cta_text', __('Ready to get started?', 'wpac'))); ?>
 					</h2>
 					<a href="<?php echo esc_url(get_theme_mod('page_cta_button_url', '#')); ?>"
 						class="inline-block bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-						<?php echo esc_html(get_theme_mod('page_cta_button_text', __('Contact Us', 'headless'))); ?>
+						<?php echo esc_html(get_theme_mod('page_cta_button_text', __('Contact Us', 'wpac'))); ?>
 					</a>
 				</div>
 			</div>

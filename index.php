@@ -10,7 +10,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package headless
+ * @package wpac
  */
 
 get_header();
@@ -48,8 +48,8 @@ get_header();
 				endwhile;
 
 				// Custom posts navigation
-				$prev_link = get_previous_posts_link(__('Newer Posts', 'headless'));
-				$next_link = get_next_posts_link(__('Older Posts', 'headless'));
+				$prev_link = get_previous_posts_link(__('Newer Posts', 'wpac'));
+				$next_link = get_next_posts_link(__('Older Posts', 'wpac'));
 
 				if ($prev_link || $next_link) :
 					echo '<div class="mt-8 pt-8 border-t border-gray-200 flex flex-wrap justify-between gap-4">';

@@ -3,7 +3,7 @@
 /**
  * Front Page Options for the Customizer
  *
- * @package headless
+ * @package wpac
  */
 
 if (!defined('ABSPATH')) {
@@ -13,47 +13,47 @@ if (!defined('ABSPATH')) {
 /**
  * Register Front Page Options
  */
-function headless_register_front_page_options($wp_customize)
+function wpac_register_front_page_options($wp_customize)
 {
     // Add Front Page Options Panel
     $wp_customize->add_panel('front_page_options', array(
-        'title' => __('Front Page Options', 'headless'),
+        'title' => __('Front Page Options', 'wpac'),
         'priority' => 20,
-        'description' => __('Customize the front page sections', 'headless'),
+        'description' => __('Customize the front page sections', 'wpac'),
     ));
 
     // Hero Section
-    headless_customizer_hero_section($wp_customize);
+    wpac_customizer_hero_section($wp_customize);
 
     // Tagline Section
-    headless_customizer_tagline_section($wp_customize);
+    wpac_customizer_tagline_section($wp_customize);
 
     // Featured Programs Section
-    headless_customizer_featured_programs_section($wp_customize);
+    wpac_customizer_featured_programs_section($wp_customize);
 
     // Mission Section
-    headless_customizer_mission_section($wp_customize);
+    wpac_customizer_mission_section($wp_customize);
 
     // Values Section
-    headless_customizer_values_section($wp_customize);
+    wpac_customizer_values_section($wp_customize);
 
     // Gallery Section
-    headless_customizer_gallery_section($wp_customize);
+    wpac_customizer_gallery_section($wp_customize);
 
     // Testimonials Section
-    headless_customizer_testimonials_section($wp_customize);
+    wpac_customizer_testimonials_section($wp_customize);
 
     // Events Section
-    headless_customizer_events_section($wp_customize);
+    wpac_customizer_events_section($wp_customize);
 }
 
 /**
  * Hero Section
  */
-function headless_customizer_hero_section($wp_customize)
+function wpac_customizer_hero_section($wp_customize)
 {
     $wp_customize->add_section('hero_section', array(
-        'title' => __('Hero Section', 'headless'),
+        'title' => __('Hero Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -64,7 +64,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'hero_background', array(
-        'label' => __('Hero Background', 'headless'),
+        'label' => __('Hero Background', 'wpac'),
         'section' => 'hero_section',
     )));
 
@@ -75,7 +75,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control('hero_badge_text', array(
-        'label' => __('Badge Text', 'headless'),
+        'label' => __('Badge Text', 'wpac'),
         'section' => 'hero_section',
         'type' => 'text',
     ));
@@ -87,7 +87,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control('hero_heading', array(
-        'label' => __('Heading (HTML allowed for styling)', 'headless'),
+        'label' => __('Heading (HTML allowed for styling)', 'wpac'),
         'section' => 'hero_section',
         'type' => 'textarea',
     ));
@@ -99,7 +99,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control('hero_description', array(
-        'label' => __('Description', 'headless'),
+        'label' => __('Description', 'wpac'),
         'section' => 'hero_section',
         'type' => 'textarea',
     ));
@@ -111,7 +111,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control('hero_primary_button_text', array(
-        'label' => __('Primary Button Text', 'headless'),
+        'label' => __('Primary Button Text', 'wpac'),
         'section' => 'hero_section',
         'type' => 'text',
     ));
@@ -123,7 +123,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control('hero_primary_button_url', array(
-        'label' => __('Primary Button URL', 'headless'),
+        'label' => __('Primary Button URL', 'wpac'),
         'section' => 'hero_section',
         'type' => 'url',
     ));
@@ -135,7 +135,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control('hero_secondary_button_text', array(
-        'label' => __('Secondary Button Text', 'headless'),
+        'label' => __('Secondary Button Text', 'wpac'),
         'section' => 'hero_section',
         'type' => 'text',
     ));
@@ -147,7 +147,7 @@ function headless_customizer_hero_section($wp_customize)
     ));
 
     $wp_customize->add_control('hero_secondary_button_url', array(
-        'label' => __('Secondary Button URL', 'headless'),
+        'label' => __('Secondary Button URL', 'wpac'),
         'section' => 'hero_section',
         'type' => 'url',
     ));
@@ -156,10 +156,10 @@ function headless_customizer_hero_section($wp_customize)
 /**
  * Tagline Section
  */
-function headless_customizer_tagline_section($wp_customize)
+function wpac_customizer_tagline_section($wp_customize)
 {
     $wp_customize->add_section('tagline_section', array(
-        'title' => __('Tagline Section', 'headless'),
+        'title' => __('Tagline Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -170,7 +170,7 @@ function headless_customizer_tagline_section($wp_customize)
     ));
 
     $wp_customize->add_control('tagline_text', array(
-        'label' => __('Tagline Text', 'headless'),
+        'label' => __('Tagline Text', 'wpac'),
         'section' => 'tagline_section',
         'type' => 'text',
     ));
@@ -179,10 +179,10 @@ function headless_customizer_tagline_section($wp_customize)
 /**
  * Featured Programs Section
  */
-function headless_customizer_featured_programs_section($wp_customize)
+function wpac_customizer_featured_programs_section($wp_customize)
 {
     $wp_customize->add_section('featured_programs_section', array(
-        'title' => __('Featured Programs Section', 'headless'),
+        'title' => __('Featured Programs Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -193,7 +193,7 @@ function headless_customizer_featured_programs_section($wp_customize)
     ));
 
     $wp_customize->add_control('programs_badge_text', array(
-        'label' => __('Badge Text', 'headless'),
+        'label' => __('Badge Text', 'wpac'),
         'section' => 'featured_programs_section',
         'type' => 'text',
     ));
@@ -205,7 +205,7 @@ function headless_customizer_featured_programs_section($wp_customize)
     ));
 
     $wp_customize->add_control('programs_heading', array(
-        'label' => __('Heading', 'headless'),
+        'label' => __('Heading', 'wpac'),
         'section' => 'featured_programs_section',
         'type' => 'text',
     ));
@@ -217,7 +217,7 @@ function headless_customizer_featured_programs_section($wp_customize)
     ));
 
     $wp_customize->add_control('programs_button_text', array(
-        'label' => __('Button Text', 'headless'),
+        'label' => __('Button Text', 'wpac'),
         'section' => 'featured_programs_section',
         'type' => 'text',
     ));
@@ -229,7 +229,7 @@ function headless_customizer_featured_programs_section($wp_customize)
     ));
 
     $wp_customize->add_control('programs_button_url', array(
-        'label' => __('Button URL', 'headless'),
+        'label' => __('Button URL', 'wpac'),
         'section' => 'featured_programs_section',
         'type' => 'url',
     ));
@@ -241,7 +241,7 @@ function headless_customizer_featured_programs_section($wp_customize)
     ));
 
     $wp_customize->add_control('programs_count', array(
-        'label' => __('Number of Programs to Display', 'headless'),
+        'label' => __('Number of Programs to Display', 'wpac'),
         'section' => 'featured_programs_section',
         'type' => 'number',
         'input_attrs' => array(
@@ -259,7 +259,7 @@ function headless_customizer_featured_programs_section($wp_customize)
         ));
 
         $wp_customize->add_control("program_{$i}_title", array(
-            'label' => sprintf(__('Program %d Title', 'headless'), $i),
+            'label' => sprintf(__('Program %d Title', 'wpac'), $i),
             'section' => 'featured_programs_section',
             'type' => 'text',
         ));
@@ -270,7 +270,7 @@ function headless_customizer_featured_programs_section($wp_customize)
         ));
 
         $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "program_{$i}_image", array(
-            'label' => sprintf(__('Program %d Image', 'headless'), $i),
+            'label' => sprintf(__('Program %d Image', 'wpac'), $i),
             'section' => 'featured_programs_section',
         )));
 
@@ -280,7 +280,7 @@ function headless_customizer_featured_programs_section($wp_customize)
         ));
 
         $wp_customize->add_control("program_{$i}_url", array(
-            'label' => sprintf(__('Program %d URL', 'headless'), $i),
+            'label' => sprintf(__('Program %d URL', 'wpac'), $i),
             'section' => 'featured_programs_section',
             'type' => 'url',
         ));
@@ -291,7 +291,7 @@ function headless_customizer_featured_programs_section($wp_customize)
         ));
 
         $wp_customize->add_control("program_{$i}_badge", array(
-            'label' => sprintf(__('Program %d Badge (optional)', 'headless'), $i),
+            'label' => sprintf(__('Program %d Badge (optional)', 'wpac'), $i),
             'section' => 'featured_programs_section',
             'type' => 'text',
         ));
@@ -302,7 +302,7 @@ function headless_customizer_featured_programs_section($wp_customize)
         ));
 
         $wp_customize->add_control("program_{$i}_description", array(
-            'label' => sprintf(__('Program %d Description (optional)', 'headless'), $i),
+            'label' => sprintf(__('Program %d Description (optional)', 'wpac'), $i),
             'section' => 'featured_programs_section',
             'type' => 'textarea',
         ));
@@ -312,10 +312,10 @@ function headless_customizer_featured_programs_section($wp_customize)
 /**
  * Mission Section
  */
-function headless_customizer_mission_section($wp_customize)
+function wpac_customizer_mission_section($wp_customize)
 {
     $wp_customize->add_section('mission_section', array(
-        'title' => __('Mission Section', 'headless'),
+        'title' => __('Mission Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -326,7 +326,7 @@ function headless_customizer_mission_section($wp_customize)
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'mission_background', array(
-        'label' => __('Background Image', 'headless'),
+        'label' => __('Background Image', 'wpac'),
         'section' => 'mission_section',
     )));
 
@@ -337,7 +337,7 @@ function headless_customizer_mission_section($wp_customize)
     ));
 
     $wp_customize->add_control('mission_badge_text', array(
-        'label' => __('Badge Text', 'headless'),
+        'label' => __('Badge Text', 'wpac'),
         'section' => 'mission_section',
         'type' => 'text',
     ));
@@ -349,7 +349,7 @@ function headless_customizer_mission_section($wp_customize)
     ));
 
     $wp_customize->add_control('mission_heading', array(
-        'label' => __('Heading', 'headless'),
+        'label' => __('Heading', 'wpac'),
         'section' => 'mission_section',
         'type' => 'text',
     ));
@@ -362,7 +362,7 @@ function headless_customizer_mission_section($wp_customize)
         ));
 
         $wp_customize->add_control("mission_item_{$i}_title", array(
-            'label' => sprintf(__('Mission Item %d Title', 'headless'), $i),
+            'label' => sprintf(__('Mission Item %d Title', 'wpac'), $i),
             'section' => 'mission_section',
             'type' => 'text',
         ));
@@ -373,7 +373,7 @@ function headless_customizer_mission_section($wp_customize)
         ));
 
         $wp_customize->add_control("mission_item_{$i}_description", array(
-            'label' => sprintf(__('Mission Item %d Description', 'headless'), $i),
+            'label' => sprintf(__('Mission Item %d Description', 'wpac'), $i),
             'section' => 'mission_section',
             'type' => 'textarea',
         ));
@@ -384,7 +384,7 @@ function headless_customizer_mission_section($wp_customize)
         ));
 
         $wp_customize->add_control("mission_item_{$i}_icon", array(
-            'label' => sprintf(__('Mission Item %d Icon (FontAwesome name without "fa-" prefix)', 'headless'), $i),
+            'label' => sprintf(__('Mission Item %d Icon (FontAwesome name without "fa-" prefix)', 'wpac'), $i),
             'section' => 'mission_section',
             'type' => 'text',
         ));
@@ -395,7 +395,7 @@ function headless_customizer_mission_section($wp_customize)
         ));
 
         $wp_customize->add_control("mission_item_{$i}_url", array(
-            'label' => sprintf(__('Mission Item %d URL', 'headless'), $i),
+            'label' => sprintf(__('Mission Item %d URL', 'wpac'), $i),
             'section' => 'mission_section',
             'type' => 'url',
         ));
@@ -405,10 +405,10 @@ function headless_customizer_mission_section($wp_customize)
 /**
  * Values Section
  */
-function headless_customizer_values_section($wp_customize)
+function wpac_customizer_values_section($wp_customize)
 {
     $wp_customize->add_section('values_section', array(
-        'title' => __('Values Section', 'headless'),
+        'title' => __('Values Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -419,7 +419,7 @@ function headless_customizer_values_section($wp_customize)
     ));
 
     $wp_customize->add_control('values_badge_text', array(
-        'label' => __('Badge Text', 'headless'),
+        'label' => __('Badge Text', 'wpac'),
         'section' => 'values_section',
         'type' => 'text',
     ));
@@ -431,7 +431,7 @@ function headless_customizer_values_section($wp_customize)
     ));
 
     $wp_customize->add_control('values_heading', array(
-        'label' => __('Heading', 'headless'),
+        'label' => __('Heading', 'wpac'),
         'section' => 'values_section',
         'type' => 'text',
     ));
@@ -444,7 +444,7 @@ function headless_customizer_values_section($wp_customize)
         ));
 
         $wp_customize->add_control("values_item_{$i}_title", array(
-            'label' => sprintf(__('Value %d Title', 'headless'), $i),
+            'label' => sprintf(__('Value %d Title', 'wpac'), $i),
             'section' => 'values_section',
             'type' => 'text',
         ));
@@ -455,7 +455,7 @@ function headless_customizer_values_section($wp_customize)
         ));
 
         $wp_customize->add_control("values_item_{$i}_description", array(
-            'label' => sprintf(__('Value %d Description', 'headless'), $i),
+            'label' => sprintf(__('Value %d Description', 'wpac'), $i),
             'section' => 'values_section',
             'type' => 'text',
         ));
@@ -466,7 +466,7 @@ function headless_customizer_values_section($wp_customize)
         ));
 
         $wp_customize->add_control("values_item_{$i}_icon", array(
-            'label' => sprintf(__('Value %d Icon (FontAwesome name without "fa-" prefix)', 'headless'), $i),
+            'label' => sprintf(__('Value %d Icon (FontAwesome name without "fa-" prefix)', 'wpac'), $i),
             'section' => 'values_section',
             'type' => 'text',
         ));
@@ -476,10 +476,10 @@ function headless_customizer_values_section($wp_customize)
 /**
  * Gallery Section
  */
-function headless_customizer_gallery_section($wp_customize)
+function wpac_customizer_gallery_section($wp_customize)
 {
     $wp_customize->add_section('gallery_section', array(
-        'title' => __('Gallery Section', 'headless'),
+        'title' => __('Gallery Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -490,7 +490,7 @@ function headless_customizer_gallery_section($wp_customize)
     ));
 
     $wp_customize->add_control('gallery_badge_text', array(
-        'label' => __('Badge Text', 'headless'),
+        'label' => __('Badge Text', 'wpac'),
         'section' => 'gallery_section',
         'type' => 'text',
     ));
@@ -502,7 +502,7 @@ function headless_customizer_gallery_section($wp_customize)
     ));
 
     $wp_customize->add_control('gallery_heading', array(
-        'label' => __('Heading', 'headless'),
+        'label' => __('Heading', 'wpac'),
         'section' => 'gallery_section',
         'type' => 'text',
     ));
@@ -515,7 +515,7 @@ function headless_customizer_gallery_section($wp_customize)
         ));
 
         $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "gallery_item_{$i}_image", array(
-            'label' => sprintf(__('Gallery Item %d Image', 'headless'), $i),
+            'label' => sprintf(__('Gallery Item %d Image', 'wpac'), $i),
             'section' => 'gallery_section',
         )));
 
@@ -525,7 +525,7 @@ function headless_customizer_gallery_section($wp_customize)
         ));
 
         $wp_customize->add_control("gallery_item_{$i}_title", array(
-            'label' => sprintf(__('Gallery Item %d Title', 'headless'), $i),
+            'label' => sprintf(__('Gallery Item %d Title', 'wpac'), $i),
             'section' => 'gallery_section',
             'type' => 'text',
         ));
@@ -536,7 +536,7 @@ function headless_customizer_gallery_section($wp_customize)
         ));
 
         $wp_customize->add_control("gallery_item_{$i}_description", array(
-            'label' => sprintf(__('Gallery Item %d Description', 'headless'), $i),
+            'label' => sprintf(__('Gallery Item %d Description', 'wpac'), $i),
             'section' => 'gallery_section',
             'type' => 'text',
         ));
@@ -546,10 +546,10 @@ function headless_customizer_gallery_section($wp_customize)
 /**
  * Testimonials Section
  */
-function headless_customizer_testimonials_section($wp_customize)
+function wpac_customizer_testimonials_section($wp_customize)
 {
     $wp_customize->add_section('testimonials_section', array(
-        'title' => __('Testimonials Section', 'headless'),
+        'title' => __('Testimonials Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -560,7 +560,7 @@ function headless_customizer_testimonials_section($wp_customize)
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'testimonials_background', array(
-        'label' => __('Background Image', 'headless'),
+        'label' => __('Background Image', 'wpac'),
         'section' => 'testimonials_section',
     )));
 
@@ -571,7 +571,7 @@ function headless_customizer_testimonials_section($wp_customize)
     ));
 
     $wp_customize->add_control('testimonials_badge_text', array(
-        'label' => __('Badge Text', 'headless'),
+        'label' => __('Badge Text', 'wpac'),
         'section' => 'testimonials_section',
         'type' => 'text',
     ));
@@ -583,7 +583,7 @@ function headless_customizer_testimonials_section($wp_customize)
     ));
 
     $wp_customize->add_control('testimonials_heading', array(
-        'label' => __('Heading', 'headless'),
+        'label' => __('Heading', 'wpac'),
         'section' => 'testimonials_section',
         'type' => 'text',
     ));
@@ -596,7 +596,7 @@ function headless_customizer_testimonials_section($wp_customize)
         ));
 
         $wp_customize->add_control("testimonial_{$i}_name", array(
-            'label' => sprintf(__('Testimonial %d Name', 'headless'), $i),
+            'label' => sprintf(__('Testimonial %d Name', 'wpac'), $i),
             'section' => 'testimonials_section',
             'type' => 'text',
         ));
@@ -607,7 +607,7 @@ function headless_customizer_testimonials_section($wp_customize)
         ));
 
         $wp_customize->add_control("testimonial_{$i}_title", array(
-            'label' => sprintf(__('Testimonial %d Title/Position', 'headless'), $i),
+            'label' => sprintf(__('Testimonial %d Title/Position', 'wpac'), $i),
             'section' => 'testimonials_section',
             'type' => 'text',
         ));
@@ -618,7 +618,7 @@ function headless_customizer_testimonials_section($wp_customize)
         ));
 
         $wp_customize->add_control("testimonial_{$i}_quote", array(
-            'label' => sprintf(__('Testimonial %d Quote', 'headless'), $i),
+            'label' => sprintf(__('Testimonial %d Quote', 'wpac'), $i),
             'section' => 'testimonials_section',
             'type' => 'textarea',
         ));
@@ -629,7 +629,7 @@ function headless_customizer_testimonials_section($wp_customize)
         ));
 
         $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "testimonial_{$i}_image", array(
-            'label' => sprintf(__('Testimonial %d Image', 'headless'), $i),
+            'label' => sprintf(__('Testimonial %d Image', 'wpac'), $i),
             'section' => 'testimonials_section',
         )));
     }
@@ -638,10 +638,10 @@ function headless_customizer_testimonials_section($wp_customize)
 /**
  * Events Section
  */
-function headless_customizer_events_section($wp_customize)
+function wpac_customizer_events_section($wp_customize)
 {
     $wp_customize->add_section('events_section', array(
-        'title' => __('Events Section', 'headless'),
+        'title' => __('Events Section', 'wpac'),
         'panel' => 'front_page_options',
     ));
 
@@ -652,7 +652,7 @@ function headless_customizer_events_section($wp_customize)
     ));
 
     $wp_customize->add_control('events_badge_text', array(
-        'label' => __('Badge Text', 'headless'),
+        'label' => __('Badge Text', 'wpac'),
         'section' => 'events_section',
         'type' => 'text',
     ));
@@ -664,7 +664,7 @@ function headless_customizer_events_section($wp_customize)
     ));
 
     $wp_customize->add_control('events_heading', array(
-        'label' => __('Heading', 'headless'),
+        'label' => __('Heading', 'wpac'),
         'section' => 'events_section',
         'type' => 'text',
     ));
@@ -676,7 +676,7 @@ function headless_customizer_events_section($wp_customize)
     ));
 
     $wp_customize->add_control('events_button_text', array(
-        'label' => __('Button Text', 'headless'),
+        'label' => __('Button Text', 'wpac'),
         'section' => 'events_section',
         'type' => 'text',
     ));
@@ -688,7 +688,7 @@ function headless_customizer_events_section($wp_customize)
     ));
 
     $wp_customize->add_control('events_button_url', array(
-        'label' => __('Button URL', 'headless'),
+        'label' => __('Button URL', 'wpac'),
         'section' => 'events_section',
         'type' => 'url',
     ));
@@ -700,12 +700,12 @@ function headless_customizer_events_section($wp_customize)
     ));
 
     $wp_customize->add_control('events_source', array(
-        'label' => __('Events Source', 'headless'),
+        'label' => __('Events Source', 'wpac'),
         'section' => 'events_section',
         'type' => 'radio',
         'choices' => array(
-            'custom' => __('Custom Events (defined below)', 'headless'),
-            'auto' => __('Automatic (from Events post type)', 'headless'),
+            'custom' => __('Custom Events (defined below)', 'wpac'),
+            'auto' => __('Automatic (from Events post type)', 'wpac'),
         ),
     ));
 
@@ -716,7 +716,7 @@ function headless_customizer_events_section($wp_customize)
     ));
 
     $wp_customize->add_control('events_count', array(
-        'label' => __('Number of Events to Display (when automatic)', 'headless'),
+        'label' => __('Number of Events to Display (when automatic)', 'wpac'),
         'section' => 'events_section',
         'type' => 'number',
         'input_attrs' => array(
@@ -734,7 +734,7 @@ function headless_customizer_events_section($wp_customize)
         ));
 
         $wp_customize->add_control("event_{$i}_title", array(
-            'label' => sprintf(__('Event %d Title', 'headless'), $i),
+            'label' => sprintf(__('Event %d Title', 'wpac'), $i),
             'section' => 'events_section',
             'type' => 'text',
         ));
@@ -745,7 +745,7 @@ function headless_customizer_events_section($wp_customize)
         ));
 
         $wp_customize->add_control("event_{$i}_date", array(
-            'label' => sprintf(__('Event %d Date (YYYY-MM-DD format)', 'headless'), $i),
+            'label' => sprintf(__('Event %d Date (YYYY-MM-DD format)', 'wpac'), $i),
             'section' => 'events_section',
             'type' => 'text',
         ));
@@ -756,7 +756,7 @@ function headless_customizer_events_section($wp_customize)
         ));
 
         $wp_customize->add_control("event_{$i}_time", array(
-            'label' => sprintf(__('Event %d Time (HH:MM format)', 'headless'), $i),
+            'label' => sprintf(__('Event %d Time (HH:MM format)', 'wpac'), $i),
             'section' => 'events_section',
             'type' => 'text',
         ));
@@ -767,7 +767,7 @@ function headless_customizer_events_section($wp_customize)
         ));
 
         $wp_customize->add_control("event_{$i}_location", array(
-            'label' => sprintf(__('Event %d Location', 'headless'), $i),
+            'label' => sprintf(__('Event %d Location', 'wpac'), $i),
             'section' => 'events_section',
             'type' => 'text',
         ));
@@ -778,7 +778,7 @@ function headless_customizer_events_section($wp_customize)
         ));
 
         $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "event_{$i}_image", array(
-            'label' => sprintf(__('Event %d Image', 'headless'), $i),
+            'label' => sprintf(__('Event %d Image', 'wpac'), $i),
             'section' => 'events_section',
         )));
 
@@ -788,14 +788,14 @@ function headless_customizer_events_section($wp_customize)
         ));
 
         $wp_customize->add_control("event_{$i}_url", array(
-            'label' => sprintf(__('Event %d URL', 'headless'), $i),
+            'label' => sprintf(__('Event %d URL', 'wpac'), $i),
             'section' => 'events_section',
             'type' => 'url',
         ));
     }
 }
 
-add_action('customize_register', 'headless_register_front_page_options');
+add_action('customize_register', 'wpac_register_front_page_options');
 
 /**
  * Helper Functions to Get Front Page Options
@@ -804,7 +804,7 @@ add_action('customize_register', 'headless_register_front_page_options');
 /**
  * Get Hero Section Options
  */
-function headless_get_hero_options()
+function wpac_get_hero_options()
 {
     return array(
         'background' => get_theme_mod('hero_background', get_template_directory_uri() . '/images/background-patterns/hero-background.svg'),
@@ -821,7 +821,7 @@ function headless_get_hero_options()
 /**
  * Get Tagline Options
  */
-function headless_get_tagline_options()
+function wpac_get_tagline_options()
 {
     return array(
         'text' => get_theme_mod('tagline_text', 'African Solutions for Glocal Issues'),
@@ -831,7 +831,7 @@ function headless_get_tagline_options()
 /**
  * Get Featured Programs Options
  */
-function headless_get_featured_programs()
+function wpac_get_featured_programs()
 {
     $programs = array();
     $count = get_theme_mod('programs_count', 6);
@@ -879,7 +879,7 @@ function headless_get_featured_programs()
 /**
  * Get Featured Programs Section Options
  */
-function headless_get_programs_section_options()
+function wpac_get_programs_section_options()
 {
     return array(
         'badge_text' => get_theme_mod('programs_badge_text', 'Discover'),
@@ -892,7 +892,7 @@ function headless_get_programs_section_options()
 /**
  * Get Mission Items
  */
-function headless_get_mission_items()
+function wpac_get_mission_items()
 {
     $items = array();
 
@@ -938,7 +938,7 @@ function headless_get_mission_items()
 /**
  * Get Mission Section Options
  */
-function headless_get_mission_section_options()
+function wpac_get_mission_section_options()
 {
     return array(
         'background' => get_theme_mod('mission_background', get_template_directory_uri() . '/images/background-patterns/our-purpose-background.svg'),
@@ -950,7 +950,7 @@ function headless_get_mission_section_options()
 /**
  * Get Values Items
  */
-function headless_get_values()
+function wpac_get_values()
 {
     $values = array();
 
@@ -997,7 +997,7 @@ function headless_get_values()
 /**
  * Get Values Section Options
  */
-function headless_get_values_section_options()
+function wpac_get_values_section_options()
 {
     return array(
         'badge_text' => get_theme_mod('values_badge_text', 'What Guides Us'),
@@ -1008,7 +1008,7 @@ function headless_get_values_section_options()
 /**
  * Get Gallery Items
  */
-function headless_get_gallery_items()
+function wpac_get_gallery_items()
 {
     $items = array();
 
@@ -1057,7 +1057,7 @@ function headless_get_gallery_items()
 /**
  * Get Gallery Section Options
  */
-function headless_get_gallery_section_options()
+function wpac_get_gallery_section_options()
 {
     return array(
         'badge_text' => get_theme_mod('gallery_badge_text', 'Our Latest Events'),
@@ -1068,7 +1068,7 @@ function headless_get_gallery_section_options()
 /**
  * Get Testimonials
  */
-function headless_get_testimonials()
+function wpac_get_testimonials()
 {
     $testimonials = array();
 
@@ -1114,7 +1114,7 @@ function headless_get_testimonials()
 /**
  * Get Testimonials Section Options
  */
-function headless_get_testimonials_section_options()
+function wpac_get_testimonials_section_options()
 {
     return array(
         'background' => get_theme_mod('testimonials_background', get_template_directory_uri() . '/images/background-patterns/community-voices-lines-only.svg'),
@@ -1126,7 +1126,7 @@ function headless_get_testimonials_section_options()
 /**
  * Get Events
  */
-function headless_get_events()
+function wpac_get_events()
 {
     $events_source = get_theme_mod('events_source', 'custom');
 
@@ -1230,7 +1230,7 @@ function headless_get_events()
 /**
  * Get Events Section Options
  */
-function headless_get_events_section_options()
+function wpac_get_events_section_options()
 {
     return array(
         'badge_text' => get_theme_mod('events_badge_text', 'Join Us'),

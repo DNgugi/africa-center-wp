@@ -1,17 +1,18 @@
 <?php
 
 /**
- * headless functions and definitions
+ * wpac functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package headless
+ * @package wpac
  */
 
 if (! defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
 	define('_S_VERSION', '1.0.1');
 }
+
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -20,15 +21,15 @@ if (! defined('_S_VERSION')) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function headless_setup()
+function wpac_setup()
 {
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on headless, use a find and replace
-		* to change 'headless' to the name of your theme in all the template files.
+		* If you're building a theme based on wpac, use a find and replace
+		* to change 'wpac' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain('headless', get_template_directory() . '/languages');
+	load_theme_textdomain('wpac', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support('automatic-feed-links');
@@ -66,30 +67,17 @@ function headless_setup()
 	/**
 	 * Display breadcrumbs
 	 */
-	function headless_breadcrumbs()
+	function wpac_breadcrumbs()
 	{
 		if (function_exists('yoast_breadcrumb')) {
 			yoast_breadcrumb('<nav class="breadcrumbs py-3 text-sm text-gray-600">', '</nav>');
 		}
 	}
 
-	// Register main sidebar
-	register_sidebar(
-		array(
-			'name'          => esc_html__('Main Sidebar', 'headless'),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__('Add widgets here.', 'headless'),
-			'before_widget' => '<section id="%1$s" class="widget %2$s p-4 bg-white rounded-lg shadow-sm mb-6">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title text-lg font-semibold mb-4">',
-			'after_title'   => '</h2>',
-		)
-	);
-
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__('Primary', 'headless'),
+			'menu-1' => esc_html__('Primary', 'wpac'),
 		)
 	);
 
@@ -114,7 +102,7 @@ function headless_setup()
 	add_theme_support(
 		'custom-background',
 		apply_filters(
-			'headless_custom_background_args',
+			'wpac_custom_background_args',
 			array(
 				'default-color' => 'ffffff',
 				'default-image' => '',
@@ -140,7 +128,7 @@ function headless_setup()
 		)
 	);
 }
-add_action('after_setup_theme', 'headless_setup');
+add_action('after_setup_theme', 'wpac_setup');
 
 
 
@@ -151,37 +139,49 @@ add_action('after_setup_theme', 'headless_setup');
  *
  * @global int $content_width
  */
-function headless_content_width()
+function wpac_content_width()
 {
-	$GLOBALS['content_width'] = apply_filters('headless_content_width', 640);
+	$GLOBALS['content_width'] = apply_filters('wpac_content_width', 640);
 }
-add_action('after_setup_theme', 'headless_content_width', 0);
+add_action('after_setup_theme', 'wpac_content_width', 0);
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function headless_widgets_init()
+function wpac_widgets_init()
 {
 	register_sidebar(
 		array(
-			'name'          => esc_html__('Sidebar', 'headless'),
+			'name'          => esc_html__('Main Sidebar', 'wpac'),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__('Add widgets here.', 'headless'),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'description'   => esc_html__('Add widgets here.', 'wpac'),
+			'before_widget' => '<section id="%1$s" class="widget %2$s p-4 bg-white rounded-lg shadow-sm mb-6">',
 			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
+			'before_title'  => '<h2 class="widget-title text-lg font-semibold mb-4 pb-2 border-b border-primary-terracotta text-primary-terracotta">',
+			'after_title'   => '</h2>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__('Footer Widgets', 'wpac'),
+			'id'            => 'footer-widgets',
+			'description'   => esc_html__('Add widgets here.', 'wpac'),
+			'before_widget' => '<section id="%1$s" class="widget %2$s p-4 bg-primary-blue text-gray-300 rounded-lg shadow-sm mb-6">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title text-lg font-semibold mb-4 pb-2 border-b border-primary-ochre text-primary-ochre">',
 			'after_title'   => '</h2>',
 		)
 	);
 }
-add_action('widgets_init', 'headless_widgets_init');
+add_action('widgets_init', 'wpac_widgets_init');
 
 /**
  * Enqueue scripts and styles.
  */
-function headless_scripts()
+function wpac_scripts()
 {
 	// Google Fonts
 	wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap', array(), null);
@@ -189,23 +189,26 @@ function headless_scripts()
 	// Font Awesome for icons
 	wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
 
-	wp_enqueue_style('headless-style', get_stylesheet_uri(), array(), _S_VERSION);
+	wp_enqueue_style('wpac-style', get_stylesheet_uri(), array(), _S_VERSION);
 	wp_enqueue_style('tailwind-style', get_template_directory_uri() . '/final.css', array(), filemtime(get_template_directory() . '/final.css'));
 
-	wp_style_add_data('headless-style', 'rtl', 'replace');
+	wp_style_add_data('wpac-style', 'rtl', 'replace');
 
-	wp_enqueue_script('headless-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
+	wp_enqueue_script('wpac-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
 	// GLightbox scripts and styles for gallery and image lightbox
 	wp_enqueue_style('glightbox-css', get_template_directory_uri() . '/js/vendor/glightbox/dist/css/glightbox.min.css', array(), '3.2.0');
 	wp_enqueue_script('glightbox-js', get_template_directory_uri() . '/js/vendor/glightbox/dist/js/glightbox.min.js', array(), '3.2.0', true);
-	wp_enqueue_script('headless-gallery-init', get_template_directory_uri() . '/js/gallery-init.js', array('glightbox-js'), _S_VERSION, true);
+	wp_enqueue_script('wpac-gallery-init', get_template_directory_uri() . '/js/gallery-init.js', array('glightbox-js'), _S_VERSION, true);
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
+
+	wp_enqueue_script('mc-validate', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', array(), null, true);
+	wp_enqueue_script('wpac-mailchimp-embed', get_template_directory_uri() . '/js/mailchimp-embed.js', array('jquery', 'mc-validate'), filemtime(get_template_directory() . '/js/mailchimp-embed.js'), true);
 }
-add_action('wp_enqueue_scripts', 'headless_scripts');
+add_action('wp_enqueue_scripts', 'wpac_scripts');
 
 /**
  * Implement the Custom Header feature.
@@ -233,19 +236,25 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/gallery-functions.php';
 
 /**
+ * Custom event post type meta.
+ */
+require_once get_template_directory() . '/inc/events.php';
+
+
+/**
  * Enqueue block editor assets
  */
-function headless_enqueue_block_editor_assets()
+function wpac_enqueue_block_editor_assets()
 {
 	wp_enqueue_script(
-		'headless-gallery-editor',
+		'wpac-gallery-editor',
 		get_template_directory_uri() . '/js/gallery-block-editor.js',
 		array('wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-element', 'wp-hooks', 'wp-components', 'wp-data'),
 		_S_VERSION,
 		true
 	);
 }
-add_action('enqueue_block_editor_assets', 'headless_enqueue_block_editor_assets');
+add_action('enqueue_block_editor_assets', 'wpac_enqueue_block_editor_assets');
 
 /**
  * Load Jetpack compatibility file.
@@ -259,7 +268,7 @@ if (defined('JETPACK__VERSION')) {
  */
 
 // Modify search query to handle filters
-function headless_modify_search_query($query)
+function wpac_modify_search_query($query)
 {
 	if (!is_admin() && $query->is_main_query() && is_search()) {
 		// Category filter
@@ -299,12 +308,12 @@ function headless_modify_search_query($query)
 		$query->set('posts_per_page', 10);
 	}
 }
-add_action('pre_get_posts', 'headless_modify_search_query');
+add_action('pre_get_posts', 'wpac_modify_search_query');
 
 
 
 // Highlight search terms in content
-function headless_highlight_search_terms($content)
+function wpac_highlight_search_terms($content)
 {
 	if (is_search() && !is_admin() && get_search_query()) {
 		$search_term = get_search_query();
@@ -317,13 +326,13 @@ function headless_highlight_search_terms($content)
 	}
 	return $content;
 }
-add_filter('the_content', 'headless_highlight_search_terms');
-add_filter('the_excerpt', 'headless_highlight_search_terms');
+add_filter('the_content', 'wpac_highlight_search_terms');
+add_filter('the_excerpt', 'wpac_highlight_search_terms');
 
 /**
  * Register Event Custom Post Type
  */
-function headless_register_event_post_type()
+function wpac_register_event_post_type()
 {
 	$labels = array(
 		'name'               => 'Events',
@@ -361,17 +370,17 @@ function headless_register_event_post_type()
 
 	register_post_type('event', $args);
 }
-add_action('init', 'headless_register_event_post_type');
+add_action('init', 'wpac_register_event_post_type');
 
 /**
  * Flush rewrite rules on theme activation to ensure event permalinks work
  */
-function headless_rewrite_flush()
+function wpac_rewrite_flush()
 {
 	// First, we need to ensure our custom post type is registered
-	headless_register_event_post_type();
+	wpac_register_event_post_type();
 
 	// Then flush rewrite rules
 	flush_rewrite_rules();
 }
-register_activation_hook(__FILE__, 'headless_rewrite_flush');
+register_activation_hook(__FILE__, 'wpac_rewrite_flush');

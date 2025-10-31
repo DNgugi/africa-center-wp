@@ -1,4 +1,4 @@
-# Headless WordPress Theme
+# Africa Center WordPress Theme
 
 A flexible WordPress theme with a fully customizable front page through the WordPress Customizer.
 

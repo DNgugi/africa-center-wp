@@ -43,8 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const galleryImages = document.querySelectorAll(
       ".wp-block-gallery .wp-block-image img, " +
         ".wp-block-gallery .blocks-gallery-item img, " +
-        ".wp-block-gallery.is-style-headless-slideshow .wp-block-image img, " +
-        ".wp-block-gallery.is-style-headless-slideshow .blocks-gallery-item img"
+        ".wp-block-gallery.is-style-wpac-slideshow .wp-block-image img, " +
+        ".wp-block-gallery.is-style-wpac-slideshow .blocks-gallery-item img"
     );
 
     galleryImages.forEach(function (img) {
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize slideshow functionality if present
   const slideshowGalleries = document.querySelectorAll(
-    ".is-style-headless-slideshow"
+    ".is-style-wpac-slideshow"
   );
   if (slideshowGalleries.length) {
     slideshowGalleries.forEach(function (gallery) {
