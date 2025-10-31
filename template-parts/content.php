@@ -5,7 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package headless
+ * @package wpac
  */
 
 ?>
@@ -23,22 +23,22 @@
 			?>
 				<div class="flex items-center gap-4 text-sm text-neutral-medium">
 					<?php
-					headless_posted_on();
-					headless_posted_by();
+					wpac_posted_on();
+					wpac_posted_by();
 					?>
 				</div>
 			<?php endif; ?>
 		</header>
 	<?php endif; ?>
 
-	<?php headless_post_thumbnail(); ?>
+	<?php wpac_post_thumbnail(); ?>
 
 	<div class="entry-content max-w-none text-neutral-darkest font-body leading-relaxed"><?php
 																							the_content(
 																								sprintf(
 																									wp_kses(
 																										/* translators: %s: Name of current post. Only visible to screen readers */
-																										__('Continue reading<span class="screen-reader-text"> "%s"</span>', 'headless'),
+																										__('Continue reading<span class="screen-reader-text"> "%s"</span>', 'wpac'),
 																										array(
 																											'span' => array(
 																												'class' => array(),
@@ -51,7 +51,7 @@
 
 																							wp_link_pages(
 																								array(
-																									'before' => '<div class="page-links mt-6 pt-6 border-t border-neutral-light text-neutral-medium">' . esc_html__('Pages:', 'headless'),
+																									'before' => '<div class="page-links mt-6 pt-6 border-t border-neutral-light text-neutral-medium">' . esc_html__('Pages:', 'wpac'),
 																									'after'  => '</div>',
 																								)
 																							);
@@ -59,6 +59,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer mt-6 pt-6 border-t border-neutral-light">
-		<?php headless_entry_footer(); ?>
+		<?php wpac_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

@@ -5,7 +5,7 @@
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package headless
+ * @package wpac
  */
 
 get_header();
@@ -18,10 +18,10 @@ get_header();
 		<div class="container mx-auto px-4 relative z-10">
 			<div class="max-w-3xl mx-auto">
 				<h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary-ochre">
-					<?php esc_html_e('Oops! That page can&rsquo;t be found.', 'headless'); ?>
+					<?php esc_html_e('Oops! That page can&rsquo;t be found.', 'wpac'); ?>
 				</h1>
 				<p class="text-xl mb-8 text-white/90">
-					<?php esc_html_e('It looks like nothing was found at this location. Maybe try one of the options below?', 'headless'); ?>
+					<?php esc_html_e('It looks like nothing was found at this location. Maybe try one of the options below?', 'wpac'); ?>
 				</p>
 			</div>
 		</div>
@@ -42,10 +42,9 @@ get_header();
 
 					<!-- Recent Posts -->
 					<div class="bg-white rounded-lg shadow-lg p-6">
-						<h2 class="text-2xl font-bold mb-4 font-heading text-primary-blue">Recent Posts</h2>
 						<?php
 						the_widget('WP_Widget_Recent_Posts', array(
-							'title' => '',
+							'title' => __('Recent Posts', 'wpac'),
 							'number' => 5,
 						), array(
 							'before_widget' => '<div class="widget">',
@@ -60,7 +59,7 @@ get_header();
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
 					<!-- Categories -->
 					<div class="bg-white rounded-lg shadow-lg p-6">
-						<h2 class="text-2xl font-bold mb-4 font-heading text-primary-blue">Popular Categories</h2>
+						<h2 class="text-2xl font-bold mb-4 font-heading text-primary-terracotta">Popular Categories</h2>
 						<div class="widget widget_categories">
 							<ul class="space-y-2">
 								<?php
@@ -80,14 +79,13 @@ get_header();
 
 					<!-- Archives -->
 					<div class="bg-white rounded-lg shadow-lg p-6">
-						<h2 class="text-2xl font-bold mb-4 font-heading text-primary-blue">Archives</h2>
 						<?php
-						$headless_archive_content = '<p class="mb-4 text-neutral-dark">' . sprintf(esc_html__('Browse our monthly archives. %1$s', 'headless'), convert_smilies(':)')) . '</p>';
+						$wpac_archive_content = '<p class="mb-4 text-neutral-dark">' . sprintf(esc_html__('Browse our monthly archives. %1$s', 'wpac'), convert_smilies(':)')) . '</p>';
 						the_widget('WP_Widget_Archives', 'dropdown=1', array(
 							'before_widget' => '<div class="widget">',
 							'after_widget' => '</div>',
-							'before_title' => '<h3 class="widget-title sr-only">',
-							'after_title' => '</h3>' . $headless_archive_content,
+							'before_title' => '<h3 class="widget-title">',
+							'after_title' => '</h3>' . $wpac_archive_content,
 						));
 						?>
 					</div>

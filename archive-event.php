@@ -3,7 +3,7 @@
 /**
  * The template for displaying event archives
  *
- * @package Headless
+ * @package wpac
  */
 
 get_header();

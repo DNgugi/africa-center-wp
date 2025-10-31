@@ -18,7 +18,7 @@
   // Add custom attributes to the gallery block
   wp.hooks.addFilter(
     "blocks.registerBlockType",
-    "headless/gallery-attributes",
+    "wpac/gallery-attributes",
     function (settings, name) {
       if (name !== "core/gallery") {
         return settings;
@@ -47,7 +47,7 @@
       // Handle style change
       var onStyleChange = function (value) {
         // Update the className to include our custom style
-        var newClassName = "is-style-headless-" + value;
+        var newClassName = "is-style-wpac-" + value;
         props.setAttributes({
           className: newClassName,
           displayAs: value,
@@ -58,7 +58,7 @@
       var currentStyle = "grid"; // Default
       if (
         props.attributes.className &&
-        props.attributes.className.includes("is-style-headless-slideshow")
+        props.attributes.className.includes("is-style-wpac-slideshow")
       ) {
         currentStyle = "slideshow";
       }
@@ -92,7 +92,7 @@
   // Register our custom gallery controls
   wp.hooks.addFilter(
     "editor.BlockEdit",
-    "headless/gallery-controls",
+    "wpac/gallery-controls",
     galleryControls
   );
 })(window.wp);

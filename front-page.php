@@ -7,7 +7,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package headless
+ * @package wpac
  */
 
 if (!defined('ABSPATH')) {
@@ -23,7 +23,7 @@ get_header();
 
 	<!-- Hero Section -->
 	<?php
-	$hero = headless_get_hero_options();
+	$hero = wpac_get_hero_options();
 	?>
 	<section class="relative text-white py-20 lg:py-28 overflow-hidden" style="background-image: url('<?php echo esc_url($hero['background']); ?>'); background-size: cover;">
 		<div class="container mx-auto px-4 relative z-10">
@@ -54,7 +54,7 @@ get_header();
 
 	<!-- Tagline Section -->
 	<?php
-	$tagline = headless_get_tagline_options();
+	$tagline = wpac_get_tagline_options();
 	?>
 	<section class="py-10 bg-secondary-sand">
 		<div class="container mx-auto px-4 text-center">
@@ -66,8 +66,8 @@ get_header();
 
 	<!-- Featured Programs -->
 	<?php
-	$programs_section = headless_get_programs_section_options();
-	$featured_programs = headless_get_featured_programs();
+	$programs_section = wpac_get_programs_section_options();
+	$featured_programs = wpac_get_featured_programs();
 	?>
 	<section class="py-16 bg-neutral-lightest">
 		<div class="container mx-auto px-4">
@@ -123,8 +123,8 @@ get_header();
 
 	<!-- Mission Section -->
 	<?php
-	$mission_section = headless_get_mission_section_options();
-	$mission_items = headless_get_mission_items();
+	$mission_section = wpac_get_mission_section_options();
+	$mission_items = wpac_get_mission_items();
 	?>
 	<section class="py-16" style="background-image: url('<?php echo esc_url($mission_section['background']); ?>'); background-size: cover;">
 		<div class="container mx-auto px-4">
@@ -166,8 +166,8 @@ get_header();
 
 	<!-- Values Section -->
 	<?php
-	$values_section = headless_get_values_section_options();
-	$values = headless_get_values();
+	$values_section = wpac_get_values_section_options();
+	$values = wpac_get_values();
 	?>
 	<section class="py-16 bg-white">
 		<div class="container mx-auto px-4">
@@ -197,8 +197,8 @@ get_header();
 
 	<!-- Gallery Section -->
 	<?php
-	$gallery_section = headless_get_gallery_section_options();
-	$gallery_items = headless_get_gallery_items();
+	$gallery_section = wpac_get_gallery_section_options();
+	$gallery_items = wpac_get_gallery_items();
 	?>
 	<section class="py-16 bg-neutral-light">
 		<div class="container mx-auto px-4">
@@ -233,8 +233,8 @@ get_header();
 
 	<!-- Community Voices Section -->
 	<?php
-	$testimonials_section = headless_get_testimonials_section_options();
-	$testimonials = headless_get_testimonials();
+	$testimonials_section = wpac_get_testimonials_section_options();
+	$testimonials = wpac_get_testimonials();
 	?>
 	<section class="py-16 relative overflow-hidden" style="background-image: url('<?php echo esc_url($testimonials_section['background']); ?>'); background-repeat: repeat;">
 		<div class="container mx-auto px-4 relative z-10">
@@ -290,8 +290,8 @@ get_header();
 
 	<!-- Events Section -->
 	<?php
-	$events_section = headless_get_events_section_options();
-	$events = headless_get_events();
+	$events_section = wpac_get_events_section_options();
+	$events = wpac_get_events();
 	?>
 	<section class="py-16 bg-white">
 		<div class="container mx-auto px-4">

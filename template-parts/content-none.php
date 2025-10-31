@@ -5,14 +5,14 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package headless
+ * @package wpac
  */
 
 ?>
 
 <section class="no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e('Nothing Found', 'headless'); ?></h1>
+		<h1 class="page-title"><?php esc_html_e('Nothing Found', 'wpac'); ?></h1>
 	</header><!-- .page-header -->
 
 	<div class="page-content">
@@ -20,22 +20,22 @@
 		if (is_home() && current_user_can('publish_posts')) :
 
 			printf(
-				'<p class="mb-6">' . esc_html__('Ready to publish your first post?', 'headless') . '</p>' .
-					'<a href="%1$s" class="btn-primary">' . esc_html__('Get Started', 'headless') . '</a>',
+				'<p class="mb-6">' . esc_html__('Ready to publish your first post?', 'wpac') . '</p>' .
+					'<a href="%1$s" class="btn-primary">' . esc_html__('Get Started', 'wpac') . '</a>',
 				esc_url(admin_url('post-new.php'))
 			);
 
 		elseif (is_search()) :
 		?>
 
-			<p><?php esc_html_e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'headless'); ?></p>
+			<p><?php esc_html_e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'wpac'); ?></p>
 		<?php
 			get_search_form();
 
 		else :
 		?>
 
-			<p><?php esc_html_e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'headless'); ?></p>
+			<p><?php esc_html_e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'wpac'); ?></p>
 		<?php
 			get_search_form();
 

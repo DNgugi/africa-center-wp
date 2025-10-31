@@ -5,20 +5,20 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package headless
+ * @package wpac
  */
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
-	$page_options = headless_get_page_options();
+	$page_options = wpac_get_page_options();
 
 	// Title is now displayed in the main page template (page.php) with gradient background
 	// So we skip displaying it here to avoid duplication
 
 	if (!$page_options['hide_title']) {
-		headless_post_thumbnail();
+		wpac_post_thumbnail();
 	} ?>
 
 	<div class="entry-content max-w-none"><?php
@@ -26,7 +26,7 @@
 
 											wp_link_pages(
 												array(
-													'before' => '<div class="page-links">' . esc_html__('Pages:', 'headless'),
+													'before' => '<div class="page-links">' . esc_html__('Pages:', 'wpac'),
 													'after'  => '</div>',
 												)
 											);
@@ -40,7 +40,7 @@
 				sprintf(
 					wp_kses(
 						/* translators: %s: Name of current post. Only visible to screen readers */
-						__('Edit <span class="screen-reader-text">%s</span>', 'headless'),
+						__('Edit <span class="screen-reader-text">%s</span>', 'wpac'),
 						array(
 							'span' => array(
 								'class' => array(),

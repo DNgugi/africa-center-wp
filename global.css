@@ -1,3 +1,7 @@
+/* Force orange color for widget headings in sidebar widgets */
+.widget .wp-block-heading {
+  color: #c75d32 !important;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -407,8 +411,9 @@ mark {
     @apply bg-white rounded-lg shadow p-6;
   }
 
-  .widget-title {
-    @apply text-lg font-semibold mb-4 text-gray-900;
+  .widget-title,
+  .widget .wp-block-header {
+    @apply text-lg font-semibold mb-4 text-primary-terracotta;
   }
 
   .widget ul {
@@ -581,8 +586,7 @@ mark {
 .site-header.header-scrolled {
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
@@ -1099,10 +1103,7 @@ mark {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-3px);
-    transition:
-      opacity 0.1s ease,
-      visibility 0s linear,
-      transform 0.1s ease;
+    transition: opacity 0.1s ease, visibility 0s linear, transform 0.1s ease;
     pointer-events: none; /* Don't catch mouse events when hidden */
   }
 
@@ -1317,4 +1318,12 @@ mark {
       padding: 8px 12px !important; /* Smaller padding */
     }
   }
+}
+
+footer .widget a {
+  color: #ffffff;
+}
+
+footer .widget a:hover {
+  color: #d9a23b;
 }

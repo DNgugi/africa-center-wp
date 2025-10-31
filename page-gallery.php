@@ -3,7 +3,7 @@
 /**
  * Template Name: Gallery Page
  *
- * @package headless
+ * @package wpac
  */
 
 get_header();
