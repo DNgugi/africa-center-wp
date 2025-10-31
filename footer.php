@@ -43,8 +43,7 @@
 
 
 			<!-- Newsletter -->
-			<div id="newsletter">
-				<h3 class="text-xl font-bold mb-4 text-primary-ochre">Newsletter</h3>
+			<!-- <div id="newsletter">
 				<p class="text-sm text-gray-300 mb-4">Stay updated with our latest news and events.</p>
 				<form class="space-y-4" action="https://list-manage.us6.list-manage.com/subscribe/post?u=b6ea1e261df062e0833e8db59&amp;id=ff2ca589a7&amp;f_id=00ca11e3f0" method="post" target="_blank">
 					<div class="mb-3">
@@ -53,20 +52,25 @@
 							placeholder="Enter your email"
 							class="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-ochre">
 					</div>
+					<div class="mb-3">
+						<input type="text" name="NAME" id="mce-NAME"
+							class="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-ochre"
+							placeholder="Your name (optional)">
+					</div>
 					<div class="flex items-center justify-between">
 						<button type="submit"
 							class="inline-block px-6 py-2 bg-primary-ochre text-white rounded hover:bg-primary-terracotta transition-colors duration-200">
 							Subscribe
-						</button>
+						</button> -->
 
-						<!-- Back to Top Button -->
-						<button id="back-to-top" type="button"
+			<!-- Back to Top Button -->
+			<!-- <button id="back-to-top" type="button"
 							class="inline-flex items-center justify-center w-12 h-12 bg-gray-700 hover:bg-primary-ochre text-gray-300 hover:text-white rounded-full transition-all duration-300 cursor-pointer border-2 border-gray-600 hover:border-primary-ochre shadow-lg">
 							<i class="fas fa-arrow-up text-sm"></i>
 						</button>
 					</div>
 				</form>
-			</div>
+			</div> -->
 
 
 
@@ -76,7 +80,7 @@
 		<div class="mt-12 pt-8 border-t border-white/10">
 			<div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
 				<div class="text-sm text-gray-300">
-					© <?php echo date('Y'); ?> <?php echo get_bloginfo('name'); ?>. All rights reserved. Theme Design & Development by <a href="https://www.encantador.co" class="hover:text-primary-ochre">Studio Encantador</a>.
+					All rights reserved © <?php echo date('Y'); ?> <?php echo get_bloginfo('name'); ?>. Theme Design & Development by <a href="https://www.encantador.co" target="_blank" class="hover:text-primary-ochre">Studio Encantador</a>.
 				</div>
 				<div class="text-sm text-gray-300">
 					<a href="<?php echo esc_url(home_url('/privacy-policy')); ?>" class="hover:text-primary-ochre">Privacy Policy</a>

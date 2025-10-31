@@ -48,7 +48,7 @@ get_header();
             'post_type' => 'event',
             'posts_per_page' => -1,
             's' => $search_query,
-            'meta_key' => '_event_date',
+            'meta_key' => '_event_start_date',
         );
 
         // Get current date
@@ -59,7 +59,7 @@ get_header();
             // PAST EVENTS: Show events that happened before today
             $args['meta_query'] = array(
                 array(
-                    'key' => '_event_date',
+                    'key' => '_event_start_date',
                     'value' => $today,
                     'compare' => '<',
                     'type' => 'DATE',
@@ -72,7 +72,7 @@ get_header();
             // UPCOMING EVENTS: Show events from today onwards
             $args['meta_query'] = array(
                 array(
-                    'key' => '_event_date',
+                    'key' => '_event_start_date',
                     'value' => $today,
                     'compare' => '>=',
                     'type' => 'DATE',
@@ -85,7 +85,7 @@ get_header();
             // TODAY'S EVENTS: Show only events happening today
             $args['meta_query'] = array(
                 array(
-                    'key' => '_event_date',
+                    'key' => '_event_start_date',
                     'value' => $today,
                     'compare' => '=',
                     'type' => 'DATE',
@@ -99,7 +99,7 @@ get_header();
             $week_end = date('Y-m-d', strtotime('sunday this week', strtotime($today)));
             $args['meta_query'] = array(
                 array(
-                    'key' => '_event_date',
+                    'key' => '_event_start_date',
                     'value' => array($week_start, $week_end),
                     'compare' => 'BETWEEN',
                     'type' => 'DATE',
@@ -113,7 +113,7 @@ get_header();
             $month_end = date('Y-m-t', strtotime($today));
             $args['meta_query'] = array(
                 array(
-                    'key' => '_event_date',
+                    'key' => '_event_start_date',
                     'value' => array($month_start, $month_end),
                     'compare' => 'BETWEEN',
                     'type' => 'DATE',
@@ -130,12 +130,12 @@ get_header();
                 'post_type' => 'event',
                 'posts_per_page' => -1,
                 's' => $search_query,
-                'meta_key' => '_event_date',
+                'meta_key' => '_event_start_date',
                 'orderby' => 'meta_value',
                 'order' => 'ASC',
                 'meta_query' => array(
                     array(
-                        'key' => '_event_date',
+                        'key' => '_event_start_date',
                         'value' => $today,
                         'compare' => '>=',
                         'type' => 'DATE',
@@ -148,12 +148,12 @@ get_header();
                 'post_type' => 'event',
                 'posts_per_page' => -1,
                 's' => $search_query,
-                'meta_key' => '_event_date',
+                'meta_key' => '_event_start_date',
                 'orderby' => 'meta_value',
                 'order' => 'DESC',
                 'meta_query' => array(
                     array(
-                        'key' => '_event_date',
+                        'key' => '_event_start_date',
                         'value' => $today,
                         'compare' => '<',
                         'type' => 'DATE',
@@ -192,9 +192,9 @@ get_header();
         if ($events_query->have_posts()) :
             $current_date = '';
             while ($events_query->have_posts()) : $events_query->the_post();
-                $event_date = get_post_meta(get_the_ID(), '_event_date', true);
-                $event_time_start = get_post_meta(get_the_ID(), '_event_time_start', true);
-                $event_time_end = get_post_meta(get_the_ID(), '_event_time_end', true);
+                $event_date = get_post_meta(get_the_ID(), '_event_start_date', true);
+                $event_time_start = get_post_meta(get_the_ID(), '_event_start_time', true);
+                $event_time_end = get_post_meta(get_the_ID(), '_event_end_time', true);
                 $event_location = get_post_meta(get_the_ID(), '_event_location', true);
                 $event_timezone = get_post_meta(get_the_ID(), '_event_timezone', true);
 

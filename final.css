@@ -6312,7 +6312,7 @@ footer .widget a {
 }
 
 footer .widget a:hover {
-  color: #d9a23b;
+  /* Use a warmer gold for better contrast against the footer blue background */
+  color: #f2c14e;
+  transition: color 160ms ease-in-out;
 }
-
-

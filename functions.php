@@ -204,6 +204,9 @@ function wpac_scripts()
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
+
+	wp_enqueue_script('mc-validate', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', array(), null, true);
+	wp_enqueue_script('wpac-mailchimp-embed', get_template_directory_uri() . '/js/mailchimp-embed.js', array('jquery', 'mc-validate'), filemtime(get_template_directory() . '/js/mailchimp-embed.js'), true);
 }
 add_action('wp_enqueue_scripts', 'wpac_scripts');
 
